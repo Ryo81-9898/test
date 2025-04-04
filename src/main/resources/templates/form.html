@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>問題登録・編集フォーム</title>
+</head>
+
+<body>
+	<p th:if="${message}" th:text="${message}" style="color: blue;">新規登録完了メッセージ</p>
+	<!--	タイトル：登録 or 編集-->
+	<h2 th:if="${quizForm.isNew}">新規問題登録</h2>
+	<h2 th:unless="${quizForm.isNew}">問題編集・更新</h2>
+	<!--	アクション：登録 or 編集-->
+	<form th:action="${quizForm.isNew} ? @{save} : @{/check}" th:object="${quizForm}" method="get">
+		<!--		idは更新時に必要なため、hiddenで持つ-->
+		<input type="hidden" th:field="*{id}">
+		<label for="question">問題文：</label>
+		<input type="text" id="question" th:field="*{question}">
+
+		<br>
+		<br>
+		<table>
+			<tr>
+				<th>番号</th>
+				<th>選択肢</th>
+			</tr>
+			<tr>
+				<td><label for="choice1"> 1. </label></td>
+				<td>
+					<textarea id="choice1" rows="1" cols="100" th:field="*{choice1}" required>
+					</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="choice2"> 2. </label></td>
+				<td>
+					<textarea id="choice2" rows="1" cols="100" th:field="*{choice2}" required>
+					</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="choice3"> 3. </label></td>
+				<td>
+					<textarea id="choice3" rows="1" cols="100" th:field="*{choice3}" required>
+					</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="choice4"> 4. </label></td>
+				<td>
+					<textarea id="choice4" rows="1" cols="100" th:field="*{choice4}" required>
+					</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="choice5"> 5. </label></td>
+				<td>
+					<textarea id="choice5" rows="1" cols="100" th:field="*{choice5}" >
+					</textarea>
+				</td>
+			</tr>
+			
+		</table>
+
+		<br>
+		<br>
+		<label for="ans">答え</label>
+		<input type="number" id="ans" th:field="*{ans}"  min="1" max="5">
+
+		<br>
+		<br>
+		<label for="explanation">解説</label>
+		<textarea rows="10" cols="100" id="explanation" th:field="*{explanation}">
+		</textarea>
+
+		<!--		ボタン：登録 or 更新-->
+		<br>
+		<br>
+		<button th:if="${quizForm.isNew}" type="submit">登録</button>
+		<button th:unless="${quizForm.isNew}" type="submit">編集確認</button>
+	</form>
+	<br>
+	<a th:href="@{/list}">問題一覧へ</a>
+	<br>
+	<a th:href="@{/}">メニューへ戻る</a>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>選択結果</title>
+</head>
+
+<body>
+	<h1>あなたの正答率は [[${correctRate}]]% です。</h1>
+	<div th:each= "result, s : ${userResults}">
+		<hr>
+		<p>問題[[${s.count}]]：[[${result.questionText}]]</p>
+	    <p th:text="|あなたの答え：${result.userAnswer}|"></p>
+	    <p th:text="|正解：${result.correctAnswer}|"></p>
+	    <p th:text="|解説：${result.explanation}|"></p>
+	</div>
+	
+	<hr>
+	<a th:href="@{/}">
+		<button type="button">メニューへ戻る</button>
+	</a>
+	<form th:action="@{/challenge/{no}(no=${questionCount})}" method="get">
+	    <button>もう一度問題を解く</button>
+	</form>
+</body>
+
+</html>

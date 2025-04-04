@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>問題集</title>
+</head>
+
+<body>
+	<h2>Quizzes</h2>
+	<form th:action="@{/result}" method="post">
+		<div th:each="q, s : ${quizList}">
+
+			<!--	 隠しフィールドで問題文を送信 -->
+			<input type="hidden" th:name="|question_${s.count}|" th:value="${q.question}">
+			<!--	隠しフィールドで正解を送信 -->
+			<div th:with="ansChoice=${q['choice' + q.ans]}">
+				<input type="hidden" th:name="|ans_${s.count}|" th:value="|${q.ans}. ${ansChoice}|">
+			</div>
+			<!--	 隠しフィールドで解説を送信 -->
+			<input type="hidden" th:name="|explanation_${s.count}|" th:value="${q.explanation}">
+
+
+			
+			<!--	ここからがブラウザ上で表示-->
+			<hr>
+			<p>問題[[${s.count}]]：[[${q.question}]]</p>
+			<label>
+				<input type="radio" th:name="|userAnswerQuestionNo${s.count}|" th:value="|1. ${q.choice1}|" required>1.
+				[[${q.choice1}]]
+			</label>
+			<br>
+			<label>
+				<input type="radio" th:name="|userAnswerQuestionNo${s.count}|" th:value="|2. ${q.choice2}|">2.
+				[[${q.choice2}]]
+			</label>
+			<br>
+			<label>
+				<input type="radio" th:name="|userAnswerQuestionNo${s.count}|" th:value="|3. ${q.choice3}|">3.
+				[[${q.choice3}]]
+			</label>
+			<br>
+			<label>
+				<input type="radio" th:name="|userAnswerQuestionNo${s.count}|" th:value="|4. ${q.choice4}|">4.
+				[[${q.choice4}]]
+			</label>
+			<br>
+			<div th:if="${q.choice5 != null}">
+				<label>
+					<input type="radio" th:name="|userAnswerQuestionNo${s.count}|" th:value="|5. ${q.choice5}|">5.
+					[[${q.choice5}]]
+				</label>
+				<br>
+			</div>
+		</div>
+		<button type="submit">解答へ送信</button>
+	</form>
+
+</body>
+
+</html>

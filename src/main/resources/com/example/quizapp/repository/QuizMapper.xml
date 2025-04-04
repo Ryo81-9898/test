@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.quizapp.repository.QuizMapper">
+<!--	全問題表示-->
+	<select id = "selectAll" resultType="com.example.quizapp.entity.Quiz">
+	SELECT 	*
+	FROM quizzes
+	ORDER BY id
+	;
+	</select>
+<!--	指定した問題数の問題をランダムに取得し表示-->
+	<select id = "randomSelect" resultType="com.example.quizapp.entity.Quiz">
+	SELECT 	*
+	FROM quizzes
+	WHERE id IN (
+    	SELECT id 
+    	FROM quizzes 
+    	ORDER BY RANDOM() LIMIT #{no}
+	);
+	</select>
+
+<!--	idで指定した問題を表示-->
+	<select id = "selectById" resultType="com.example.quizapp.entity.Quiz">
+	SELECT 	*
+	FROM quizzes
+	WHERE id = #{id}
+	;
+	</select>
+<!--	問題を追加-->
+	<insert id = "insert"><!--  省略可 parameterType="com.example.quizapp.entity.Quiz"-->
+	INSERT INTO quizzes(
+				question, 
+				choice1, 
+				choice2, 
+				choice3, 
+				choice4, 
+				choice5,
+				ans, 
+				explanation
+	)
+	VALUES (
+		#{question}, 
+		#{choice1}, 
+		#{choice2}, 
+		#{choice3}, 
+		#{choice4}, 
+		#{choice5}, 
+		#{ans}, 
+		#{explanation}
+	);
+	</insert>
+<!--	問題を変更、修正（更新）-->
+	<update id = "update"> <!-- 省略可 parameterType="com.example.quizapp.entity.Quiz"-->
+	UPDATE quizzes
+	SET question = #{question},
+		choice1 = #{choice1},
+		choice2 = #{choice2},
+		choice3 = #{choice3}, 
+		choice4 = #{choice4},
+		choice5 = #{choice5},
+		ans = #{ans}, 
+		explanation = #{explanation}
+	WHERE id = #{id}
+	;
+	</update>
+<!--	問題を削除-->
+	<delete id = "delete" parameterType="Integer">
+	DELETE FROM quizzes
+	WHERE id = #{id}
+	;
+	</delete>
+</mapper>

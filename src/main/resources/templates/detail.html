@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>問題詳細</title>
+</head>
+
+<body>
+	<!--	ID検索-->
+	<h2 th:if="${pickUpQuiz.isNew}">検索結果</h2>
+	<!--		更新前確認-->
+	<div th:unless="${pickUpQuiz.isNew}">
+		<h2>更新前確認</h2>
+		<p th:text="${checkMessage}" style="color: blue;"></p>
+		<hr>
+		<h3 th:unless="${pickUpQuiz.isNew}">変更前</h3>
+	</div>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>問題文</th>
+				<th>選択肢 1</th>
+				<th>選択肢 2</th>
+				<th>選択肢 3</th>
+				<th>選択肢 4</th>
+				<th>選択肢 5</th>
+				<th>正解番号</th>
+				<th>解説</th>
+				<th th:if="${pickUpQuiz.isNew}">編集</th>
+			</tr>
+		</thead>
+		<!--		ID検索時のテーブルボディ-->
+		<tbody th:if="${pickUpQuiz.isNew}">
+			<tr>
+				<td th:text="${pickUpQuiz.id}">ID</td>
+				<td th:text="${pickUpQuiz.question}">問題文</td>
+				<td th:text="${pickUpQuiz.choice1}">選択肢1</td>
+				<td th:text="${pickUpQuiz.choice2}">選択肢2</td>
+				<td th:text="${pickUpQuiz.choice3}">選択肢3</td>
+				<td th:text="${pickUpQuiz.choice4}">選択肢4</td>
+				<td th:text="${pickUpQuiz.choice5}">選択肢5</td>
+				<td th:text="${pickUpQuiz.ans}">正解番号</td>
+				<td th:text="${pickUpQuiz.explanation}">解説</td>
+				<td th:if="${pickUpQuiz.isNew}">
+					<a th:href="@{/edit/{id}(id=${pickUpQuiz.id})}">編集
+					</a>
+				</td>
+			</tr>
+		</tbody>
+		<!--		更新確認時のテーブルボディ-->
+		<tbody th:unless="${pickUpQuiz.isNew}">
+			<tr>
+				<td th:text="${before.id}">ID</td>
+				<td th:text="${before.question}">問題文</td>
+				<td th:text="${before.choice1}">選択肢1</td>
+				<td th:text="${before.choice2}">選択肢2</td>
+				<td th:text="${before.choice3}">選択肢3</td>
+				<td th:text="${before.choice4}">選択肢4</td>
+				<td th:text="${before.choice5}">選択肢5</td>
+				<td th:text="${before.ans}">正解番号</td>
+				<td th:text="${before.explanation}">解説</td>
+			</tr>
+		</tbody>
+	</table>
+	<!--	<br>-->
+
+	<!--	変更する予定の内容を表示（更新時のみ）-->
+	<div th:unless="${pickUpQuiz.isNew}">
+		<h3>↓</h3>
+		<h3>変更後</h3>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>問題文</th>
+					<th>選択肢 1</th>
+					<th>選択肢 2</th>
+					<th>選択肢 3</th>
+					<th>選択肢 4</th>
+					<th>選択肢 5</th>
+					<th>正解番号</th>
+					<th>解説</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${pickUpQuiz.id}">ID</td>
+					<td th:text="${pickUpQuiz.question}">問題文</td>
+					<td th:text="${pickUpQuiz.choice1}">選択肢1</td>
+					<td th:text="${pickUpQuiz.choice2}">選択肢2</td>
+					<td th:text="${pickUpQuiz.choice3}">選択肢3</td>
+					<td th:text="${pickUpQuiz.choice4}">選択肢4</td>
+					<td th:text="${pickUpQuiz.choice5}">選択肢5</td>
+					<td th:text="${pickUpQuiz.ans}">正解番号</td>
+					<td th:text="${pickUpQuiz.explanation}">解説</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:unless="${pickUpQuiz.isNew}">
+		<br>
+		<form th:action="@{/reedit}" method="post">
+			<button type="submit">編集画面へ戻る</button>
+		</form>
+		<br>
+		<form th:action="@{/update}" method="post">
+			<button type="submit">更新</button>
+		</form>
+		<br>
+		<a th:href="@{/list}">一覧へ戻る</a>
+	</div>
+<!--	削除前の最終ボタン-->
+	<div th:if="${deleteButton}">
+		<p th:text="本当に削除してもいいですか" style="color : red;"></p>
+		<form th:action="@{/delete}" method="post">
+			<input type="hidden" name="id" th:value="${pickUpQuiz.id}">
+			<button type="submit">削除</button>
+		</form>
+	</div>
+	<br>
+	<a th:href="@{/}">メニューへ戻る</a>
+</body>
+
+</html>

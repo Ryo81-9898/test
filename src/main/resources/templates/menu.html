@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>メニュー</title>
+</head>
+
+<body>
+	<h2>メニュー画面</h2>
+	<hr>
+	<a th:href="@{challenge/5}">
+		<button type="button">5問チャレンジ</button>
+	</a>
+	<a th:href="@{challenge/10}">
+		<button type="button">10問チャレンジ</button>
+	</a>
+	<hr>
+	<a th:href="@{form}">
+		<button type="button">問題の新規登録</button>
+	</a>
+	<a th:href="@{list}">
+		<button type="button">登録済み問題一覧表示</button>
+	</a>
+	<form th:action="@{pickUp}" method="get">
+		<label for="enterId">問題のID検索</label>
+		<input type="number" 	id="enterId" name="id" min="1" max="100">
+		<button type="submit">検索</button>
+	</form>
+	
+
+</body>
+
+</html>
