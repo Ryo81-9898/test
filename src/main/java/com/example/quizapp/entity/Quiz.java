@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Quiz {
 	private Integer id;
+	private Integer questionNumber;
 	private String question;
 	private String choice1;
 	private String choice2;
@@ -17,6 +18,11 @@ public class Quiz {
 	private String choice5;
 	private Integer ans;
 	private String explanation;
+	private TestNumber testNumber;
+	private Time time;
+	private Koumoku koumoku;
+	
+	
 
 	
 

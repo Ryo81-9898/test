@@ -1,72 +1,239 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.quizapp.repository.QuizMapper">
-<!--	全問題表示-->
-	<select id = "selectAll" resultType="com.example.quizapp.entity.Quiz">
-	SELECT 	*
-	FROM quizzes
-	ORDER BY id
-	;
+<!--テーブル結合-->
+	<resultMap id="QuizWithTestNumberResult"
+			type="com.example.quizapp.entity.Quiz">
+			<id property="id" column="id" />
+			<result property="questionNumber" column="question_number" />
+			<result property="question" column="question" />
+			<result property="choice1" column="choice1" />
+			<result property="choice2" column="choice2" />
+			<result property="choice3" column="choice3" />
+			<result property="choice4" column="choice4" />
+			<result property="choice5" column="choice5" />
+			<result property="ans" column="ans" />
+			<result property="explanation" column="explanation" />
+			<association property="testNumber"
+				javaType="com.example.quizapp.entity.TestNumber">
+				<id property="testNumberId" column="test_number_id" />
+				<result property="gengoNen" column="gengo_nen" />
+				<result property="seireki" column="seireki" />
+				<association property="gengo"
+					javaType="com.example.quizapp.entity.Gengo">
+					<id property="gengoId" column="gengo_id" />
+					<result property="gengo" column="gengo" />
+				 </association>
+   			 </association>
+   			 <association property="time"
+				javaType="com.example.quizapp.entity.Time">
+				<id property="timeId" column="time_id" />
+				<result property="time" column="time" />
+   			 </association>
+   			 <association property="koumoku"
+				javaType="com.example.quizapp.entity.Koumoku">
+				<id property="koumokuId" column="koumoku_id" />
+				<result property="sKoumoku" column="s_koumoku" />
+				<association property="mkoumoku"
+					javaType="com.example.quizapp.entity.Mkoumoku">
+					<id property="mKoumokuId" column="m_koumoku_id" />
+					<result property="mKoumoku" column="m_koumoku" />
+				</association>
+				<association property="lkoumoku"
+					javaType="com.example.quizapp.entity.Lkoumoku">
+					<id property="lKoumokuId" column="l_koumoku_id" />
+					<result property="lKoumoku" column="l_koumoku" />
+				</association>
+				<association property="mokuhyo"
+					javaType="com.example.quizapp.entity.Mokuhyo">
+					<id property="mokuhyoId" column="mokuhyo_id" />
+					<result property="mokuhyo" column="mokuhyo" />
+				 </association>
+   			 </association>
+	</resultMap>
+	<!-- 全問題表示 -->
+	<select id="selectAll"
+		resultMap="QuizWithTestNumberResult">
+		SELECT id,
+			quizzes.test_number_id,
+			gengo_table.gengo,
+			gengo_nen,
+			seireki,
+			time_table.time,
+			question_number,
+			question,
+			choice1,
+			choice2,
+			choice3,
+			choice4,
+			choice5,
+			ans,
+			explanation,
+			s_koumoku,
+			m_koumoku,
+			l_koumoku,
+			mokuhyo
+		FROM quizzes
+		JOIN test_number_table
+		ON quizzes.test_number_id = test_number_table.test_number_id
+		JOIN gengo_table
+		ON test_number_table.gengo_id = gengo_table.gengo_id
+		JOIN time_table
+		ON quizzes.time_id = time_table.time_id
+		JOIN koumoku_table
+		ON quizzes.koumoku_id = koumoku_table.koumoku_id
+		JOIN m_koumoku_table
+		ON koumoku_table.m_koumoku_id = m_koumoku_table.m_koumoku_id
+		JOIN l_koumoku_table
+		ON koumoku_table.l_koumoku_id = l_koumoku_table.l_koumoku_id
+		JOIN mokuhyo_table
+		ON koumoku_table.mokuhyo_id = mokuhyo_table.mokuhyo_id
+		ORDER BY id
+		;
 	</select>
-<!--	指定した問題数の問題をランダムに取得し表示-->
-	<select id = "randomSelect" resultType="com.example.quizapp.entity.Quiz">
-	SELECT 	*
-	FROM quizzes
-	WHERE id IN (
-    	SELECT id 
-    	FROM quizzes 
-    	ORDER BY RANDOM() LIMIT #{no}
-	);
+	<!-- 指定した問題数の問題をランダムに取得し表示 -->
+	<select id="randomSelect"
+		resultMap="QuizWithTestNumberResult">
+		WITH random_quizzes AS (
+					SELECT *
+					FROM quizzes
+					ORDER BY RANDOM()
+					LIMIT #{id}
+					)
+
+		SELECT rq.id,
+			rq.test_number_id,
+			gengo_table.gengo,
+			gengo_nen,
+			seireki,
+			time_table.time,
+			rq.question_number,
+			rq.question,
+			rq.choice1,
+			rq.choice2,
+			rq.choice3,
+			rq.choice4,
+			rq.choice5,
+			rq.ans,
+			rq.explanation,
+			s_koumoku,
+			m_koumoku,
+			l_koumoku,
+			mokuhyo
+		FROM random_quizzes rq
+		JOIN test_number_table
+		ON rq.test_number_id = test_number_table.test_number_id
+		JOIN gengo_table
+		ON test_number_table.gengo_id = gengo_table.gengo_id
+		JOIN time_table
+		ON rq.time_id = time_table.time_id
+		JOIN koumoku_table
+		ON rq.koumoku_id = koumoku_table.koumoku_id
+		JOIN m_koumoku_table
+		ON koumoku_table.m_koumoku_id = m_koumoku_table.m_koumoku_id
+		JOIN l_koumoku_table
+		ON koumoku_table.l_koumoku_id = l_koumoku_table.l_koumoku_id
+		JOIN mokuhyo_table
+		ON koumoku_table.mokuhyo_id = mokuhyo_table.mokuhyo_id
+		;
 	</select>
 
-<!--	idで指定した問題を表示-->
-	<select id = "selectById" resultType="com.example.quizapp.entity.Quiz">
-	SELECT 	*
-	FROM quizzes
-	WHERE id = #{id}
-	;
+	<!-- idで指定した問題を表示 -->
+	<select id="selectById"
+		resultMap="QuizWithTestNumberResult">
+		SELECT id,
+			quizzes.test_number_id,
+			gengo_table.gengo,
+			gengo_nen,
+			seireki,
+			time_table.time,
+			question_number,
+			question,
+			choice1,
+			choice2,
+			choice3,
+			choice4,
+			choice5,
+			ans,
+			explanation,
+			s_koumoku,
+			m_koumoku,
+			l_koumoku,
+			mokuhyo
+		FROM quizzes
+		JOIN test_number_table
+		ON quizzes.test_number_id = test_number_table.test_number_id
+		JOIN gengo_table
+		ON test_number_table.gengo_id = gengo_table.gengo_id
+		JOIN time_table
+		ON quizzes.time_id = time_table.time_id
+		JOIN koumoku_table
+		ON quizzes.koumoku_id = koumoku_table.koumoku_id
+		JOIN m_koumoku_table
+		ON koumoku_table.m_koumoku_id = m_koumoku_table.m_koumoku_id
+		JOIN l_koumoku_table
+		ON koumoku_table.l_koumoku_id = l_koumoku_table.l_koumoku_id
+		JOIN mokuhyo_table
+		ON koumoku_table.mokuhyo_id = mokuhyo_table.mokuhyo_id
+		WHERE id = #{id}
+		;
 	</select>
-<!--	問題を追加-->
-	<insert id = "insert"><!--  省略可 parameterType="com.example.quizapp.entity.Quiz"-->
-	INSERT INTO quizzes(
-				question, 
-				choice1, 
-				choice2, 
-				choice3, 
-				choice4, 
-				choice5,
-				ans, 
-				explanation
-	)
-	VALUES (
-		#{question}, 
-		#{choice1}, 
-		#{choice2}, 
-		#{choice3}, 
-		#{choice4}, 
-		#{choice5}, 
-		#{ans}, 
-		#{explanation}
-	);
+	<!-- 問題を追加 -->
+	<insert id="insert"><!-- 省略可 parameterType="com.example.quizapp.entity.Quiz" -->
+		INSERT INTO quizzes (
+			test_number_id,
+			time_id,
+			question_number,
+			question,
+			choice1,
+			choice2,
+			choice3,
+			choice4,
+			choice5,
+			ans,
+			explanation,
+			koumoku_id
+		)
+		VALUES (
+			#{testNumber.testNumberId},
+			#{time.timeId},
+			#{questionNumber},
+			#{question},
+			#{choice1},
+			#{choice2},
+			#{choice3},
+			#{choice4},
+			#{choice5},
+			#{ans},
+			#{explanation},
+			#{koumoku.koumokuId}
+		);
 	</insert>
-<!--	問題を変更、修正（更新）-->
-	<update id = "update"> <!-- 省略可 parameterType="com.example.quizapp.entity.Quiz"-->
-	UPDATE quizzes
-	SET question = #{question},
-		choice1 = #{choice1},
-		choice2 = #{choice2},
-		choice3 = #{choice3}, 
-		choice4 = #{choice4},
-		choice5 = #{choice5},
-		ans = #{ans}, 
-		explanation = #{explanation}
-	WHERE id = #{id}
-	;
+	<!-- 問題を変更、修正（更新） -->
+	<update id="update"> <!-- 省略可 parameterType="com.example.quizapp.entity.Quiz" -->
+		UPDATE quizzes
+		SET	test_number_id = #{testNumber.testNumberId},
+			time_id = #{time.timeId},
+			question_number = #{questionNumber},
+			question = #{question},
+			choice1 = #{choice1},
+			choice2 = #{choice2},
+			choice3 = #{choice3},
+			choice4 = #{choice4},
+			choice5 = #{choice5},
+			ans = #{ans},
+			explanation = #{explanation},
+			koumoku_id = #{koumoku.koumokuId}
+		WHERE id = #{id}
+		;
 	</update>
-<!--	問題を削除-->
-	<delete id = "delete" parameterType="Integer">
-	DELETE FROM quizzes
-	WHERE id = #{id}
-	;
+	<!-- 問題を削除 -->
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM quizzes
+		WHERE id =
+		#{id}
+		;
 	</delete>
+	
+
 </mapper>
