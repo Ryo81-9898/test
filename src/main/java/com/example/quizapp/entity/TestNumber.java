@@ -12,5 +12,10 @@ public class TestNumber {
 		private Integer gengoNen;
 		private Integer seireki;
 		private Gengo gengo;
+		
+		
 
+		public TestNumber(Integer t) {
+			this.testNumberId = t;
+		}
 }

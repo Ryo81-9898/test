@@ -11,14 +11,14 @@
 	<form th:action="@{/result}" method="post">
 		<div th:each="q, s : ${quizList}">
 
-			<!--	 隠しフィールドで問題文を送信 -->
-			<input type="hidden" th:name="|question_${s.count}|" th:value="${q.question}">
-			<!--	隠しフィールドで正解を送信 -->
-			<div th:with="ansChoice=${q['choice' + q.ans]}">
-				<input type="hidden" th:name="|ans_${s.count}|" th:value="|${q.ans}. ${ansChoice}|">
-			</div>
-			<!--	 隠しフィールドで解説を送信 -->
-			<input type="hidden" th:name="|explanation_${s.count}|" th:value="${q.explanation}">
+<!--				 隠しフィールドで問題文を送信 -->
+<!--			<input type="hidden" th:name="|question_${s.count}|" th:value="${q.question}">-->
+<!--				隠しフィールドで正解を送信 -->
+<!--			<div th:with="ansChoice=${q['choice' + q.ans]}">-->
+<!--				<input type="hidden" th:name="|ans_${s.count}|" th:value="|${q.ans}. ${ansChoice}|">-->
+<!--			</div>-->
+<!--				 隠しフィールドで解説を送信 -->
+<!--			<input type="hidden" th:name="|explanation_${s.count}|" th:value="${q.explanation}">-->
 
 
 			

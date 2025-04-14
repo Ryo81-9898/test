@@ -5,7 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.example.quizapp.entity.KoumokuTable;
 import com.example.quizapp.entity.Quiz;
+import com.example.quizapp.entity.TimeTable;
 
 @Mapper
 public interface QuizMapper {
@@ -24,6 +26,12 @@ public interface QuizMapper {
 //	問題を修正（更新）
 	void update(Quiz quiz);
 	
+//	更新時のタイムテーブル取得
+	TimeTable getTimeTable(int id);
+	
+//	更新時の項目テーブル取得
+	KoumokuTable getKoumokuTable(int id);
+
 //	idで指定した問題を削除
 	void delete(@Param("id") int id);
 	

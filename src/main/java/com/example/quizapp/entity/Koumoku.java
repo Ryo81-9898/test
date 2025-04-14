@@ -14,7 +14,10 @@ public class Koumoku {
 		private Lkoumoku lkoumoku;
 		private Mokuhyo mokuhyo;
 		
-
+//		フォームから得た数値を変換するためのコンストラクター（新規作成時に使用）
+		public Koumoku(Integer k) {
+			this.koumokuId = k;
+		}
 
 
 }

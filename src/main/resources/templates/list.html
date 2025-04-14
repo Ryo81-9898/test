@@ -20,6 +20,10 @@
 		<thead>
 			<tr>				
 				<th>ID</th>
+				<th>回数</th>
+				<th>元号・年</th>
+				<th>西暦</th>
+				<th>時間・問題</th>
 				<th>問題文</th>
 				<th>選択肢 1</th>
 				<th>選択肢 2</th>
@@ -28,6 +32,10 @@
 				<th>選択肢 5</th>
 				<th>正解番号</th>
 				<th>解説</th>
+				<th>小項目</th>
+				<th>中項目</th>
+				<th>大項目</th>
+				<th>目標</th>
 				<th>編集</th>
 				<th>削除</th>
 			</tr>
@@ -36,6 +44,10 @@
 			<tbody>
 				<tr>
 					<td th:text="${qa.id}">ID</td>
+					<td th:text="|第${qa.testNumber.testNumberId}回|">回数</td>
+					<td th:text="|${qa.testNumber.gengo.gengo}${qa.testNumber.gengoNen}年|">元号</td>
+					<td th:text="|${qa.testNumber.seireki}年|">西暦</td>
+					<td th:text="|${qa.time.time}問題 ${qa.questionNumber}|">時間・問題</td>
 					<td th:text="${qa.question}">問題文</td>
 					<td th:text="${qa.choice1}">選択肢1</td>
 					<td th:text="${qa.choice2}">選択肢2</td>
@@ -44,6 +56,11 @@
 					<td th:text="${qa.choice5}">選択肢5</td>
 					<td th:text="${qa.ans}">正解番号</td>
 					<td th:text="${qa.explanation}">解説</td>
+					<td th:text="${qa.koumoku.sKoumoku}">小項目</td>
+					<td th:text="${qa.koumoku.mkoumoku.mKoumoku}">中項目</td>
+					<td th:text="${qa.koumoku.lkoumoku.lKoumoku}">大項目</td>
+					<td th:text="${qa.koumoku.mokuhyo.mokuhyo}">目標</td>
+					
 					<td>
 						<form th:action="@{/edit/{id}(id=${qa.id})}" method="get">
 							<button type="submit">編集</button>

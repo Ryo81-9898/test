@@ -10,9 +10,9 @@
 	<h1>あなたの正答率は [[${correctRate}]]% です。</h1>
 	<div th:each= "result, s : ${userResults}">
 		<hr>
-		<p>問題[[${s.count}]]：[[${result.questionText}]]</p>
+		<p>問題[[${s.count}]]：[[${result.question}]]</p>
 	    <p th:text="|あなたの答え：${result.userAnswer}|"></p>
-	    <p th:text="|正解：${result.correctAnswer}|"></p>
+	    <p th:text="|正解：${result.ans}|"></p>
 	    <p th:text="|解説：${result.explanation}|"></p>
 	</div>
 	

@@ -146,6 +146,7 @@
 			gengo_table.gengo,
 			gengo_nen,
 			seireki,
+			time_table.time_id,
 			time_table.time,
 			question_number,
 			question,
@@ -156,6 +157,7 @@
 			choice5,
 			ans,
 			explanation,
+			koumoku_table.koumoku_id,
 			s_koumoku,
 			m_koumoku,
 			l_koumoku,
@@ -227,6 +229,22 @@
 		WHERE id = #{id}
 		;
 	</update>
+<!--	アップデートのためのtime_tableとkoumoku_tableの取得-->
+<!--	time_table取得-->
+	<select id="getTimeTable" resultType="com.example.quizapp.entity.TimeTable">
+		SELECT * 
+		FROM time_table 
+		WHERE time_id = #{id}
+		;
+	</select>
+<!--	koumoku_table取得-->
+	<select id="getKoumokuTable" resultType="com.example.quizapp.entity.KoumokuTable">
+		SELECT  koumoku_id,
+				s_koumoku 
+		FROM koumoku_table 
+		WHERE koumoku_id = #{id}
+		;
+	</select>
 	<!-- 問題を削除 -->
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM quizzes

@@ -1,5 +1,6 @@
 package com.example.quizapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,8 @@ public class QuizController {
 //情報保持のためのフィールド
 	//正答率計算のため
 	private int numQuestion;
+	//ランダムに選ばれた問題と、解答後の情報保持
+	private  List<UserResult> results;
 	//再編集の際に使用
 	private QuizForm temporaryForm;
 	
@@ -56,7 +59,13 @@ public class QuizController {
 	@GetMapping("challenge/{no}")
 	public String quizList(@PathVariable int no, Model model) {
 		no = no % 5 == 0 ? no : 5; //ボタンに無い数を入力されても初期化する
-		model.addAttribute("quizList", q.randomSelectQuiz(no));
+//		ランダムに取ってきた問題をフィールドに保存
+		List<UserResult> ur = new ArrayList<>();
+		for(Quiz qu : q.randomSelectQuiz(no)) {
+			ur.add(Quizhelper.convertUserResult(qu));
+			results = ur;
+		}
+		model.addAttribute("quizList", results);
 		//フィールドに問題数を保存
 		this.setNumQuestion(no);
 		return "quiz/quizzes";
@@ -69,11 +78,14 @@ public class QuizController {
 	public String answerList(@RequestParam Map<String, String> params, Model model) {
 		
 		//表示した問題数を取得する
-//		int questionCount = (int) params.keySet().stream().filter(key -> key.startsWith("question_")).count();
 		int questionCount = this.getNumQuestion();
 		
 		//答え、解説に関する情報を取得
-		 List<UserResult> results = q.getUserResult(params, questionCount);
+		for (int i = 1; i <= questionCount; i++) {
+			results.get(i-1).setUserAnswer(params.get("userAnswerQuestionNo" + i));
+			System.out.println(results.get(i-1));
+		}
+//		 List<UserResult> results = q.getUserResult(params, questionCount);
 			
 		//正答率の取得
 		int rate = q.correctAnsRate(results, questionCount);
@@ -119,7 +131,7 @@ public class QuizController {
 	@GetMapping("save")
 	public String creat(@ModelAttribute QuizForm form, RedirectAttributes attributes) {
 		//登録実行
-		q.insertNewQuiz(Quizhelper.convertQuiz(form));
+		q.insertNewQuiz(Quizhelper.toQuiz(form));
 		// フラッシュメッセージ
 		attributes.addFlashAttribute("message", "新しい問題が追加されました");
 		//同じフォーム画面へもどる（上記フラッシュメッセージ付き）
@@ -132,7 +144,7 @@ public class QuizController {
 		Quiz target = q.findQuizById(id);
 		if(target != null) {
 			//対象データがある場合はFormへの変換
-			QuizForm form = Quizhelper.convertForm(target);
+			QuizForm form = Quizhelper.toForm(target);
 			model.addAttribute("quizForm", form);
 			return "/form";
 		} else {
@@ -151,13 +163,18 @@ public class QuizController {
 	
 	//更新前確認(form.html->detail(pickUpQuiz.isNew=null))
 	@GetMapping("/check")
-	public String checkBeforeUpdate(@ModelAttribute QuizForm form,  Model model) {
+	public String checkBeforeUpdate(@ModelAttribute QuizForm form,
+			Model model) {
+//		更新のため一時的にフィールドに情報保存
 		this.setTemporaryForm(form);
 //		//isNew判定とメッセージ表示、変更予定の内容を格納
 		model.addAttribute("pickUpQuiz", form);
+		//タイムテーブルから午前か午後かの情報を取ってくる
+		model.addAttribute("timeTable",q.findTimeTable(form.getTimeId()));
+		//項目テーブルから小項目情報を取ってくる
+		model.addAttribute("koumokuTable",q.findKoumokuTable(form.getKoumokuId()));
 		model.addAttribute("checkMessage", "変更内容に間違いはありませんか");
-//		変更前の内容
-		System.out.println(q.findQuizById(form.getId()));
+		//変更前の内容
 		model.addAttribute("before", q.findQuizById(form.getId()));
 		return "detail";
 		
@@ -167,7 +184,7 @@ public class QuizController {
 	@PostMapping("update")
 	public String updateQuestion(@ModelAttribute QuizForm form,  RedirectAttributes redirect) {
 		//データベースへの更新処理
-		q.updateQuiz(Quizhelper.convertQuiz(this.getTemporaryForm()));
+		q.updateQuiz(Quizhelper.toQuiz(this.getTemporaryForm()));
 
 		//フラッシュメッセージ
 		redirect.addFlashAttribute("updateMessage", "問題が更新されました");

@@ -20,6 +20,10 @@
 		<thead>
 			<tr>
 				<th>ID</th>
+				<th>回数</th>
+				<th th:if="${pickUpQuiz.isNew}">元号・年</th>
+				<th th:if="${pickUpQuiz.isNew}">西暦</th>
+				<th>時間・問題</th>
 				<th>問題文</th>
 				<th>選択肢 1</th>
 				<th>選択肢 2</th>
@@ -28,6 +32,10 @@
 				<th>選択肢 5</th>
 				<th>正解番号</th>
 				<th>解説</th>
+				<th>小項目</th>
+				<th th:if="${pickUpQuiz.isNew}">中項目</th>
+				<th th:if="${pickUpQuiz.isNew}">大項目</th>
+				<th th:if="${pickUpQuiz.isNew}">目標</th>
 				<th th:if="${pickUpQuiz.isNew}">編集</th>
 			</tr>
 		</thead>
@@ -35,6 +43,10 @@
 		<tbody th:if="${pickUpQuiz.isNew}">
 			<tr>
 				<td th:text="${pickUpQuiz.id}">ID</td>
+				<td th:text="|第${pickUpQuiz.testNumber.testNumberId}回|">回数</td>
+				<td th:text="|${pickUpQuiz.testNumber.gengo.gengo}${pickUpQuiz.testNumber.gengoNen}年|">元号</td>
+				<td th:text="|${pickUpQuiz.testNumber.seireki}年|">西暦</td>
+				<td th:text="|${pickUpQuiz.time.time}問題 ${pickUpQuiz.questionNumber}|">時間・問題</td>
 				<td th:text="${pickUpQuiz.question}">問題文</td>
 				<td th:text="${pickUpQuiz.choice1}">選択肢1</td>
 				<td th:text="${pickUpQuiz.choice2}">選択肢2</td>
@@ -43,6 +55,10 @@
 				<td th:text="${pickUpQuiz.choice5}">選択肢5</td>
 				<td th:text="${pickUpQuiz.ans}">正解番号</td>
 				<td th:text="${pickUpQuiz.explanation}">解説</td>
+				<td th:text="${pickUpQuiz.koumoku.sKoumoku}">小項目</td>
+				<td th:text="${pickUpQuiz.koumoku.mkoumoku.mKoumoku}">中項目</td>
+				<td th:text="${pickUpQuiz.koumoku.lkoumoku.lKoumoku}">大項目</td>
+				<td th:text="${pickUpQuiz.koumoku.mokuhyo.mokuhyo}">目標</td>
 				<td th:if="${pickUpQuiz.isNew}">
 					<a th:href="@{/edit/{id}(id=${pickUpQuiz.id})}">編集
 					</a>
@@ -53,6 +69,8 @@
 		<tbody th:unless="${pickUpQuiz.isNew}">
 			<tr>
 				<td th:text="${before.id}">ID</td>
+				<td th:text="|第${before.testNumber.testNumberId}回|">回数</td>
+				<td th:text="|${before.time.time}問題 ${before.questionNumber}|">時間・問題</td>
 				<td th:text="${before.question}">問題文</td>
 				<td th:text="${before.choice1}">選択肢1</td>
 				<td th:text="${before.choice2}">選択肢2</td>
@@ -61,6 +79,7 @@
 				<td th:text="${before.choice5}">選択肢5</td>
 				<td th:text="${before.ans}">正解番号</td>
 				<td th:text="${before.explanation}">解説</td>
+				<td th:text="${before.koumoku.sKoumoku}">小項目</td>
 			</tr>
 		</tbody>
 	</table>
@@ -74,6 +93,8 @@
 			<thead>
 				<tr>
 					<th>ID</th>
+					<th>回数</th>
+					<th>時間・問題</th>
 					<th>問題文</th>
 					<th>選択肢 1</th>
 					<th>選択肢 2</th>
@@ -82,11 +103,14 @@
 					<th>選択肢 5</th>
 					<th>正解番号</th>
 					<th>解説</th>
+					<th>小項目</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td th:text="${pickUpQuiz.id}">ID</td>
+					<td th:text="|第${pickUpQuiz.testNumberId}回|">回数</td>
+					<td th:text="|${timeTable.time}問題 ${pickUpQuiz.questionNumber}|">時間・問題</td>
 					<td th:text="${pickUpQuiz.question}">問題文</td>
 					<td th:text="${pickUpQuiz.choice1}">選択肢1</td>
 					<td th:text="${pickUpQuiz.choice2}">選択肢2</td>
@@ -95,6 +119,7 @@
 					<td th:text="${pickUpQuiz.choice5}">選択肢5</td>
 					<td th:text="${pickUpQuiz.ans}">正解番号</td>
 					<td th:text="${pickUpQuiz.explanation}">解説</td>
+					<td th:text="${koumokuTable.sKoumoku}">小項目</td>
 				</tr>
 			</tbody>
 		</table>
@@ -111,7 +136,7 @@
 		<br>
 		<a th:href="@{/list}">一覧へ戻る</a>
 	</div>
-<!--	削除前の最終ボタン-->
+	<!--	削除前の最終ボタン-->
 	<div th:if="${deleteButton}">
 		<p th:text="本当に削除してもいいですか" style="color : red;"></p>
 		<form th:action="@{/delete}" method="post">
