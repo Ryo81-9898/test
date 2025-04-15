@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -129,8 +131,13 @@ public class QuizController {
 	}
 	
 	//新規登録問題の入力後の画面遷移
-	@GetMapping("save")
-	public String creat(@ModelAttribute QuizForm form, RedirectAttributes attributes) {
+	@PostMapping("save")
+	public String creat(@Validated @ModelAttribute QuizForm form, BindingResult bindingResult, RedirectAttributes attributes) {
+//		===バリデーションチェック===
+		if (bindingResult.hasErrors()) {
+			form.setIsNew(true);
+			return "form";
+		}
 		//登録実行
 		q.insertNewQuiz(Quizhelper.toQuiz(form));
 		// フラッシュメッセージ
@@ -163,9 +170,13 @@ public class QuizController {
 	}
 	
 	//更新前確認(form.html->detail(pickUpQuiz.isNew=null))
-	@GetMapping("/check")
-	public String checkBeforeUpdate(@ModelAttribute QuizForm form,
+	@PostMapping("/check")
+	public String checkBeforeUpdate(@Validated @ModelAttribute QuizForm form, BindingResult bindingResult,
 			Model model) {
+//		===バリデーションチェック===
+		if (bindingResult.hasErrors()) {
+			return "form";
+		}
 //		更新のため一時的にフィールドに情報保存
 		this.setTemporaryForm(form);
 //		//isNew判定とメッセージ表示、変更予定の内容を格納
@@ -183,7 +194,7 @@ public class QuizController {
 	
 	//更新処理
 	@PostMapping("update")
-	public String updateQuestion(@ModelAttribute QuizForm form,  RedirectAttributes redirect) {
+	public String updateQuestion(@ModelAttribute QuizForm form, RedirectAttributes redirect) {
 		//データベースへの更新処理
 		q.updateQuiz(Quizhelper.toQuiz(this.getTemporaryForm()));
 

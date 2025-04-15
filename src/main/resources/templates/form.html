@@ -12,30 +12,33 @@
 	<h2 th:if="${quizForm.isNew}">新規問題登録</h2>
 	<h2 th:unless="${quizForm.isNew}">問題編集・更新</h2>
 	<!--	アクション：登録 or 編集-->
-	<form th:action="${quizForm.isNew} ? @{save} : @{/check}" th:object="${quizForm}" method="get">
+	<form th:action="${quizForm.isNew} ? @{save} : @{/check}" th:object="${quizForm}" method="post">
 		<!--		idは更新時に必要なため、hiddenで持つ-->
 		<input type="hidden" th:field="*{id}">
 
 		<!--		入力内容-->
 		<!--		試験回数-->
 		<label for="testNumberId">試験回数：第</label>
-		<input type="text" id="testNumberId" th:field="*{testNumberId}"><label>回</label><br>
+		<input type="text" id="testNumberId" th:field="*{testNumberId}" required><label>回</label>
+		<span th:if="${#fields.hasErrors('testNumberId')}" th:errors="*{testNumberId}" style="color:red"></span><br>
 		<!--		時間帯-->
 		<label for="timeId">時間帯</label>
-		<select id="timeId" th:field="*{timeId}">
+		<select id="timeId" th:field="*{timeId}" required>
 			<option value="1">午前</option>
 			<option value="2">午後</option>
-		</select><br>
+		</select>
+		<span th:if="${#fields.hasErrors('timeId')}" th:errors="*{timeId}" style="color:red"></span><br>
 		<!--		問題番号-->
 		<label for="questionNumber">問題番号</label>
-		<select id="questionNumber" th:field="*{questionNumber}">
+		<select id="questionNumber" th:field="*{questionNumber}" required>
 			<option th:each="i : ${#numbers.sequence(1,25)}" th:value="${i}" th:text="${i}">
 			</option>
-		</select><br>
+		</select>
+		<span th:if="${#fields.hasErrors('questionNumber')}" th:errors="*{questionNumber}" style="color:red"></span><br>
 		<!--		問題文-->
 		<label for="question">問題文：</label>
-		<input type="text" id="question" th:field="*{question}">
-		<br>
+		<input type="text" id="question" th:field="*{question}" required>
+		<span th:if="${#fields.hasErrors('question')}" th:errors="*{question}" style="color:red"></span><br>
 		<!--		選択肢-->
 		<table>
 			<tr>
@@ -47,6 +50,7 @@
 				<td><label for="choice1">1.</label></td>
 				<td>
 					<textarea id="choice1" rows="1" cols="100" th:field="*{choice1}" required></textarea>
+					<span th:if="${#fields.hasErrors('choice1')}" th:errors="*{choice1}" style="color:red"></span>
 				</td>
 			</tr>
 
@@ -54,6 +58,7 @@
 				<td><label for="choice2">2.</label></td>
 				<td>
 					<textarea id="choice2" rows="1" cols="100" th:field="*{choice2}" required></textarea>
+					<span th:if="${#fields.hasErrors('choice2')}" th:errors="*{choice2}" style="color:red"></span>
 				</td>
 			</tr>
 
@@ -61,6 +66,7 @@
 				<td><label for="choice3">3.</label></td>
 				<td>
 					<textarea id="choice3" rows="1" cols="100" th:field="*{choice3}" required></textarea>
+					<span th:if="${#fields.hasErrors('choice3')}" th:errors="*{choice3}" style="color:red"></span>
 				</td>
 			</tr>
 
@@ -68,6 +74,7 @@
 				<td><label for="choice4">4.</label></td>
 				<td>
 					<textarea id="choice4" rows="1" cols="100" th:field="*{choice4}" required></textarea>
+					<span th:if="${#fields.hasErrors('choice4')}" th:errors="*{choice4}" style="color:red"></span>
 				</td>
 			</tr>
 
@@ -80,19 +87,21 @@
 		</table>
 		<!--		答え-->
 		<label for="ans">答え</label>
-		<input type="number" id="ans" th:field="*{ans}" min="1" max="5">
+		<input type="number" id="ans" th:field="*{ans}" min="1" max="5" required>
+		<span th:if="${#fields.hasErrors('ans')}" th:errors="*{ans}" style="color:red"></span><br>
 		<!--		解説-->
 		<br>
 		<label for="explanation">解説</label>
-		<textarea rows="10" cols="100" id="explanation" th:field="*{explanation}">
-		</textarea>
+		<textarea rows="10" cols="100" id="explanation" th:field="*{explanation}" required></textarea>
+		<span th:if="${#fields.hasErrors('explanation')}" th:errors="*{explanation}" style="color:red"></span><br>
 		<br>
 		<!--		出題基準-->
 		<label for="koumokuId">出題基準</label>
-		<select id="koumokuId" th:field="*{koumokuId}">
+		<select id="koumokuId" th:field="*{koumokuId}" required>
 			<option th:each="i : ${#numbers.sequence(1,16)}" th:value="${i}" th:text="${'sho_koumoku' + i}">
 			</option>
-		</select><br>
+		</select>
+		<span th:if="${#fields.hasErrors('koumokuId')}" th:errors="*{koumokuId}" style="color:red"></span><br>
 		<!--		ボタン：登録 or 更新-->
 		<br>
 		<br>
