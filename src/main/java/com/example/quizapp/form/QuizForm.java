@@ -18,24 +18,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuizForm {
-//		private int id;
-//		private Integer questionNumber;
-//		private String question;
-//		private String choice1;
-//		private String choice2;
-//		private String choice3;
-//		private String choice4;
-//		private String choice5;
-//		private Integer ans;
-//		private String explanation;
-//		private Integer testNumberId;
-//		private TestNumber testNumber;
-//		private Integer timeId;
-//		private Time time;
-//		private Integer koumokuId;
-//		private Koumoku koumoku;
-//		//新規作成or更新(form.html)、ID検索or更新確認画面(detail.html)
-//		private Boolean isNew;
 		
 		private int id;
 		@NotNull(message = "※問題番号は必須です")
@@ -56,7 +38,7 @@ public class QuizForm {
 		@NotBlank(message = "※解説は必須です")
 		private String explanation;
 		@NotNull(message = "※試験回数は必須です")
-		@Range(min = 105, max = 114, message = "※試験回数は第105回から第114回までの範囲となっています")
+		@Range(min = 105, max = 200, message = "※試験回数は第{min}回から最新のテストまでの範囲となっています")
 		private Integer testNumberId;
 		private TestNumber testNumber;
 		@NotNull(message = "※選択は必須です")
