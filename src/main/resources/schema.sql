@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS koumoku_table;
 DROP TABLE IF EXISTS mokuhyo_table;
 DROP TABLE IF EXISTS l_koumoku_table;
 DROP TABLE IF EXISTS m_koumoku_table;
+DROP TABLE IF EXISTS authentications;
 
 
 --テーブルの作成
@@ -83,3 +84,14 @@ CREATE TABLE quizzes (
 	REFERENCES koumoku_table(koumoku_id)
 );
 
+--認証情報を格納するテーブル
+CREATE TABLE authentications(
+	--	ユーザー名：主キー
+	username VARCHAR(50) PRIMARY KEY,
+	--	パスワード
+	password VARCHAR(255) NOT NULL
+--	--権限
+--	authority role NOT NULL,
+--	--表示名
+--	displayname VARCHAR(50) NOT NULL
+);

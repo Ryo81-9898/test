@@ -114,5 +114,15 @@ INSERT INTO quizzes (test_number_id, time_id, question_number, question, choice1
 	;
 
 
-
+--認証テーブルへのダミーデータの追加
+INSERT INTO authentications (username, password)
+	VALUES ('admin', 'adminpass');
+	
+----認証テーブルへのダミーデータの追加
+----password: adminpass
+--INSERT INTO authentications (username, password, authority, displayname)
+--	VALUES ('admin', '$2a$10$USGMv1horWcgWRZF3wfdf.omjDm2Tbz.OvCKNMUkjmamBcqoxRypi','ADMIN', '管理太郎');
+----password: userpass
+--INSERT INTO authentications (username, password, authority, displayname)
+--	VALUES ('user', '$2a$10$aLgku.XkJN..5BgT3jLZQeUXdNM7yIbeJaF0tJOvxMNYiStqOKH5O','USER', '一般花子');
 

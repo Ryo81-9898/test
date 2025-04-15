@@ -1,4 +1,4 @@
-package com.example.quizapp.service;
+package com.example.quizapp.service.impl;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import com.example.quizapp.entity.MaxId;
 import com.example.quizapp.entity.Quiz;
 import com.example.quizapp.entity.TimeTable;
 import com.example.quizapp.repository.QuizMapper;
+import com.example.quizapp.service.QuizService;
 
 import lombok.RequiredArgsConstructor;
 
