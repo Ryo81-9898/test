@@ -15,121 +15,83 @@
 	<form th:action="${quizForm.isNew} ? @{save} : @{/check}" th:object="${quizForm}" method="get">
 		<!--		idは更新時に必要なため、hiddenで持つ-->
 		<input type="hidden" th:field="*{id}">
-		
-<!--		入力内容-->
-<!--		試験回数-->
+
+		<!--		入力内容-->
+		<!--		試験回数-->
 		<label for="testNumberId">試験回数：第</label>
 		<input type="text" id="testNumberId" th:field="*{testNumberId}"><label>回</label><br>
-<!--		時間帯-->
+		<!--		時間帯-->
 		<label for="timeId">時間帯</label>
 		<select id="timeId" th:field="*{timeId}">
-		    <option value="1">午前</option>
-		    <option value="2">午後</option>
+			<option value="1">午前</option>
+			<option value="2">午後</option>
 		</select><br>
-<!--		問題番号-->
+		<!--		問題番号-->
 		<label for="questionNumber">問題番号</label>
 		<select id="questionNumber" th:field="*{questionNumber}">
-		    <option value="1">1</option>
-		    <option value="2">2</option>
-		    <option value="3">3</option>
-		    <option value="4">4</option>
-		    <option value="5">5</option>
-		    <option value="6">6</option>
-		    <option value="7">7</option>
-		    <option value="8">8</option>
-		    <option value="9">9</option>
-		    <option value="10">10</option>
-		    <option value="11">11</option>
-		    <option value="12">12</option>
-		    <option value="13">13</option>
-		    <option value="14">14</option>
-		    <option value="15">15</option>
-		    <option value="16">16</option>
-		    <option value="17">17</option>
-		    <option value="18">18</option>
-		    <option value="19">19</option>
-		    <option value="20">20</option>
-		    <option value="21">21</option>
-		    <option value="22">22</option>
-		    <option value="23">23</option>
-		    <option value="24">24</option>
-		    <option value="25">25</option>
+			<option th:each="i : ${#numbers.sequence(1,25)}" th:value="${i}" th:text="${i}">
+			</option>
 		</select><br>
-<!--		問題文-->
+		<!--		問題文-->
 		<label for="question">問題文：</label>
 		<input type="text" id="question" th:field="*{question}">
 		<br>
-<!--		選択肢-->
+		<!--		選択肢-->
 		<table>
 			<tr>
 				<th>番号</th>
 				<th>選択肢</th>
 			</tr>
+
 			<tr>
-				<td><label for="choice1"> 1. </label></td>
+				<td><label for="choice1">1.</label></td>
 				<td>
-					<textarea id="choice1" rows="1" cols="100" th:field="*{choice1}" required>
-					</textarea>
+					<textarea id="choice1" rows="1" cols="100" th:field="*{choice1}" required></textarea>
 				</td>
 			</tr>
+
 			<tr>
-				<td><label for="choice2"> 2. </label></td>
+				<td><label for="choice2">2.</label></td>
 				<td>
-					<textarea id="choice2" rows="1" cols="100" th:field="*{choice2}" required>
-					</textarea>
+					<textarea id="choice2" rows="1" cols="100" th:field="*{choice2}" required></textarea>
 				</td>
 			</tr>
+
 			<tr>
-				<td><label for="choice3"> 3. </label></td>
+				<td><label for="choice3">3.</label></td>
 				<td>
-					<textarea id="choice3" rows="1" cols="100" th:field="*{choice3}" required>
-					</textarea>
+					<textarea id="choice3" rows="1" cols="100" th:field="*{choice3}" required></textarea>
 				</td>
 			</tr>
+
 			<tr>
-				<td><label for="choice4"> 4. </label></td>
+				<td><label for="choice4">4.</label></td>
 				<td>
-					<textarea id="choice4" rows="1" cols="100" th:field="*{choice4}" required>
-					</textarea>
+					<textarea id="choice4" rows="1" cols="100" th:field="*{choice4}" required></textarea>
 				</td>
 			</tr>
+
 			<tr>
-				<td><label for="choice5"> 5. </label></td>
+				<td><label for="choice5">5.</label></td>
 				<td>
-					<textarea id="choice5" rows="1" cols="100" th:field="*{choice5}" >
-					</textarea>
+					<textarea id="choice5" rows="1" cols="100" th:field="*{choice5}"></textarea>
 				</td>
 			</tr>
-			
 		</table>
-<!--		答え-->
+		<!--		答え-->
 		<label for="ans">答え</label>
-		<input type="number" id="ans" th:field="*{ans}"  min="1" max="5">
-<!--		解説-->
+		<input type="number" id="ans" th:field="*{ans}" min="1" max="5">
+		<!--		解説-->
 		<br>
 		<label for="explanation">解説</label>
 		<textarea rows="10" cols="100" id="explanation" th:field="*{explanation}">
 		</textarea>
 		<br>
-<!--		出題基準-->
+		<!--		出題基準-->
 		<label for="koumokuId">出題基準</label>
 		<select id="koumokuId" th:field="*{koumokuId}">
-		    <option value="1">sho_koumoku1</option>
-		    <option value="2">sho_koumoku2</option>
-		    <option value="3">sho_koumoku3</option>
-		    <option value="4">sho_koumoku4</option>
-		    <option value="5">sho_koumoku5</option>
-		    <option value="6">sho_koumoku6</option>
-		    <option value="7">sho_koumoku7</option>
-		    <option value="8">sho_koumoku8</option>
-		    <option value="9">sho_koumoku9</option>
-		    <option value="10">sho_koumoku10</option>
-		    <option value="11">sho_koumoku11</option>
-		    <option value="12">sho_koumoku12</option>
-		    <option value="13">sho_koumoku13</option>
-		    <option value="14">sho_koumoku14</option>
-		    <option value="15">sho_koumoku15</option>
-		    <option value="16">sho_koumoku16</option>
+			<option th:each="i : ${#numbers.sequence(1,16)}" th:value="${i}" th:text="${'sho_koumoku' + i}">
+			</option>
 		</select><br>
 		<!--		ボタン：登録 or 更新-->
 		<br>
