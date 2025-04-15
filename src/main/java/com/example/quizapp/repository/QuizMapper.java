@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.quizapp.entity.KoumokuTable;
+import com.example.quizapp.entity.MaxId;
 import com.example.quizapp.entity.Quiz;
 import com.example.quizapp.entity.TimeTable;
 
@@ -34,6 +35,9 @@ public interface QuizMapper {
 
 //	idで指定した問題を削除
 	void delete(@Param("id") int id);
+	
+//	idの最大値を取得
+	MaxId getMaxId();
 	
 	
 

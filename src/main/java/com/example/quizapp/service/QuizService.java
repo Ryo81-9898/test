@@ -31,6 +31,9 @@ public interface QuizService {
 	
 //	idで指定した問題を削除
 	void deleteQuiz(int id);
+	
+//	idの最大値を取得
+	int findMaxId();
 
 	
 //	正答率計算メソッド

@@ -253,5 +253,12 @@
 		;
 	</delete>
 	
+<!--	idの最大値を取得-->
+	<select id="getMaxId" resultType="com.example.quizapp.entity.MaxId">
+		SELECT MAX(id) AS max_id
+		FROM quizzes;
+		;
+	</select>
+	
 
 </mapper>

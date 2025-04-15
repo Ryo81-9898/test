@@ -47,8 +47,9 @@ public class QuizController {
 	
 	//	最初のメニュー表示
 	@GetMapping
-	public String menu() {
-		
+	public String menu(Model model) {
+		int maxId = q.findMaxId(); // DBからIDの最大値を取得
+	    model.addAttribute("maxId", maxId);
 		return "menu";
 	}
 

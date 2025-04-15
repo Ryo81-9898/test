@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.quizapp.dto.UserResult;
 import com.example.quizapp.entity.KoumokuTable;
+import com.example.quizapp.entity.MaxId;
 import com.example.quizapp.entity.Quiz;
 import com.example.quizapp.entity.TimeTable;
 import com.example.quizapp.repository.QuizMapper;
@@ -61,6 +62,12 @@ public class QuizServiceImpl implements QuizService {
 	@Override
 	public void deleteQuiz(int id) {
 		quizMapper.delete(id);
+	}
+	
+	@Override
+	public int findMaxId() {
+		MaxId maxIdEntity = quizMapper.getMaxId();
+	    return maxIdEntity.getMaxId();
 	}
 
 

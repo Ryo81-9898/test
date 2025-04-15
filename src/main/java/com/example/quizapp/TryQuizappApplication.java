@@ -97,7 +97,7 @@ public class TryQuizappApplication {
 	private final QuizService s;
 	
 	public void exe() {
-//		//全件検索
+////		//全件検索
 //		System.out.println("全件検索");
 //		for (Quiz q : s.selectAllQuiz()) {
 //			System.out.println(q);
@@ -146,8 +146,8 @@ public class TryQuizappApplication {
 //		}
 		
 		//タイムテーブル、項目テーブル
-		System.out.println(s.findTimeTable(1));
-		System.out.println(s.findKoumokuTable(16));
+//		System.out.println(s.findTimeTable(1));
+//		System.out.println(s.findKoumokuTable(16));
 
 	}
 }
