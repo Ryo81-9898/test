@@ -4,8 +4,10 @@
 	namespace="com.example.quizapp.repository.AuthenticationMapper">
 <!--	ユーザー名で認証情報を検索-->
 	<select id="selectByUsername" resultType="com.example.quizapp.entity.Authentication">
-		SELECT username, password
-<!--		 authority, displayname-->
+		SELECT 	username,
+				password,
+				authority,
+				displayname
 		FROM authentications 
 		WHERE username = #{username}
 		;

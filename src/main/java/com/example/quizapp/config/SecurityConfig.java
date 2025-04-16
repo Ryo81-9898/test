@@ -25,6 +25,8 @@ public class SecurityConfig {
 				.authorizeHttpRequests(authz -> authz
 						//	「/login」へのアクセスは認証を必要としない
 						.requestMatchers("/", "/login", "/challenge/**", "/result").permitAll()
+//						【管理者権限設定】以下のurlは管理者しかアクセスできない
+						.requestMatchers("/result", "/list", "/pickUp/**", "/form", "/save", "/edit/**", "/reedit", "/check", "/update/**", "pickUpDeleteQuestion/**", "/delete/**").hasAuthority("ADMIN")
 						//	その他のリクエストは認証が必要
 						.anyRequest().authenticated())
 
@@ -48,7 +50,7 @@ public class SecurityConfig {
 						//	ログアウトを処理するURLを指定
 						.logoutUrl("/logout")
 						//	ログアウト成功時のリダイレクト先を指定
-						.logoutSuccessUrl("/login?logout")
+						.logoutSuccessUrl("/?logout")
 						//	ログアウト時にセッションを無効にする
 						.invalidateHttpSession(true)
 						//	ログアウト時にCookieを削除する

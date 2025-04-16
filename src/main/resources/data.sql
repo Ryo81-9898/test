@@ -113,16 +113,14 @@ INSERT INTO quizzes (test_number_id, time_id, question_number, question, choice1
 		(114, 2, 5, 'question20', 'choice20-1', 'choice20-2', 'choice20-3', 'choice20-4', 2, 'explanation20', 4)
 	;
 
-
---認証テーブルへのダミーデータの追加
-INSERT INTO authentications (username, password)
-	VALUES ('admin', 'adminpass');
 	
-----認証テーブルへのダミーデータの追加
-----password: adminpass
---INSERT INTO authentications (username, password, authority, displayname)
---	VALUES ('admin', '$2a$10$USGMv1horWcgWRZF3wfdf.omjDm2Tbz.OvCKNMUkjmamBcqoxRypi','ADMIN', '管理太郎');
-----password: userpass
---INSERT INTO authentications (username, password, authority, displayname)
---	VALUES ('user', '$2a$10$aLgku.XkJN..5BgT3jLZQeUXdNM7yIbeJaF0tJOvxMNYiStqOKH5O','USER', '一般花子');
+--認証テーブルへのダミーデータの追加
+--password: adminpass
+INSERT INTO authentications (username, password, authority, displayname)
+	VALUES ('admin', '$2a$10$wnz5r4I7MfF78TJagE/3s.l4BQ3i3AWelDkYbklx4UvqYkX6Mxs7C','ADMIN', '管理者');
+	
+--password: userpass
+INSERT INTO authentications (username, password, authority, displayname)
+	VALUES ('user', '$2a$10$/65M/Lyf.mXzGXogrBmFDeVFiUm4yZ2kKtwy/KMcp9BW3aE52.4eu','USER', '利用者');
+
 

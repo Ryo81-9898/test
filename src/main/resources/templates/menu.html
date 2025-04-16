@@ -13,7 +13,12 @@
 	<h2>メニュー画面</h2>
 	<hr>
 	<div sec:authentication="name">
-		ログイン情報のname値に置き換わる
+		Usernameがname値に置き換わる
+	</div>
+	<div sec:authorize="isAuthenticated()">
+		<div th:text="${#authentication.principal.displayname}">
+			新たに追加したディスプレイネームに置き換わる
+		</div>
 	</div>
 	<a th:href="@{challenge/5}">
 		<button type="button">5問チャレンジ</button>
@@ -22,20 +27,30 @@
 		<button type="button">10問チャレンジ</button>
 	</a>
 	<hr>
-	<div sec:authorize="isAuthenticated()">
-		認証された場合のみ表示<br>
-		<a th:href="@{form}">
-			<button type="button">問題の新規登録</button>
-		</a>
-		<a th:href="@{list}">
-			<button type="button">登録済み問題一覧表示</button>
-		</a>
-		<form th:action="@{pickUp}" method="get">
-			<label for="enterId">問題のID検索</label>
-			<input type="number" id="enterId" name="id" min="1" th:max="${maxId}">
-			<button type="submit">検索</button>
-		</form>
+	<div th:if="${param.logout}">
+		<p style="color: blue;">ログアウトしました</p>
+	</div>
 
+	<div sec:authorize="isAuthenticated()">
+		<div sec:authorize="hasAuthority('ADMIN')">
+			管理者のみ表示<br>
+			<a th:href="@{form}">
+				<button type="button">問題の新規登録</button>
+			</a>
+			<a th:href="@{list}">
+				<button type="button">登録済み問題一覧表示</button>
+			</a>
+			<form th:action="@{pickUp}" method="get">
+				<label for="enterId">問題のID検索</label>
+				<input type="number" id="enterId" name="id" min="1" th:max="${maxId}">
+				<button type="submit">検索</button>
+			</form>
+		</div>
+		
+		<div sec:authorize="hasAuthority('USER')">
+			成績表を作る
+		</div>
+		
 		<!--	ログアウト-->
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="ログアウト">
