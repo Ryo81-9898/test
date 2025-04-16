@@ -8,6 +8,7 @@
 
 <body>
 	<header>
+		<p th:if="${param.timeout}" style="color:red;">セッションがタイムアウトしました。再度ログインしてください。</p>
 		<a th:href="@{/login}">ログイン</a>
 	</header>
 	<h2>メニュー画面</h2>

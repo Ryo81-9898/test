@@ -14,10 +14,10 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-	
+
 	private final UserDetailsService userDetailsService;
 	private final PasswordEncoder passwordEncoder;
-	
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
@@ -54,7 +54,13 @@ public class SecurityConfig {
 						//	ログアウト時にセッションを無効にする
 						.invalidateHttpSession(true)
 						//	ログアウト時にCookieを削除する
-						.deleteCookies("JSESSIONID"));
+						.deleteCookies("JSESSIONID"))
+		
+				//		セッション管理
+				.sessionManagement(session -> session
+						.invalidSessionUrl("/?timeout") // セッション切れ時の遷移先
+						.maximumSessions(1))             // 同時ログイン数制限
+		;
 
 		return http.build();
 	}
