@@ -4,29 +4,36 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ログイン</title>
+	<link rel="stylesheet" th:href="@{/css/login.css}" />
 </head>
 
 <body>
-	<h2>ログイン画面</h2>
-	<!--	エラー表示-->
-	<div th:if="${param.error}">
-		<p style="color: red;">usernameまたはpasswordが違います</p>
-	</div>
-	<!--	ログアウト表示-->
-	<form th:action="@{/authentication}" method="post" th:object="${loginForm}">
-		<div><!--ユーザー名-->
-			<label for="usernameInput">username</label>
-			<input type="text" th:field="*{usernameInput}">
-		</div>
-		<div><!--パスワード-->
-			<label for="passwordInput">password</label>
-			<input type="password" th:field="*{passwordInput}">
-		</div>
-		<div>
-			<input type="submit" value="login">
-		</div>
-	</form>
+	<div class="container">
+		<!-- ログイン画面のタイトル -->
+		<h2>ログイン画面</h2>
 
+		<!-- エラーメッセージ -->
+		<div th:if="${param.error}" class="error-message">
+			<p>usernameまたはpasswordが違います</p>
+		</div>
+
+		<!-- ログインフォーム -->
+		<form th:action="@{/authentication}" method="post" th:object="${loginForm}" onsubmit="return validateLogin()">
+			<div class="input-field"><!-- ユーザー名 -->
+				<label for="usernameInput">username</label>
+				<input type="text" th:field="*{usernameInput}" id="usernameInput" />
+			</div>
+			<div class="input-field"><!-- パスワード -->
+				<label for="passwordInput">password</label>
+				<input type="password" th:field="*{passwordInput}" id="passwordInput" />
+			</div>
+			<div class="submit-button">
+				<input type="submit" value="login">
+			</div>
+		</form>
+	</div>
+
+	<script th:src="@{/js/login.js}"></script>
 </body>
 
 </html>
