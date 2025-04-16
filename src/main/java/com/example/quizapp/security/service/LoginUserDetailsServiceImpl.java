@@ -1,4 +1,4 @@
-package com.example.quizapp.service.impl;
+package com.example.quizapp.security.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.quizapp.entity.Authentication;
 import com.example.quizapp.entity.LoginUser;
-import com.example.quizapp.entity.Role;
-import com.example.quizapp.repository.AuthenticationMapper;
+import com.example.quizapp.security.entity.Authentication;
+import com.example.quizapp.security.entity.Role;
+import com.example.quizapp.security.repository.AuthenticationMapper;
 
 import lombok.RequiredArgsConstructor;
 

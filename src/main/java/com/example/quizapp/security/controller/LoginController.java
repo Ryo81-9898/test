@@ -1,11 +1,11 @@
-package com.example.quizapp.controller;
+package com.example.quizapp.security.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.quizapp.form.LoginForm;
+import com.example.quizapp.security.form.LoginForm;
 
 @Controller
 @RequestMapping("/login")

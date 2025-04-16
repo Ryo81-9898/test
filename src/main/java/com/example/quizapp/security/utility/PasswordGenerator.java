@@ -1,4 +1,4 @@
-package com.example.quizapp.utility;
+package com.example.quizapp.security.utility;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

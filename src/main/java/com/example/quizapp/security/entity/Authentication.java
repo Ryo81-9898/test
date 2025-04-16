@@ -1,4 +1,4 @@
-package com.example.quizapp.entity;
+package com.example.quizapp.security.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,8 +1,8 @@
-package com.example.quizapp.repository;
+package com.example.quizapp.security.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.quizapp.entity.Authentication;
+import com.example.quizapp.security.entity.Authentication;
 
 @Mapper
 public interface AuthenticationMapper {

@@ -1,4 +1,4 @@
-package com.example.quizapp.form;
+package com.example.quizapp.security.form;
 
 import lombok.Data;
 
