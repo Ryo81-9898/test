@@ -4,7 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ログイン</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
 	<link rel="stylesheet" th:href="@{/css/login.css}" />
+	<script th:src="@{/js/login.js}" defer></script>
 </head>
 
 <body>
@@ -13,7 +15,7 @@
 		<h2>ログイン画面</h2>
 
 		<!-- エラーメッセージ -->
-		<div th:if="${param.error}" class="error-message">
+		<div th:if="${param.error}" id="loginErrorMessage" class="error-message">
 			<p>usernameまたはpasswordが違います</p>
 		</div>
 
@@ -33,7 +35,6 @@
 		</form>
 	</div>
 
-	<script th:src="@{/js/login.js}"></script>
 </body>
 
 </html>

@@ -4,23 +4,50 @@
 <head>
 	<meta charset="UTF-8">
 	<title>メニュー</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" th:href="@{/css/menu.css}" />
+	<script th:src="@{/js/menu.js}" defer></script>
+
 </head>
 
 <body>
-	<header>
-		<p th:if="${param.timeout}" style="color:red;">セッションがタイムアウトしました。再度ログインしてください。</p>
-		<a th:href="@{/login}">ログイン</a>
+	<header class="top-header">
+		<!--自動ログアウト時のメッセージ-->
+		<div th:if="${param.timeout}" id="menuErrorMessage" class="error-message">
+			<div>⚠️</div>
+			<div>
+				セッションがタイムアウトしました。再度ログインしてください。
+			</div>
+		</div>
+
+		<!-- 未ログイン状態で表示されるログインボタン -->
+		<div sec:authorize="isAnonymous()">
+			<a th:href="@{/login}" class="btn coral">ログイン</a>
+		</div>
+
+		<!--ログイン中の表示-->
+		<div sec:authorize="isAuthenticated()" class="user-info">
+			<div class="display-name" th:text="${#authentication.principal.displayname}">
+				新たに追加したディスプレイネームに置き換わる
+			</div>
+		<!--ログアウト-->
+			<form th:action="@{/logout}" method="post">
+				<button type="submit" class="btn lavender">ログアウト</button>
+			</form>
+		</div>
 	</header>
+
+
 	<h2>メニュー画面</h2>
 	<hr>
 	<div sec:authentication="name">
 		Usernameがname値に置き換わる
 	</div>
-	<div sec:authorize="isAuthenticated()">
-		<div th:text="${#authentication.principal.displayname}">
-			新たに追加したディスプレイネームに置き換わる
-		</div>
-	</div>
+<!--	<div sec:authorize="isAuthenticated()">-->
+<!--		<div th:text="${#authentication.principal.displayname}">-->
+<!--			新たに追加したディスプレイネームに置き換わる-->
+<!--		</div>-->
+<!--	</div>-->
 	<a th:href="@{challenge/5}">
 		<button type="button">5問チャレンジ</button>
 	</a>
@@ -47,15 +74,12 @@
 				<button type="submit">検索</button>
 			</form>
 		</div>
-		
+
 		<div sec:authorize="hasAuthority('USER')">
 			成績表を作る
 		</div>
-		
-		<!--	ログアウト-->
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="ログアウト">
-		</form>
+
+
 	</div>
 
 </body>
