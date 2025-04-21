@@ -42,28 +42,31 @@
 	</header>
 
 
-
-	<h2 class="menu-title zen-maru-gothic-regular">看護師国家試験 必修問題対策</h2>
+	<div class="zen-maru-gothic-regular">
+		<p class="menu-title1">看護師国家試験</p>
+		<p class="menu-title2">必修問題対策</p>
+	</div>
 
 	
 	<div class="menu-buttons zen-maru-gothic-regular">
-	    <a th:href="@{challenge/5}" class="btn">
-	        <span class="number">5問</span><br>
+	    <a th:href="@{challenge/5}" class="btn " data-message="まずは5問から気軽にスタート！">
+	        <span class="number">5問</span>
 	        <span class="label">チャレンジ</span>
 	    </a>
-	    <a th:href="@{challenge/10}" class="btn">
-	        <span class="number">10問</span><br>
+	    <a th:href="@{challenge/10}" class="btn" data-message="少し本気で取り組みたいあなたへ！">
+	        <span class="number">10問</span>
 	        <span class="label">チャレンジ</span>
 	    </a>
-	    <a th:href="@{challenge/25}" class="btn">
-	        <span class="number">25問</span><br>
+	    <a th:href="@{challenge/25}" class="btn" data-message="必修問題半日分の問題数に挑戦できる！">
+	        <span class="number">25問</span>
 	        <span class="label">チャレンジ</span>
 	    </a>
-	    <a th:href="@{challenge/50}" class="btn">
-	        <span class="number">50問</span><br>
+	    <a th:href="@{challenge/50}" class="btn" data-message="本番の国家試験の必修問題数にチャレンジ！">
+	        <span class="number">50問</span>
 	        <span class="label">チャレンジ</span>
 	    </a>
 	</div>
+	<div id="hover-message" class="hover-message"></div>
 
 
 

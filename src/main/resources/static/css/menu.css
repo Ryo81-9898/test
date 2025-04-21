@@ -6,6 +6,12 @@ body {
 	padding: 20px;
 }
 
+/*メニュー画面のフォント*/
+.zen-maru-gothic-regular {
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 /*ログイン画面固有のエラーメッセージの設定（style.cssにも共通事項あり）*/
 #menuErrorMessage {
@@ -18,27 +24,28 @@ body {
 }
 
 
-.zen-maru-gothic-regular {
-  font-family: "Zen Maru Gothic", serif;
-  font-weight: 400;
-  font-style: normal;
-}
 
-
-
-/* メニュー画面のタイトル */
-.menu-title {
-    font-size: 50px;
+/* タイトル部分 */
+.menu-title1{
+    font-size: 60px;
     font-weight: bold;
     color: #ff6f61;  /* パステルピンク */
     text-align: center;
 	margin-top: 70px;
+	margin-bottom: 0;
+	position: relative;
+}
+.menu-title2{
+    font-size: 40px;
+    font-weight: bold;
+    color: #ff6f61;  /* パステルピンク */
+    text-align: center;
+	margin-top: 0;
     margin-bottom: 20px;
-    padding: 10px;
 	position: relative;
 }
 
-.menu-title::after {
+.menu-title2::after {
     content: "";
     position: absolute;
     bottom: -10px;  /* タイトルの下に配置 */
@@ -60,33 +67,8 @@ body {
     }
 }
 
-/* タブレットサイズでタイトルを少し小さく */
-@media (max-width: 1024px) {
-    .menu-title {
-        font-size: 45px;
-    }
-}
-
-@media (max-width: 860px) {
-    .menu-title {
-        font-size: 35px;
-    }
-}
-
-/* スマホサイズでさらに調整 */
-@media (max-width: 600px) {
-    .menu-title {
-        font-size: 30px;
-        padding: 5px;
-    }
-
-    .menu-title::after {
-        height: 4px;  /* 線の太さも少し細く */
-    }
-}
 
 /* 5問チャレンジと10問チャレンジボタン */
-
 .menu-buttons {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -105,7 +87,6 @@ body {
     background-color: #8ac6e8;
     color: white;
     font-size: 1.5rem;
-    font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     opacity: 0;
     animation: fadeInUp 0.8s ease-out forwards;
@@ -150,127 +131,99 @@ body {
 
 
 
+/*ホバー時ボタン上に出てくるメッセージ（600px以下は無し）*/
+.hover-message {
+    position: absolute;
+    background: #fff4da;
+    color: #6d4c41;
+    padding: 10px 16px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    font-size: 15px;
+    font-family: "Hiragino Maru Gothic Pro", "Rounded Mplus 1c", sans-serif;
+    display: none;
+    z-index: 10;
+    pointer-events: none;
+    animation: fadeIn 0.3s ease-in-out;
+    border: 2px solid #ffe0a3;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*レスポンシブ*/
+/* タイトル */
+@media (max-width: 1024px) {
+    .menu-title1  {
+        font-size: 50px;
+    }
+    .menu-title2  {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .menu-title1 {
+        font-size: 40px;
+    }
+    .menu-title2 {
+        font-size: 25px;
+		
+    }
+	.menu-title2::after {
+	    height: 4px;  /* 線の太さも少し細く */
+	 }
+}
+
+@media (max-width: 480px) {
+    .menu-title1 {
+        font-size: 30px;
+    }
+    .menu-title2 {
+        font-size: 20px;
+    }
+	.menu-title2::after {
+		    height: 3px;  /* 線の太さも少し細く */
+		 }
+
+   
+}
+
+/*ボタン*/
 @media (max-width: 1024px) {
     .menu-buttons {
         grid-template-columns: repeat(2, 1fr);
 		width: 60%;
-		min-width:500px;
+		min-width:400px;
 		margin: 30px auto;
     }
-
-
-	
 	.menu-buttons a {
 	       aspect-ratio: 1 / 1;
 	       font-size: 20px;
 	   }
 }
 
- /*モバイル表示で1列 */
-@media (max-width: 600px) {
+@media (max-width: 480px) {
     .menu-buttons {
-        grid-template-columns: 1fr;
-		
-
+        grid-template-columns: repeat(2, 1fr);
+		width: 90%;
+		min-width:260px;
+		margin: 30px auto;
+		gap: 10px;
     }
-    .menu-buttons a {
-		max-width: 50%;
-        font-size: 16px;
-    }
+	.menu-buttons .btn .number {
+		    font-size: 28px;
+		  }
+	.menu-buttons .btn .label {
+		    font-size: 16px;
+		  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 見出し */
-/*h2 {*/
-/*	color: #333;*/
-/*	margin-bottom: 20px;*/
-/*}*/
-
-/* ボタン全体のスタイル */
-/*button {*/
-/*	background-color: #4CAF50;*/
-/*	color: white;*/
-/*	border: none;*/
-/*	border-radius: 8px;*/
-/*	padding: 12px 20px;*/
-/*	font-size: 16px;*/
-/*	margin: 10px 5px;*/
-/*	cursor: pointer;*/
-/*	transition: background-color 0.3s, transform 0.1s;*/
-/*}*/
-
-/*button:hover {*/
-/*	background-color: #45a049;*/
-/*}*/
-
-
-
-
-
-
-
-
-/* 入力フォーム用 */
-/*input[type="number"] {*/
-/*	padding: 10px;*/
-/*	font-size: 16px;*/
-/*	border-radius: 4px;*/
-/*	border: 1px solid #ccc;*/
-/*	width: 80px;*/
-/*	margin-right: 10px;*/
-/*}*/
-
-/*form {*/
-/*	margin-top: 15px;*/
-/*}*/
-
-
-
-/* 認証ブロック */
-/*div[sec\:authorize] {*/
-/*	margin-top: 30px;*/
-/*}*/
-
-/* レスポンシブ対応 */
-/*@media screen and (max-width: 600px) {*/
-/*	.container {*/
-/*		padding: 20px;*/
-/*		max-width: 95%;*/
-/*	}*/
-
-/*	button {*/
-/*		width: 100%;*/
-/*		margin: 8px 0;*/
-/*	}*/
-
-/*	input[type="number"] {*/
-/*		width: 100%;*/
-/*		margin: 8px 0;*/
-/*	}*/
-
-/*	form {*/
-/*		display: flex;*/
-/*		flex-direction: column;*/
-/*		align-items: center;*/
-/*	}*/
-
-/*	h2 {*/
-/*		font-size: 22px;*/
-/*	}*/
-/*}*/
