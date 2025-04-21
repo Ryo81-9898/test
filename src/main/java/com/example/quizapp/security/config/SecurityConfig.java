@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,12 +24,15 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
+				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 				//	HTTPリクエストに対するセキュリティ設定
 				.authorizeHttpRequests(authz -> authz
 						//	「/login」へのアクセスは認証を必要としない
-						.requestMatchers("/", "/login", "/challenge/**", "/result", "/css/**", "/js/**", "/images/**").permitAll()
-//						【管理者権限設定】以下のurlは管理者しかアクセスできない
-						.requestMatchers("/result", "/list", "/pickUp/**", "/form", "/save", "/edit/**", "/reedit", "/check", "/update/**", "pickUpDeleteQuestion/**", "/delete/**").hasAuthority("ADMIN")
+						.requestMatchers("/", "/login", "/challenge/**", "/css/**", "/js/**", "/images/**").permitAll()
+						//						【管理者権限設定】以下のurlは管理者しかアクセスできない
+						.requestMatchers("/result", "/list", "/pickUp/**", "/form", "/save", "/edit/**", "/reedit",
+								"/check", "/update/**", "pickUpDeleteQuestion/**", "/delete/**")
+						.hasAuthority("ADMIN")
 						//	その他のリクエストは認証が必要
 						.anyRequest().authenticated())
 
@@ -55,14 +61,27 @@ public class SecurityConfig {
 						.invalidateHttpSession(true)
 						//	ログアウト時にCookieを削除する
 						.deleteCookies("JSESSIONID"))
-		
+
 				//		セッション管理
 				.sessionManagement(session -> session
 						.invalidSessionUrl("/?timeout") // セッション切れ時の遷移先
-						.maximumSessions(1))             // 同時ログイン数制限
+						.maximumSessions(1)) // 同時ログイン数制限
 		;
 
 		return http.build();
+
 	}
 
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.addAllowedOrigin("*"); // すべてのオリジンを許可
+		configuration.addAllowedMethod("*"); // すべてのメソッドを許可
+		configuration.addAllowedHeader("*"); // すべてのヘッダーを許可
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
+
+	
 }

@@ -1,6 +1,15 @@
 /**
  * 
  */
+
+//タイトルの動き
+window.addEventListener('load', function() {
+    document.querySelector('.menu-title').classList.add('loaded');
+});
+
+
+
+
 /*button .btnのjsの機能の設定*/
 /* クリックアニメーション */
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,3 +23,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+

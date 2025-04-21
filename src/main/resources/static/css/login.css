@@ -85,7 +85,7 @@ h2 {
 /* 🔁 レスポンシブデザイン（スマホ・小さい画面用：600px以下） */
 @media screen and (max-width: 600px) {
     .container {
-        padding: 20px;
+        padding: 30px;
         max-width: 90%;
     }
 	
@@ -93,7 +93,6 @@ h2 {
 	.submit-button input {
 	    width: 100%;
 	    max-width: 100%;
-	    box-sizing: border-box; /* パディング込みで幅を100%に */
 	}
 
     h2 {
