@@ -69,6 +69,7 @@ public class QuizController {
 			results = ur;
 		}
 		model.addAttribute("quizList", results);
+		model.addAttribute("no", no);
 		//フィールドに問題数を保存
 		this.setNumQuestion(no);
 		return "quiz/quizzes";

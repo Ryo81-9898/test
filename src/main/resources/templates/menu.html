@@ -7,10 +7,9 @@
 	<link rel="stylesheet" th:href="@{/css/style.css}" />
 	<link rel="stylesheet" th:href="@{/css/menu.css}" />
 	<script th:src="@{/js/menu.js}" defer></script>
-	
-	<!-- Poppinsフォントを読み込む -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<script th:src="@{/js/style.js}" defer></script>
+
+	<!-- zen-maru-gothic-regular -->
 	<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
 </head>
 
@@ -47,24 +46,24 @@
 		<p class="menu-title2">必修問題対策</p>
 	</div>
 
-	
+
 	<div class="menu-buttons zen-maru-gothic-regular">
-	    <a th:href="@{challenge/5}" class="btn " data-message="まずは5問から気軽にスタート！">
-	        <span class="number">5問</span>
-	        <span class="label">チャレンジ</span>
-	    </a>
-	    <a th:href="@{challenge/10}" class="btn" data-message="少し本気で取り組みたいあなたへ！">
-	        <span class="number">10問</span>
-	        <span class="label">チャレンジ</span>
-	    </a>
-	    <a th:href="@{challenge/25}" class="btn" data-message="必修問題半日分の問題数に挑戦できる！">
-	        <span class="number">25問</span>
-	        <span class="label">チャレンジ</span>
-	    </a>
-	    <a th:href="@{challenge/50}" class="btn" data-message="本番の国家試験の必修問題数にチャレンジ！">
-	        <span class="number">50問</span>
-	        <span class="label">チャレンジ</span>
-	    </a>
+		<a th:href="@{challenge/5}" class="btn" data-message="まずは5問から気軽にスタート！">
+			<span class="number">5問</span>
+			<span class="label">チャレンジ</span>
+		</a>
+		<a th:href="@{challenge/10}" class="btn" data-message="少し本気で取り組みたいあなたへ！">
+			<span class="number">10問</span>
+			<span class="label">チャレンジ</span>
+		</a>
+		<a th:href="@{challenge/25}" class="btn" data-message="必修問題半日分の問題数に挑戦できる！">
+			<span class="number">25問</span>
+			<span class="label">チャレンジ</span>
+		</a>
+		<a th:href="@{challenge/50}" class="btn" data-message="本番の国家試験の必修問題数にチャレンジ！">
+			<span class="number">50問</span>
+			<span class="label">チャレンジ</span>
+		</a>
 	</div>
 	<div id="hover-message" class="hover-message"></div>
 

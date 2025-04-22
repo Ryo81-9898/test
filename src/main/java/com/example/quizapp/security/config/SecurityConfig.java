@@ -28,9 +28,9 @@ public class SecurityConfig {
 				//	HTTPリクエストに対するセキュリティ設定
 				.authorizeHttpRequests(authz -> authz
 						//	「/login」へのアクセスは認証を必要としない
-						.requestMatchers("/", "/login", "/challenge/**", "/css/**", "/js/**", "/images/**").permitAll()
+						.requestMatchers("/", "/login", "/challenge/**", "/result", "/css/**", "/js/**", "/images/**").permitAll()
 						//						【管理者権限設定】以下のurlは管理者しかアクセスできない
-						.requestMatchers("/result", "/list", "/pickUp/**", "/form", "/save", "/edit/**", "/reedit",
+						.requestMatchers("/list", "/pickUp/**", "/form", "/save", "/edit/**", "/reedit",
 								"/check", "/update/**", "pickUpDeleteQuestion/**", "/delete/**")
 						.hasAuthority("ADMIN")
 						//	その他のリクエストは認証が必要

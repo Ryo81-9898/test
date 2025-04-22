@@ -10,6 +10,13 @@ html, body {
     background-size: cover;
 }
 
+/*フォント*/
+.zen-maru-gothic-regular {
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 /* ヘッダーのスタイル */
 .top-header {
     display: flex;
