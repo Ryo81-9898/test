@@ -43,17 +43,10 @@ document.getElementById('startButton').addEventListener('click', () => {
   }
 });
 
-
-//let timerInterval;
-//let secondsElapsed = 0;
-//
-//document.getElementById('startButton').addEventListener('click', () => {
-//  const timerCheckbox = document.getElementById('timerCheckbox');
-//  if (timerCheckbox.checked) {
-//    document.getElementById('timerDisplay').classList.remove('hidden');
-//    timerInterval = setInterval(() => {
-//      secondsElapsed++;
-//      document.getElementById('time').textContent = secondsElapsed;
-//    }, 1000);
-//  }
-//});
+//タイマーで測った時間を次のHTMLへ移す
+document.getElementById("submit-button").addEventListener("click", function () {
+    clearInterval(timerInterval); // ストップウォッチを止める
+    const time = document.getElementById("time").textContent; // 計測した時間を取得
+    sessionStorage.setItem("elapsedTime", time); // sessionStorageに保存
+    window.location.href = "/answer"; // 遷移
+});

@@ -1,0 +1,191 @@
+@charset "UTF-8";
+
+
+
+
+/* 結果カードのスタイル */
+.result-card {
+  background-color: #fff;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* 質問テキスト */
+.question {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* メタ情報 */
+.question-meta {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+/* ユーザーの答え */
+.user-answer {
+  font-size: 1rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+/* 正解と不正解の色分け */
+.correct-answer {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #388e3c;
+  margin-bottom: 10px;
+}
+
+.correct-answer.incorrect {
+  color: #e53935; /* 不正解時は赤 */
+}
+
+/* 解説部分 */
+.explanation {
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* アイコン（正誤） */
+.correct-answer::before {
+  content: "✔️"; /* 正解アイコン */
+  margin-right: 10px;
+}
+
+.correct-answer.incorrect::before {
+  content: "❌"; /* 不正解アイコン */
+  margin-right: 10px;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .result-card {
+    padding: 15px;
+  }
+
+  .question {
+    font-size: 1rem;
+  }
+
+  .question-meta, .user-answer, .correct-answer, .explanation {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* タイトル */
+h1 {
+  text-align: center;
+  color: #1976d2;
+  font-size: 2rem;
+  margin-top: 20px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 正答率の表示 */
+#display-time {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #388e3c;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* 結果カード */
+div.thymeleaf-each {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+div.thymeleaf-each:hover {
+  transform: translateY(-5px);
+}
+
+/* 各問題の詳細 */
+.question-meta {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 10px;
+}
+
+button {
+  background-color: #388e3c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2e7d32;
+}
+
+a button {
+  background-color: #007bff;
+  margin-top: 20px;
+}
+
+a button:hover {
+  background-color: #0056b3;
+}
+
+form button {
+  background-color: #fbc02d;
+  margin-top: 20px;
+}
+
+form button:hover {
+  background-color: #f57c00;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .zen-maru-gothic-regular {
+    padding: 10px;
+  }
+
+  div.thymeleaf-each {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}

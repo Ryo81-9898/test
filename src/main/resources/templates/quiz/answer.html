@@ -4,25 +4,43 @@
 <head>
 	<meta charset="UTF-8">
 	<title>選択結果</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" th:href="@{/css/answer.css}" />
+
+	<!-- zen-maru-gothic-regular -->
+	<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+
+	<!-- 外部JSファイルの読み込み -->
+	<script th:src="@{/js/answer.js}" defer></script>
+	<script th:src="@{/js/style.js}" defer></script>
 </head>
 
 <body>
-	<h1>あなたの正答率は [[${correctRate}]]% です。</h1>
-	<div th:each= "result, s : ${userResults}">
+	<div class="zen-maru-gothic-regular">
+		<p id="display-time"></p>
+
+		<h1>あなたの正答率は [[${correctRate}]]% です。</h1>
+		<div th:each="result, s : ${userResults}">
+			<div class="result-card">
+			    <p class="question">問題[[${s.count}]]：[[${result.question}]]</p>
+			    <p th:text="|（第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}）|" class="question-meta"></p>
+			    <p class="user-answer" th:text="|あなたの答え：${result.userAnswer}|"></p>
+			    <p class="correct-answer" th:text="|正解：${result.ans}|"></p>
+			    <p class="explanation" th:text="|解説：${result.explanation}|"></p>
+			  </div>
+		</div>
+		
+
+
+
 		<hr>
-		<p>問題[[${s.count}]]：[[${result.question}]]</p>
-	    <p th:text="|あなたの答え：${result.userAnswer}|"></p>
-	    <p th:text="|正解：${result.ans}|"></p>
-	    <p th:text="|解説：${result.explanation}|"></p>
+		<a th:href="@{/}">
+			<button type="button">メニューへ戻る</button>
+		</a>
+		<form th:action="@{/challenge/{no}(no=${questionCount})}" method="get">
+			<button>もう一度問題を解く</button>
+		</form>
 	</div>
-	
-	<hr>
-	<a th:href="@{/}">
-		<button type="button">メニューへ戻る</button>
-	</a>
-	<form th:action="@{/challenge/{no}(no=${questionCount})}" method="get">
-	    <button>もう一度問題を解く</button>
-	</form>
 </body>
 
 </html>
