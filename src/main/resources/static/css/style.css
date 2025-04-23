@@ -1,0 +1,139 @@
+@charset "UTF-8";
+
+/* 全体のレイアウト */
+html, body {
+    font-family: 'Arial', sans-serif;
+	background: linear-gradient(135deg, #f0f8ff, #ffe0f0); /* ピンク×淡いブルー */
+    height: 100%;
+    background-attachment: fixed; /* 背景をスクロールに固定 */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ヘッダーのスタイル */
+.top-header {
+    display: flex;
+    justify-content: flex-end; /* 右端に配置 */
+    align-items: center;
+    padding: 10px 20px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: calc(100% - 40px);
+	z-index: 1;
+}
+
+
+/*ログイン、ログアウトボタン共通*/
+.btn {
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	border-radius: 25px;
+	cursor: pointer;
+	font-weight: bold;
+	transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ふんわり影 */
+	text-decoration: none;
+	transform: scale(1);
+	
+}
+
+.btn:hover {
+	transform: scale(1.05);
+	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/*ログインボタン*/
+.btn.coral {
+	display: block;
+	margin-top: 10px;
+	margin-right: 10px;
+	background-color: #ff7f50;
+	color: white;
+}
+
+.btn.coral:hover {
+	background-color: #ff6347;
+}
+
+
+/*ログアウトボタン*/
+.btn.lavender {
+	background-color: #c8b3f3;
+	color: #fff;
+	border: none;
+}
+
+.btn.lavender:hover {
+	background-color: #a57bee; /* 濃いラベンダー */
+}
+
+/*ログアウトボタンと一緒に表示されるディスプレイネーム設定*/
+.user-info {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.display-name {
+	font-size: 16px;
+	color: #333;
+	font-weight: bold;
+}
+
+/*button .btnのjsの機能の設定*/
+/* クリックアニメーション */
+.clicked {
+	transform: scale(0.95) !important;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+	transition: transform 0.1s, box-shadow 0.1s;
+}
+
+
+
+
+
+
+
+/* エラーメッセージ */
+.error-message {
+    background-color: #fff4f4;  /* ほんのりピンク */
+    color: #cc0000;  /* 柔らかめの赤 */
+	border: 1px solid #f5bcbc;   /* 細くて柔らかい色味の枠線 */
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+	display: flex;
+	z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+ 	animation: slideDown 0.5s ease-out, slideUp 1s ease-in 9s forwards;
+ }
+/* 表示アニメーション */
+/* 上から出てくる */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* 上に消える */
+@keyframes slideUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+
+
+
+

@@ -1,0 +1,327 @@
+@charset "UTF-8";
+
+/*画面から切れないようにpaddingやmarginの影響を無くす*/
+* {
+  box-sizing: border-box;
+}
+
+.quizzes-title {
+  font-size: 2.5rem;
+  padding-top: 8px;
+  background: linear-gradient(90deg, #fbd3e9, #bbded6);
+  color: #1976d2;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 20px 0;
+  animation: float-in 1s ease-out forwards;
+}
+
+
+@keyframes float-in {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* optional: 可愛い下線をつける場合 */
+.quizzes-title::after {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 5px;
+  margin: 10px auto 0;
+  background: #81d4fa;
+  border-radius: 10px;
+}
+
+
+/*スタートボタン・タイマーチェックボックスコンテナー*/
+.start-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh; /* 画面の中央に配置するため */
+  animation: float-in-delayed 1s ease-out 0.3s forwards;
+  opacity: 0; /* 初期状態で非表示にしておく */
+  }  
+  
+  /* フェードイン遅延アニメーション */
+  @keyframes float-in-delayed {
+    0% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+/*タイマーチェックボックス*/
+#timer-option {
+    margin-bottom: 20px; /* スタートボタンとの間隔 */
+    display: flex;
+    justify-content: center;
+  }
+
+#timer-option label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border: 0.5px solid #4caf50;
+    border-radius: 10px;
+    background-color: #e8f5e9;
+    font-size: 1rem;
+    color: #2e7d32;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  #timer-option label:hover {
+    background-color: #c8e6c9;
+    border-color: #388e3c;
+  }
+
+
+.hidden {
+  display: none;
+}
+
+/*スタートボタン*/
+.start-button {
+  width: 250px;
+  height: 150px;
+  background: linear-gradient(135deg, #baf7e2, #b3e5fc);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3a80b6;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.start-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/*問題部分*/
+.quiz-card {
+    background: #ffffffcc; /* 白に少し透け感 */
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	width: 100%;
+    max-width: 800px;
+	opacity: 0;
+	animation: slide-in-right 0.6s ease forwards;
+}
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/*問題部分*/
+.quiz-question {
+  background-color: #f5f5f5; /* 薄いグレーの背景 */
+  padding: 15px; /* 少し余白を取って読みやすく */
+  border-radius: 8px; /* 角を丸くする */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽い影をつけて浮き上がらせる */
+  margin-bottom: 10px; /* 下に少し余白を追加 */
+}
+
+.quiz-question p {
+  margin: 0;
+  font-size: 1.1rem; /* 読みやすく少し大きめのフォント */
+  color: #000;
+}
+
+.quiz-question .question-meta {
+  font-size: 0.9rem; /* サブテキストを少し小さく */
+  color: #777; /* 薄いグレー */
+  margin-top: 5px;
+}
+
+
+
+input[type="radio"] {
+    display: none;
+}
+
+.quiz-card label {
+    display: block;
+    background: #f6faff;
+    border: 2px solid #aad4f5;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 8px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quiz-card label:hover {
+  background: #e3f2fd;
+  border-color: #90caf9;
+}
+
+/* 選択時のデザインはJSで label に class 付けてもOK */
+input[type="radio"]:checked + label {
+    background: #aad4f5;
+    color: white;
+    border-color: #7cb8e2;
+}
+
+
+
+/*サイドバー*/
+.sidebar {
+    position: fixed; /* 画面に固定 */
+    bottom: 20px; /* 下部に少し余裕を持たせる */
+    right: 20px; /* 右側に配置 */
+    background-color: rgba(255, 255, 255, 0.8); /* 背景に少し透過を入れる */
+    padding: 20px; /* 内側の余白 */
+    border-radius: 10px; /* 角を丸くする */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 影をつける */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* 各要素の間隔 */
+}
+
+#timerDisplay {
+  font-weight: bold;
+  font-size: 18px;
+  color: #ff6f00;
+  text-align: center;
+}
+
+#timerDisplay span {
+  display: inline-block;
+  min-width: 5em; /* 00分00秒 に十分な幅を確保 */
+  text-align: center;
+}
+
+
+#submit-button {
+    width: 100%;
+    padding: 14px;
+    font-size: 2rem;
+    border: none;
+    border-radius: 8px;
+	background-color: #388e3c; /* しっかりめのグリーン */
+	    color: #ffffff; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 少し浮き上がる感じ */
+}
+
+#submit-button:hover {
+    background-color: #2e7d32; /* ホバー時に濃く */
+    transform: scale(1.05); /* 少し大きく */
+}
+
+#back-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #007BFF;
+    text-decoration: underline;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#back-button:hover {
+    color: #0056b3; /* ホバーで少し濃く */
+}
+
+
+
+
+
+
+
+
+/* ベースの文字サイズ調整 */
+body {
+  font-size: 18px;
+}
+
+@media (max-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+
+  .question-card {
+    max-width: 700px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  .question-card {
+    max-width: 90%;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  #submit-button {
+      width: 80%;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  .quizzes-title {
+     font-size: 2rem; 
+   }
+  
+  .quiz-card {
+      padding: 16px;
+      max-width: 95%;
+    }
+
+  .sidebar {
+    flex-wrap: wrap;
+    gap: 8px;
+	padding: 0;
+  }
+  #submit-button {
+        width: 80%;
+        padding: 1px;
+        font-size: 1.5rem;
+      }
+}
+

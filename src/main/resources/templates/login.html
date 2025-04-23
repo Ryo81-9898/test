@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ログイン</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="stylesheet" th:href="@{/css/login.css}" />
+	<script th:src="@{/js/login.js}" defer></script>
+</head>
+
+<body>
+	<div class="container">
+		<!-- ログイン画面のタイトル -->
+		<h2>ログイン画面</h2>
+
+		<!-- エラーメッセージ -->
+		<div th:if="${param.error}" class="error-message">
+			<p>usernameまたはpasswordが違います</p>
+		</div>
+
+		<!-- ログインフォーム -->
+		<form th:action="@{/authentication}" method="post" th:object="${loginForm}" onsubmit="return validateLogin()">
+			<div class="input-field"><!-- ユーザー名 -->
+				<label for="usernameInput">username</label>
+				<input type="text" th:field="*{usernameInput}" id="usernameInput" />
+			</div>
+			<div class="input-field"><!-- パスワード -->
+				<label for="passwordInput">password</label>
+				<input type="password" th:field="*{passwordInput}" id="passwordInput" />
+			</div>
+			<div class="submit-button">
+				<input type="submit" value="login">
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>
