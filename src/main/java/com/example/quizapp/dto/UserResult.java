@@ -26,7 +26,10 @@ public class UserResult {
 	private Time time;
 	private Koumoku koumoku;
 	
+	private String userAns; 		//数値のみ
     private String userAnswer;     // ユーザーの解答
+    private String correctAnswer;	//正解番号と内容の組み合わせ
+    private Boolean match;			//正解か不正解かの判断(正解ならtrue)
 
     
 

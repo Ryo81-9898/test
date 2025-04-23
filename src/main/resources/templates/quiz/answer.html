@@ -22,18 +22,21 @@
 		<h1>あなたの正答率は [[${correctRate}]]% です。</h1>
 		<div th:each="result, s : ${userResults}">
 			<div class="result-card">
-			    <p class="question">問題[[${s.count}]]：[[${result.question}]]</p>
-			    <p th:text="|（第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}）|" class="question-meta"></p>
-			    <p class="user-answer" th:text="|あなたの答え：${result.userAnswer}|"></p>
-			    <p class="correct-answer" th:text="|正解：${result.ans}|"></p>
-			    <p class="explanation" th:text="|解説：${result.explanation}|"></p>
-			  </div>
+				<p class="question">問題[[${s.count}]]：[[${result.question}]]</p>
+				<p th:text="|（第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}）|"
+					class="question-meta"></p>
+				<p th:class="'correct' + (${result.match} ? '' : ' incorrect')" th:text="${result.match} ? '正解': '不正解'">
+				</p>
+				<p class="user-answer" th:text="|あなたの選択肢：${result.userAnswer}|"></p>
+				<p class="correct-answer" th:text="|答え：${result.correctAnswer}|"></p>
+
+				<div class="explanation">
+					<a href="javascript:void(0);" class="toggle-explanation">解説を見る</a>
+					<span class="explanation-content">[[${result.explanation}]]</span>
+				</div>
+			</div>
 		</div>
-		
 
-
-
-		<hr>
 		<a th:href="@{/}">
 			<button type="button">メニューへ戻る</button>
 		</a>

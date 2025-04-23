@@ -34,21 +34,21 @@
 }
 
 /* ユーザーの答え */
-.user-answer {
+.user-answer, .correct-answer{
   font-size: 1rem;
   color: #007bff;
   margin-bottom: 10px;
 }
 
 /* 正解と不正解の色分け */
-.correct-answer {
+.correct {
   font-size: 1rem;
   font-weight: bold;
   color: #388e3c;
   margin-bottom: 10px;
 }
 
-.correct-answer.incorrect {
+.correct.incorrect {
   color: #e53935; /* 不正解時は赤 */
 }
 
@@ -59,31 +59,68 @@
   margin-top: 10px;
 }
 
+
+
+/* 解説部分を初期状態で非表示にする */
+.explanation-content {
+  display: none;
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* 解説のリンク部分 */
+.toggle-explanation {
+  color: #388e3c;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* 解説が表示された後のリンクテキストの変更 */
+.explanation-content.visible {
+  display: block;
+}
+
+.explanation-content.visible + .toggle-explanation {
+  color: #e53935;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* アイコン（正誤） */
-.correct-answer::before {
+.correct::before {
   content: "✔️"; /* 正解アイコン */
   margin-right: 10px;
 }
 
-.correct-answer.incorrect::before {
+.correct.incorrect::before {
   content: "❌"; /* 不正解アイコン */
   margin-right: 10px;
 }
 
 /* モバイル対応 */
-@media (max-width: 768px) {
-  .result-card {
-    padding: 15px;
-  }
 
-  .question {
-    font-size: 1rem;
-  }
-
-  .question-meta, .user-answer, .correct-answer, .explanation {
-    font-size: 0.9rem;
-  }
-}
 
 
 

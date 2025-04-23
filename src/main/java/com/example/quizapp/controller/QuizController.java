@@ -80,20 +80,23 @@ public class QuizController {
 	// 正答率、答え、解説表示
 	@PostMapping("result")
 	public String answerList(@RequestParam Map<String, String> params, Model model) {
-		
 		//表示した問題数を取得する
 		int questionCount = this.getNumQuestion();
 		
-		//答え、解説に関する情報を取得
 		for (int i = 1; i <= questionCount; i++) {
-			results.get(i-1).setUserAnswer(params.get("userAnswerQuestionNo" + i));
+			//ユーザーの選んだ選択肢の番号と内容を作成・追加
+			results.get(i-1).setUserAns(params.get("userAnswerQuestionNo" + i));
+			results.get(i-1).setUserAnswer(q.userAnsMake(results.get(i-1)));
 			
-			System.out.println("ここみたい！");
-			System.out.println(results.get(i-1));
+			//正解の番号と文章の作成
+			results.get(i-1).setCorrectAnswer(q.correctAnsMake(results.get(i-1)));
 			
+//			正解か不正解かの判定・状態の追加
+			results.get(i-1).setMatch(q.checkMatch(results.get(i-1)));
+//			System.out.println(results.get(i-1).getMatch());
 		}
-//		 List<UserResult> results = q.getUserResult(params, questionCount);
-			
+		
+
 		//正答率の取得
 		int rate = q.correctAnsRate(results, questionCount);
 		

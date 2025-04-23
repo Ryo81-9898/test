@@ -37,5 +37,14 @@ public interface QuizService {
 
 	
 //	正答率計算メソッド
-	public int correctAnsRate(List<UserResult> userResults, int questionCount);
+	int correctAnsRate(List<UserResult> userResults, int questionCount);
+	
+//	正解番号と内容の組み合わせを作成
+	String correctAnsMake(UserResult userResult);
+	
+//	ユーザーの解答番号と内容の組み合わせを作成
+	String userAnsMake(UserResult userResult);
+	
+//	正解か不正解かの判定
+	Boolean checkMatch(UserResult userResult);
 }
