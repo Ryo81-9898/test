@@ -87,7 +87,10 @@ public class QuizController {
 		//答え、解説に関する情報を取得
 		for (int i = 1; i <= questionCount; i++) {
 			results.get(i-1).setUserAnswer(params.get("userAnswerQuestionNo" + i));
+			
+			System.out.println("ここみたい！");
 			System.out.println(results.get(i-1));
+			
 		}
 //		 List<UserResult> results = q.getUserResult(params, questionCount);
 			

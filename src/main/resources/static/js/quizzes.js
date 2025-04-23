@@ -6,17 +6,16 @@
 window.onload = function() {
     // 初期状態で問題部分とボタン類を隠す
     document.getElementById("quiz-section").style.display = "none";
-    document.getElementById(".sidebar").style.display = "none";
+    document.querySelector(".sidebar").style.display = "none";
 };
 
 // スタートボタンがクリックされた時に問題とボタンを表示
 function startQuiz() {
     document.getElementById("quiz-section").style.display = "block";  // 問題部分を表示
+	document.querySelector(".sidebar").style.display = "";
     document.getElementById("submit-button").style.display = "inline-block";  // 解答ボタンを表示
     document.getElementById("back-button").style.display = "inline-block";  // メニューへ戻るボタンを表示
 	document.querySelector(".start-button-container").style.display = "none";  // スタートボタンとチェックボックスのコンテナーを非表示
-//    document.getElementById("startButton").style.display = "none";  // スタートボタンを非表示
-//    document.getElementById("timer-option").style.display = "none";  // タイマーのチェックボックスを非表示
 }
 
 
@@ -42,11 +41,36 @@ document.getElementById('startButton').addEventListener('click', () => {
     }, 1000);
   }
 });
+S
 
-//タイマーで測った時間を次のHTMLへ移す
-document.getElementById("submit-button").addEventListener("click", function () {
-    clearInterval(timerInterval); // ストップウォッチを止める
-    const time = document.getElementById("time").textContent; // 計測した時間を取得
-    sessionStorage.setItem("elapsedTime", time); // sessionStorageに保存
-    window.location.href = "/answer"; // 遷移
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', (e) => {
+    const totalQuestions = document.querySelectorAll('.quiz-card').length;
+    let allAnswered = true;
+
+    for (let i = 1; i <= totalQuestions; i++) {
+      const radios = document.querySelectorAll(`input[name="userAnswerQuestionNo${i}"]`);
+      const isChecked = Array.from(radios).some(radio => radio.checked);
+
+      if (!isChecked) {
+        allAnswered = false;
+        break;
+      }
+    }
+
+    if (!allAnswered) {
+      e.preventDefault();
+      alert("選択されていない問題があります");
+      return;
+    }
+
+    // 全問回答済み → タイマー処理
+    clearInterval(timerInterval);
+    const time = document.getElementById("time").textContent;
+    sessionStorage.setItem("elapsedTime", time);
+
+    // フォームは自然に送信される（window.location.hrefは不要！）
+  });
 });
