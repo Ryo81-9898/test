@@ -93,7 +93,7 @@ public class QuizController {
 			
 //			正解か不正解かの判定・状態の追加
 			results.get(i-1).setMatch(q.checkMatch(results.get(i-1)));
-//			System.out.println(results.get(i-1).getMatch());
+			System.out.println(results.get(i-1));
 		}
 		
 

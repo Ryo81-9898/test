@@ -20,23 +20,33 @@
 		<p id="display-time"></p>
 
 		<h1>あなたの正答率は [[${correctRate}]]% です。</h1>
-		<div th:each="result, s : ${userResults}">
-			<div class="result-card">
-				<p class="question">問題[[${s.count}]]：[[${result.question}]]</p>
-				<p th:text="|（第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}）|"
-					class="question-meta"></p>
-				<p th:class="'correct' + (${result.match} ? '' : ' incorrect')" th:text="${result.match} ? '正解': '不正解'">
-				</p>
-				<p class="user-answer" th:text="|あなたの選択肢：${result.userAnswer}|"></p>
-				<p class="correct-answer" th:text="|答え：${result.correctAnswer}|"></p>
 
-				<div class="explanation">
-					<a href="javascript:void(0);" class="toggle-explanation">解説を見る</a>
-					<span class="explanation-content">[[${result.explanation}]]</span>
+		<div th:each="result, s : ${userResults}">
+			<div class="result-card" th:classappend="${result.match} ? ' correct-card' : ' incorrect-card'">
+				<div class="result-icon">
+					<span th:text="${result.match} ? '○' : '×'"></span>
 				</div>
+
+				<div class="result-content">
+					<p class="question">問題[[${s.count}]]</p>
+					<p th:text="|第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}　　${result.koumoku.sKoumoku}|"
+						class="question-meta"></p>
+						<span class="value">問題文：[[${result.question}]]</span>
+					<p><span class="label">あなたの選択肢：</span><span class="value" th:text="${result.userAnswer}"></span></p>
+					<p><span class="label">答え：</span><span class="value" th:text="${result.correctAnswer}"></span></p>
+					<div class="explanation">
+						<a href="javascript:void(0);" class="toggle-explanation">解説を見る</a>
+						<span class="explanation-content">[[${result.explanation}]]</span>
+					</div>
+				</div>
+			
+				<!--if文を付けて関連記事があればこのボタンを表示するように設定する予定-->
+					<a class="related-link" href="https://example.com" target="_blank" rel="noopener noreferrer">
+						<button class="zen-maru-gothic-regular" type="button">関連問題を確認！</button>
+					</a>
+
 			</div>
 		</div>
-
 		<a th:href="@{/}">
 			<button type="button">メニューへ戻る</button>
 		</a>

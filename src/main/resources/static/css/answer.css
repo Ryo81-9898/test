@@ -4,86 +4,149 @@
 
 
 /* 結果カードのスタイル */
+
 .result-card {
-  background-color: #fff;
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin: 20px auto;
+  max-width: 900px;
+  transition: transform 0.2s ease;
+  position: relative; /* ← 追加 */
 }
 
-.result-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+
+/* 左側アイコン部分 */
+.result-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  border-radius: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  }
+
+.correct-card .result-icon {
+  background-color: #66bb6a; /* 緑 ○ */
 }
 
-/* 質問テキスト */
+.incorrect-card .result-icon {
+  background-color: #ef5350; /* 赤 × */
+}
+
+.result-content {
+  padding: 10px;
+
+}
+
+
 .question {
-  font-size: 1.1rem;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+  color: #555; /* 明るめのダークグレーで少し優しい感じに */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1); /* 影を軽くしてふんわり感を出す */
+}
+
+
+
+.label {
+  display: inline-block;
+  width: 130px; /* お好みで調整してOK */
+  text-align: right;
   font-weight: bold;
   color: #333;
-  margin-bottom: 10px;
 }
 
-/* メタ情報 */
-.question-meta {
-  font-size: 0.9rem;
-  color: #888;
-  margin-bottom: 10px;
+.value {
+  display: inline;
+  color: #444;
 }
 
-/* ユーザーの答え */
-.user-answer, .correct-answer{
-  font-size: 1rem;
-  color: #007bff;
-  margin-bottom: 10px;
-}
 
-/* 正解と不正解の色分け */
-.correct {
-  font-size: 1rem;
+.toggle-explanation {
+  color: #ff8a65; /* サーモンオレンジでやさしく */
+  text-decoration: none;
   font-weight: bold;
-  color: #388e3c;
-  margin-bottom: 10px;
+  position: relative;
+  transition: color 0.3s ease;
+  cursor: pointer;
 }
 
-.correct.incorrect {
-  color: #e53935; /* 不正解時は赤 */
+.toggle-explanation::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 3px;
+  background-color: #ffd180; /* ふわっとしたオレンジ */
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
 }
 
-/* 解説部分 */
-.explanation {
-  font-size: 1rem;
-  color: #333;
-  margin-top: 10px;
+.toggle-explanation:hover {
+  color: #ff7043; /* ホバー時はちょい濃く */
+}
+
+.toggle-explanation:hover::after {
+  transform: scaleX(1);
 }
 
 
-
-/* 解説部分を初期状態で非表示にする */
 .explanation-content {
   display: none;
-  font-size: 1rem;
+  background-color: #fff8e1;
   color: #333;
-  margin-top: 10px;
-  padding-left: 20px;
+  border: 1px solid #ffd54f;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-top: 8px;
+  line-height: 1.6;
+  white-space: pre-wrap;
 }
 
-/* 解説のリンク部分 */
-.toggle-explanation {
-  color: #388e3c;
+
+/*ブログへの移動ボタン（デモ）*/
+.related-link {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+.related-link button {
+  box-sizing: border-box;
+  background-color: #4bb8ea; /* パステルブルーより濃いめの爽やかブルー */
+  color: #ffffff;
+  border: none;
+  width: 120px;
+  height: 80px;
+  padding: 10px;
+  margin: 0;
+  border-radius: 16px;
   cursor: pointer;
-  text-decoration: underline;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 8px 16px rgba(75, 184, 234, 0.5);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
-/* 解説が表示された後のリンクテキストの変更 */
-.explanation-content.visible {
-  display: block;
-}
-
-.explanation-content.visible + .toggle-explanation {
-  color: #e53935;
+.related-link button:hover {
+  background-color: #349fce; /* ホバー時に少し深めに */
+  box-shadow: 0 10px 20px rgba(52, 159, 206, 0.6);
+  transform: scale(1.05);
 }
 
 
@@ -95,31 +158,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* アイコン（正誤） */
-.correct::before {
-  content: "✔️"; /* 正解アイコン */
-  margin-right: 10px;
-}
-
-.correct.incorrect::before {
-  content: "❌"; /* 不正解アイコン */
-  margin-right: 10px;
-}
-
-/* モバイル対応 */
 
 
 
@@ -152,19 +190,6 @@ h1 {
   margin: 20px 0;
 }
 
-/* 結果カード */
-div.thymeleaf-each {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  padding: 20px;
-  transition: transform 0.2s ease-in-out;
-}
-
-div.thymeleaf-each:hover {
-  transform: translateY(-5px);
-}
 
 /* 各問題の詳細 */
 .question-meta {
