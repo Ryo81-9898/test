@@ -41,7 +41,6 @@ document.getElementById('startButton').addEventListener('click', () => {
     }, 1000);
   }
 });
-S
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('form');

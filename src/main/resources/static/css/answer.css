@@ -2,9 +2,106 @@
 
 
 
+/*解答時間・正答率のデザイン*/
+/*コンテナー*/
+.result-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding-top: 5px;
+}
+
+/*解答時間*/
+#display-time {
+  width: 300px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #388e3c;
+  font-weight: bold;
+  margin-bottom: 50px;
+  border-radius: 30px;
+  background-color: #fff8e1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+/*正答率の表示文章*/
+.result-text {
+  color: #7D5A3E;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  z-index: 0;
+}
+
+/*正答率の値部分*/
+.rate-number {
+  font-size: 3.8rem;
+  color: #D2691E;  /*キャラメルっぽい濃いオレンジ*/ 
+  position: relative;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* 正答率値の下線アニメーション */
+.rate-number::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 4px;
+  width: 100%;
+  background: #D2691E;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: underline-grow 0.8s ease-out forwards;
+  border-radius: 2px;
+}
+
+@keyframes underline-grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/*正答率のバックグラウンドの背景*/
+.result-bg-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.blob-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  animation: float 6s ease-in-out infinite;
+}
+
+/*葉っぱのようにゆらゆらした動き*/
+@keyframes float {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-10px);
+  }
+}
+
+
 
 /* 結果カードのスタイル */
-
+/*コンテナ*/
 .result-card {
   display: flex;
   align-items: flex-start;
@@ -14,15 +111,29 @@
   overflow: hidden;
   margin: 20px auto;
   max-width: 900px;
-  transition: transform 0.2s ease;
   position: relative; /* ← 追加 */
+  
+  /* スライドアニメーションのスタート状態 */
+  opacity: 0;
+  transform: translateX(40px);
+  animation: slideInRight 0.6s ease forwards;
 }
+
+/* アニメーション本体 */
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
 
 
 /* 左側アイコン部分 */
 .result-icon {
-  width: 60px;
-  height: 60px;
+  width:7%;
+  padding: 7px 0;
   display: flex;
   border-radius: 15px;
   margin-top: 5px;
@@ -42,11 +153,15 @@
   background-color: #ef5350; /* 赤 × */
 }
 
+/*真ん中のボックス*/
 .result-content {
-  padding: 10px;
-
+  margin: 5px;
+  padding: 15px;
+  width: 72%;
+  background: #f8f9fa;
+  border-radius: 12px; 
+  overflow-wrap: break-word;
 }
-
 
 .question {
   font-size: 28px;
@@ -56,7 +171,12 @@
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1); /* 影を軽くしてふんわり感を出す */
 }
 
-
+/* 各問題の詳細 */
+.question-meta {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 10px;
+}
 
 .label {
   display: inline-block;
@@ -71,7 +191,7 @@
   color: #444;
 }
 
-
+/*「解説を見る」のデザイン*/
 .toggle-explanation {
   color: #ff8a65; /* サーモンオレンジでやさしく */
   text-decoration: none;
@@ -103,7 +223,6 @@
   transform: scaleX(1);
 }
 
-
 .explanation-content {
   display: none;
   background-color: #fff8e1;
@@ -119,15 +238,22 @@
 
 
 /*ブログへの移動ボタン（デモ）*/
+.related-link-message {
+	font-size: 14px;
+	margin-bottom: 0;
+	color: #7D5A3E;
+	
+}
 .related-link {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+
 }
 
 .related-link button {
   box-sizing: border-box;
-  background-color: #4bb8ea; /* パステルブルーより濃いめの爽やかブルー */
+  background-color:  #A6DBF3; /* パステルブルーより濃いめの爽やかブルー */
   color: #ffffff;
   border: none;
   width: 120px;
@@ -167,37 +293,6 @@
 
 
 
-
-
-
-
-
-/* タイトル */
-h1 {
-  text-align: center;
-  color: #1976d2;
-  font-size: 2rem;
-  margin-top: 20px;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* 正答率の表示 */
-#display-time {
-  text-align: center;
-  font-size: 1.5rem;
-  color: #388e3c;
-  font-weight: bold;
-  margin: 20px 0;
-}
-
-
-/* 各問題の詳細 */
-.question-meta {
-  font-size: 0.9rem;
-  color: #888;
-  margin-top: 10px;
-}
-
 button {
   background-color: #388e3c;
   color: white;
@@ -229,25 +324,4 @@ form button {
 
 form button:hover {
   background-color: #f57c00;
-}
-
-/* スマホ対応 */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  .zen-maru-gothic-regular {
-    padding: 10px;
-  }
-
-  div.thymeleaf-each {
-    margin: 10px;
-    padding: 15px;
-  }
-
-  button {
-    font-size: 1rem;
-    padding: 8px 16px;
-  }
 }

@@ -81,6 +81,22 @@ h2 {
     background-color: #7a5bab;
 }
 
+#back-button {
+	margin-top: 30px;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #007BFF;
+    text-decoration: underline;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#back-button:hover {
+    color: #0056b3; /* ホバーで少し濃く */
+}
+
 
 /* 🔁 レスポンシブデザイン（スマホ・小さい画面用：600px以下） */
 @media screen and (max-width: 600px) {

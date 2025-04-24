@@ -17,36 +17,56 @@
 
 <body>
 	<div class="zen-maru-gothic-regular">
-		<p id="display-time"></p>
+		<div class="result-wrapper">
+<p id="display-time" style="display: none;"></p>
 
-		<h1>あなたの正答率は [[${correctRate}]]% です。</h1>
-
-		<div th:each="result, s : ${userResults}">
-			<div class="result-card" th:classappend="${result.match} ? ' correct-card' : ' incorrect-card'">
-				<div class="result-icon">
-					<span th:text="${result.match} ? '○' : '×'"></span>
-				</div>
-
-				<div class="result-content">
-					<p class="question">問題[[${s.count}]]</p>
-					<p th:text="|第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}　　${result.koumoku.sKoumoku}|"
-						class="question-meta"></p>
-						<span class="value">問題文：[[${result.question}]]</span>
-					<p><span class="label">あなたの選択肢：</span><span class="value" th:text="${result.userAnswer}"></span></p>
-					<p><span class="label">答え：</span><span class="value" th:text="${result.correctAnswer}"></span></p>
-					<div class="explanation">
-						<a href="javascript:void(0);" class="toggle-explanation">解説を見る</a>
-						<span class="explanation-content">[[${result.explanation}]]</span>
-					</div>
-				</div>
-			
-				<!--if文を付けて関連記事があればこのボタンを表示するように設定する予定-->
-					<a class="related-link" href="https://example.com" target="_blank" rel="noopener noreferrer">
-						<button class="zen-maru-gothic-regular" type="button">関連問題を確認！</button>
-					</a>
-
+			<div class="result-bg-wrapper">
+				<svg class="blob-bg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+					<!--	葉っぱ感のある形 & 影-->
+					<filter id="leafShadow" x="-20%" y="-20%" width="140%" height="140%">
+						<feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(0,0,0,0.2)" />
+					</filter>
+					<path d="M200,220 Q400,30 600,180 Q400,370 200,220 Z" fill="white" filter="url(#leafShadow)" />
+				</svg>
+				<h1 class="result-text">
+					あなたの正答率<br>
+					<span class="rate-number">[[${correctRate}]]%</span>でした
+				</h1>
 			</div>
 		</div>
+		<div th:each="result, s : ${userResults}"
+			th:class="'result-card ' + (${result.match} ? 'correct-card' : 'incorrect-card')"
+			th:style="'animation-delay: ' + (${s.count} * 0.2) + 's;'">
+
+
+			<div class="result-icon">
+				<span th:text="${result.match} ? '○' : '×'"></span>
+			</div>
+
+			<div class="result-content">
+				<p class="question">問題[[${s.count}]]</p>
+				<p th:text="|第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}　　${result.koumoku.sKoumoku}|"
+					class="question-meta"></p>
+				<span class="value">問題文：[[${result.question}]]</span>
+<!--				<p><span class="label">問題文：</span><span class="value" th:text="${result.question}"></span></p>-->
+				<p><span class="label">あなたの選択肢：</span><span class="value" th:text="${result.userAnswer}"></span></p>
+				<p><span class="label">答え：</span><span class="value" th:text="${result.correctAnswer}"></span></p>
+				<div class="explanation">
+					<a href="javascript:void(0);" class="toggle-explanation">解説を見る</a>
+					<span class="explanation-content">[[${result.explanation}]]</span>
+				</div>
+			</div>
+
+			<!--if文を付けて関連記事があればこのボタンを表示するように設定する予定-->
+			<div class="related-link">
+				<p class="related-link-message">\重要ポイント<br>　まとめてるよ！/</p>
+				<a href="https://example.com" target="_blank" rel="noopener noreferrer">
+					<button class="zen-maru-gothic-regular" type="button">関連問題</button>
+				</a>
+			</div>
+
+		</div>
+		<!--		</div>-->
 		<a th:href="@{/}">
 			<button type="button">メニューへ戻る</button>
 		</a>
