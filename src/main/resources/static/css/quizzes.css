@@ -116,7 +116,7 @@
 
 
 
-/*問題部分*/
+/*問題セクション*/
 .quiz-card {
     background: #ffffffcc; /* 白に少し透け感 */
     border-radius: 16px;
@@ -259,6 +259,8 @@ body {
   font-size: 18px;
 }
 
+
+/*レスポンシブデザイン*/
 @media (max-width: 1024px) {
   body {
     font-size: 16px;

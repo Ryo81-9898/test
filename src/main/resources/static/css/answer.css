@@ -281,47 +281,120 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-button {
-  background-color: #388e3c;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/*サイドバー*/
+.sidebar {
+    position: fixed; /* 画面に固定 */
+    bottom: 20px; /* 下部に少し余裕を持たせる */
+    right: 20px; /* 右側に配置 */
+    background-color: rgba(255, 255, 255, 0.8); /* 背景に少し透過を入れる */
+    padding: 20px; /* 内側の余白 */
+    border-radius: 10px; /* 角を丸くする */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 影をつける */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* 各要素の間隔 */
 }
 
-button:hover {
-  background-color: #2e7d32;
+
+#submit-button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+	background-color: #ffb300;
+	color: #ffffff; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 少し浮き上がる感じ */
 }
 
-a button {
-  background-color: #007bff;
-  margin-top: 20px;
+#submit-button:hover {
+	 background-color: #ffa000;
+    transform: scale(1.05); /* 少し大きく */
 }
 
-a button:hover {
-  background-color: #0056b3;
+#back-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #007BFF;
+    text-decoration: underline;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-form button {
-  background-color: #fbc02d;
-  margin-top: 20px;
+#back-button:hover {
+    color: #0056b3; /* ホバーで少し濃く */
 }
 
-form button:hover {
-  background-color: #f57c00;
+
+/*レスポンシブデザイン*/
+@media (max-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+
+  .result-card {
+    max-width: 600px;
+  }
 }
+
+
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  .result-card {
+    max-width: 90%;
+  }
+
+  .sidebar {
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*    gap: 10px;*/
+/*    margin-top: 20px;*/
+  }
+  
+  #submit-button {
+/*      width: 80%;*/
+/*      padding: 10px;*/
+      font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+/*  .quizzes-title {*/
+/*     font-size: 2rem; */
+/*   }*/
+  
+  .result-card {
+      padding: 16px;
+      max-width: 95%;
+    }
+
+  .sidebar {
+    flex-wrap: wrap;
+    gap: 8px;
+	padding: 0;
+  }
+  #submit-button {
+        width: 80%;
+        padding: 1px;
+/*        font-size: 1rem;*/
+      }
+}
+
+
+
+
+
+
+

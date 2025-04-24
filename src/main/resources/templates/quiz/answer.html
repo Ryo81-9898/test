@@ -18,7 +18,7 @@
 <body>
 	<div class="zen-maru-gothic-regular">
 		<div class="result-wrapper">
-<p id="display-time" style="display: none;"></p>
+			<p id="display-time" style="display: none;"></p>
 
 			<div class="result-bg-wrapper">
 				<svg class="blob-bg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@
 				<p th:text="|第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}　　${result.koumoku.sKoumoku}|"
 					class="question-meta"></p>
 				<span class="value">問題文：[[${result.question}]]</span>
-<!--				<p><span class="label">問題文：</span><span class="value" th:text="${result.question}"></span></p>-->
+				<!--				<p><span class="label">問題文：</span><span class="value" th:text="${result.question}"></span></p>-->
 				<p><span class="label">あなたの選択肢：</span><span class="value" th:text="${result.userAnswer}"></span></p>
 				<p><span class="label">答え：</span><span class="value" th:text="${result.correctAnswer}"></span></p>
 				<div class="explanation">
@@ -66,13 +66,21 @@
 			</div>
 
 		</div>
-		<!--		</div>-->
-		<a th:href="@{/}">
-			<button type="button">メニューへ戻る</button>
-		</a>
+
+
+
+		<!--	サイドバー（初期状態で非表示）-->
+		<div class="sidebar">
+
+			<!--	 もう一度ボタン -->
 		<form th:action="@{/challenge/{no}(no=${questionCount})}" method="get">
-			<button>もう一度問題を解く</button>
+			<button id="submit-button" class="zen-maru-gothic-regular" type="submit">もう一度チャレンジ</button>
 		</form>
+			<!--	 メニューへ戻るボタン -->
+		<a th:href="@{/}">
+			<button id="back-button" class="zen-maru-gothic-regular" type="button">メニューへ戻る</button>
+		</a>
+		</div>
 	</div>
 </body>
 
