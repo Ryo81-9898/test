@@ -13,10 +13,15 @@
 	<!-- 外部JSファイルの読み込み -->
 	<script th:src="@{/js/answer.js}" defer></script>
 	<script th:src="@{/js/style.js}" defer></script>
+	<!-- Font Awesome CDN 読み込み -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-	<div class="zen-maru-gothic-regular">
+	<!-- ✅ 共通のヘッダーを読み込む -->
+	<div th:replace="fragments/header :: commonHeader"></div>
+
+	<main class="zen-maru-gothic-regular">
 		<div class="result-wrapper">
 			<p id="display-time" style="display: none;"></p>
 
@@ -67,21 +72,11 @@
 
 		</div>
 
-
-
-		<!--	サイドバー（初期状態で非表示）-->
-		<div class="sidebar">
-
 			<!--	 もう一度ボタン -->
-		<form th:action="@{/challenge/{no}(no=${questionCount})}" method="get">
-			<button id="submit-button" class="zen-maru-gothic-regular" type="submit">もう一度チャレンジ</button>
-		</form>
-			<!--	 メニューへ戻るボタン -->
-		<a th:href="@{/}">
-			<button id="back-button" class="zen-maru-gothic-regular" type="button">メニューへ戻る</button>
-		</a>
-		</div>
-	</div>
+			<form th:action="@{/challenge/{no}(no=${questionCount})}" method="get">
+				<button id="submit-button" class="zen-maru-gothic-regular" type="submit">もう一度チャレンジ</button>
+			</form>
+	</main>
 </body>
 
 </html>
