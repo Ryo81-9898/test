@@ -253,6 +253,26 @@ margin: 0 20px;
 
 
 
+/*イメージの設定*/
+.image-container {
+  width: 100%;        /* 任意の幅 */
+  height: auto;       /* 任意の高さ */
+  overflow: hidden;    /* はみ出しを隠す */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc; /* 枠線あれば確認しやすい */
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* 重要：中身を見切れず縮小 */
+}
+
+
 
 
 

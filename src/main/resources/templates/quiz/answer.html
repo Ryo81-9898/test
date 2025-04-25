@@ -52,8 +52,15 @@
 				<p class="question">問題[[${s.count}]]</p>
 				<p th:text="|第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}　　${result.koumoku.sKoumoku}|"
 					class="question-meta"></p>
-				<span class="value">問題文：[[${result.question}]]</span>
-				<!--				<p><span class="label">問題文：</span><span class="value" th:text="${result.question}"></span></p>-->
+				<p><span class="value">問題文：[[${result.question}]]</span></p>
+				
+				
+				<!--					if文でデータがある場合に、パスを取ってきてイメージを表示する。-->
+<!--									<div class="image-container">-->
+<!--										<img src="/images/example.png" alt="サンプル画像" />-->
+<!--									</div>-->
+									
+									
 				<p><span class="label">あなたの選択肢：</span><span class="value" th:text="${result.userAnswer}"></span></p>
 				<p><span class="label">答え：</span><span class="value" th:text="${result.correctAnswer}"></span></p>
 				<div class="explanation">
