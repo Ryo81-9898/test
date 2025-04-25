@@ -12,9 +12,15 @@
 	<!-- 外部JSファイルの読み込み -->
 	<script th:src="@{/js/quizzes.js}" defer></script>
 	<script th:src="@{/js/style.js}" defer></script>
+	<!-- Font Awesome CDN 読み込み -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
+	<!-- ✅ 共通のヘッダーを読み込む -->
+	<div th:replace="fragments/header :: commonHeader"></div>
+
 	<div class="zen-maru-gothic-regular">
 		<h2 class="quizzes-title" th:text="|必修問題 ( ${no}問 )|">必修問題（</h2>
 
@@ -33,31 +39,32 @@
 			<form th:action="@{/result}" method="post">
 				<div class="quiz-card" th:each="q, s : ${quizList}" th:style="|animation-delay: ${s.count * 0.2}s|">
 					<div class="quiz-question">
-					  <p>問題[[${s.count}]]：[[${q.question}]]</p>
-					  <p th:text="|（第${q.testNumber.testNumberId}回 ${q.time.time}問題 ${q.questionNumber}）|" class="question-meta"></p>
+						<p>問題[[${s.count}]]：[[${q.question}]]</p>
+						<p th:text="|（第${q.testNumber.testNumberId}回 ${q.time.time}問題 ${q.questionNumber}）|"
+							class="question-meta"></p>
 					</div>
 
 
 					<input type="radio" th:id="|q${s.count}-a1|" th:name="|userAnswerQuestionNo${s.count}|"
-						th:value="1"  />
+						th:value="1" />
 					<label th:for="|q${s.count}-a1|">1. [[${q.choice1}]]</label>
 
 					<input type="radio" th:id="|q${s.count}-a2|" th:name="|userAnswerQuestionNo${s.count}|"
-						th:value="2"  />
+						th:value="2" />
 					<label th:for="|q${s.count}-a2|">2. [[${q.choice2}]]</label>
 
 					<input type="radio" th:id="|q${s.count}-a3|" th:name="|userAnswerQuestionNo${s.count}|"
-						th:value="3"  />
+						th:value="3" />
 					<label th:for="|q${s.count}-a3|">3. [[${q.choice3}]]</label>
 
 					<input type="radio" th:id="|q${s.count}-a4|" th:name="|userAnswerQuestionNo${s.count}|"
-						th:value="4"  />
+						th:value="4" />
 					<label th:for="|q${s.count}-a4|">4. [[${q.choice4}]]</label>
 
 
 					<div th:if="${q.choice5 != null}">
 						<input type="radio" th:id="|q${s.count}-a5|" th:name="|userAnswerQuestionNo${s.count}|"
-							th:value="5"  />
+							th:value="5" />
 						<label th:for="|q${s.count}-a5|">5. [[${q.choice5}]]</label>
 					</div>
 				</div>
@@ -67,15 +74,11 @@
 				<div class="sidebar">
 					<!--	ストップウォッチ-->
 					<div id="timerDisplay" class="hidden">
-					  経過時間:<span id="time">00分00秒</span>
+						経過時間:<span id="time">00分00秒</span>
 					</div>
 
 					<!--	 解答送信ボタン -->
 					<button id="submit-button" class="zen-maru-gothic-regular" type="submit">Finish</button>
-					<!--	 メニューへ戻るボタン -->
-					<a th:href="@{ / }">
-						<button id="back-button" class="zen-maru-gothic-regular" type="button">メニューへ戻る</button>
-					</a>
 				</div>
 			</form>
 		</div>

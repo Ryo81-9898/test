@@ -14,7 +14,6 @@ function startQuiz() {
     document.getElementById("quiz-section").style.display = "block";  // 問題部分を表示
 	document.querySelector(".sidebar").style.display = "";
     document.getElementById("submit-button").style.display = "inline-block";  // 解答ボタンを表示
-    document.getElementById("back-button").style.display = "inline-block";  // メニューへ戻るボタンを表示
 	document.querySelector(".start-button-container").style.display = "none";  // スタートボタンとチェックボックスのコンテナーを非表示
 }
 

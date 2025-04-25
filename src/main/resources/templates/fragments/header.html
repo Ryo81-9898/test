@@ -4,33 +4,35 @@
 
 <body>
 	<header class="header" th:fragment="commonHeader">
-		<!-- ⚠️ 自動ログアウトメッセージはここには入れない（後述） -->
+		<div class="container">
+			<!-- ⚠️ 自動ログアウトメッセージはここには入れない（後述） -->
 
-		<!-- HOME -->
-		<div class="left-section">
-			<a th:href="@{ / }" class="home-link">
-				<i class="fa-solid fa-house-chimney"></i>
-				<span>HOME</span>
-			</a>
-		</div>
+			<!-- HOME -->
+			<div class="left-section">
+				<a th:href="@{ / }" class="home-link">
+					<i class="fa-solid fa-house-chimney"></i>
+					<span>HOME</span>
+				</a>
+			</div>
 
-		<!-- ログインボタン -->
-		<div sec:authorize="isAnonymous()" class="right-section">
-			<a th:href="@{/login}" class="nav-button login">
-				<i class="fas fa-right-to-bracket"></i>
-				<span>ログイン</span>
-			</a>
-		</div>
-
-		<!-- ログイン中 -->
-		<div sec:authorize="isAuthenticated()" class="user-info">
-			<div class="display-name" th:text="${#authentication.principal.displayname}">名前</div>
-			<form th:action="@{/logout}" method="post">
-				<button type="submit" class="nav-button login">
+			<!-- ログインボタン -->
+			<div sec:authorize="isAnonymous()" class="right-section">
+				<a th:href="@{/login}" class="nav-button login">
 					<i class="fas fa-right-to-bracket"></i>
-					<span>ログアウト</span>
-				</button>
-			</form>
+					<span>ログイン</span>
+				</a>
+			</div>
+
+			<!-- ログイン中 -->
+			<div sec:authorize="isAuthenticated()" class="user-info">
+				<div class="display-name" th:text="${#authentication.principal.displayname}">名前</div>
+				<form th:action="@{/logout}" method="post">
+					<button type="submit" class="nav-button login">
+						<i class="fas fa-right-to-bracket"></i>
+						<span>ログアウト</span>
+					</button>
+				</form>
+			</div>
 		</div>
 	</header>
 </body>
