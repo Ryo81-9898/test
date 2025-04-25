@@ -18,18 +18,92 @@ html, body {
 }
 
 /* ヘッダーのスタイル */
-.top-header {
-    display: flex;
-    justify-content: flex-end; /* 右端に配置 */
-    align-items: center;
-    padding: 10px 20px;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    width: calc(100% - 40px);
-	z-index: 1;
+/* ヘッダー全体 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;  /* 上下のパディングを少し減らして密着感アップ */
+  position: fixed;     /* 画面上部に固定 */
+  top: 0;
+  left: 0;
+  width: 93%;
+  z-index: 1000;       /* 他の要素より前に表示される */
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;           /* 上部に隙間なし */
 }
 
+/* リンク（HOMEとログイン） */
+.home-link,
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;  /* アイコンと文字の間隔を少し広めに */
+  padding: 8px 20px;
+  border-radius: 25px; /* 丸みを増して柔らかい印象 */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px; /* 少し大きめに */
+  color: #7d5a3e;  /* 文字とアイコンを目立たせるために色をつける */
+  transition: all 0.3s ease;
+  background: none;  /* 背景色なし */
+  border: 2px solid transparent; /* 初期状態では枠なし */
+}
+
+/* アイコンの大きさ調整 */
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* HOMEリンクのデザイン */
+.home-link:hover,
+.nav-button.login:hover {
+  border-color: #7d5a3e;  /* ホバー時に枠が現れる */
+  background-color: rgba(125, 90, 62, 0.1);  /* ほんのり背景色を追加 */
+  transform: scale(1.05);  /* ホバー時に少し大きくする */
+}
+
+/* ログインボタンのデザイン */
+.nav-button.login {
+  color: #fff; /* アイコンと文字を白にして目立たせる */
+}
+
+/* ログインボタンホバー時 */
+.nav-button.login:hover {
+  border-color: #c4a68a; /* ホバー時に枠が現れる */
+  background-color: rgba(196, 166, 138, 0.2);  /* ログイン用に落ち着いた背景色 */
+}
+
+
+/* レスポンシブ対応（480px以下） */
+@media screen and (max-width: 480px) {
+  /* ヘッダーのパディングを調整 */
+  .header {
+    padding: 10px 15px;
+  }
+
+  /* リンクを縦並びに */
+  .home-link,
+  .nav-button {
+    flex-direction: column;  /* アイコンと文字を縦並びに */
+    align-items: center;     /* 中央揃え */
+    gap: 5px;                /* アイコンと文字の間隔を縮める */
+    padding: 6px 15px;       /* コンパクトに */
+  }
+
+  /* 文字を小さくする */
+  .home-link span,
+  .nav-button span {
+    font-size: 10px; /* 文字サイズを小さく */
+  }
+
+  /* アイコンの大きさ調整 */
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+}
 
 /*ログイン、ログアウトボタン共通*/
 .btn {
@@ -40,10 +114,8 @@ html, body {
 	cursor: pointer;
 	font-weight: bold;
 	transition: background-color 0.3s, transform 0.1s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ふんわり影 */
 	text-decoration: none;
 	transform: scale(1);
-	
 }
 
 .btn:hover {
@@ -51,30 +123,6 @@ html, body {
 	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-/*ログインボタン*/
-.btn.coral {
-	display: block;
-	margin-top: 10px;
-	margin-right: 10px;
-	background-color: #ff7f50;
-	color: white;
-}
-
-.btn.coral:hover {
-	background-color: #ff6347;
-}
-
-
-/*ログアウトボタン*/
-.btn.lavender {
-	background-color: #c8b3f3;
-	color: #fff;
-	border: none;
-}
-
-.btn.lavender:hover {
-	background-color: #a57bee; /* 濃いラベンダー */
-}
 
 /*ログアウトボタンと一緒に表示されるディスプレイネーム設定*/
 .user-info {
@@ -96,11 +144,6 @@ html, body {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 	transition: transform 0.1s, box-shadow 0.1s;
 }
-
-
-
-
-
 
 
 /* エラーメッセージ */
@@ -139,6 +182,14 @@ html, body {
         transform: translateY(-20px);
     }
 }
+
+
+
+
+
+
+
+
 
 
 
