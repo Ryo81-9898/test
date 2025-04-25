@@ -41,13 +41,19 @@ document.getElementById('startButton').addEventListener('click', () => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('form');
 
+
+
+//未選択のアラートとタイマーの引継ぎ
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('#quiz-section form');
+  
+	
   form.addEventListener('submit', (e) => {
     const totalQuestions = document.querySelectorAll('.quiz-card').length;
     let allAnswered = true;
 
+	console.log("JS読み込みOK！");
     for (let i = 1; i <= totalQuestions; i++) {
       const radios = document.querySelectorAll(`input[name="userAnswerQuestionNo${i}"]`);
       const isChecked = Array.from(radios).some(radio => radio.checked);
@@ -63,7 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
       alert("選択されていない問題があります");
       return;
     }
-
+	
+	
+	
     // 全問回答済み → タイマー処理
     clearInterval(timerInterval);
     const time = document.getElementById("time").textContent;
