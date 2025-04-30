@@ -3,7 +3,7 @@ package com.example.quizapp.service;
 import java.util.List;
 
 import com.example.quizapp.dto.UserResult;
-import com.example.quizapp.entity.KoumokuTable;
+import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.Quiz;
 import com.example.quizapp.entity.TimeTable;
 
@@ -27,7 +27,7 @@ public interface QuizService {
 	TimeTable findTimeTable(int id);
 	
 //	更新時の項目テーブル取得
-	KoumokuTable findKoumokuTable(int id);
+	Koumoku findKoumokuTable(int id);
 	
 //	idで指定した問題を削除
 	void deleteQuiz(int id);
@@ -47,4 +47,9 @@ public interface QuizService {
 	
 //	正解か不正解かの判定
 	Boolean checkMatch(UserResult userResult);
+	
+	
+	
+//	ブログURL一覧取得
+	List<Koumoku> findAllBlogUrl();
 }

@@ -76,6 +76,9 @@
 					<input type="number" id="enterId" name="id" min="1" th:max="${maxId}">
 					<button type="submit">検索</button>
 				</form>
+				<a th:href="@{bloglist}">
+					<button type="button">ブログURL一覧</button>
+				</a>
 			</div>
 
 			<div sec:authorize="hasAuthority('USER')">

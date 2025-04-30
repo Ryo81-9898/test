@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.quizapp.dto.Quizhelper;
 import com.example.quizapp.dto.UserResult;
+import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.Quiz;
 import com.example.quizapp.form.QuizForm;
 import com.example.quizapp.service.QuizService;
@@ -235,6 +236,18 @@ public class QuizController {
 		
 	}
 	
+	
+// ======ブログURLリストページへの遷移=======
+		//menuからblogListへ
+	@GetMapping("/bloglist")
+	public String showBlogList(Model model) {
+		List<Koumoku> list= q.findAllBlogUrl();
+		for (Koumoku l: list) {
+			System.out.println(l);
+		}
+		model.addAttribute("blogUrlList", q.findAllBlogUrl());
+		return "quiz/blogList";
+	}
 
 }
 

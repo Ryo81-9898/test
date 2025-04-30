@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.quizapp.entity.KoumokuTable;
+import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.MaxId;
 import com.example.quizapp.entity.Quiz;
 import com.example.quizapp.entity.TimeTable;
@@ -31,7 +31,7 @@ public interface QuizMapper {
 	TimeTable getTimeTable(int id);
 	
 //	更新時の項目テーブル取得
-	KoumokuTable getKoumokuTable(int id);
+	Koumoku getKoumokuById(int id);
 
 //	idで指定した問題を削除
 	void delete(@Param("id") int id);
@@ -39,6 +39,7 @@ public interface QuizMapper {
 //	idの最大値を取得
 	MaxId getMaxId();
 	
-	
+//	ブログURL一覧のためのテーブル取得
+	List<Koumoku> getKoumoku();
 
 }

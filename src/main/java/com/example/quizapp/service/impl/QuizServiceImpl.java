@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.quizapp.dto.UserResult;
-import com.example.quizapp.entity.KoumokuTable;
+import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.MaxId;
 import com.example.quizapp.entity.Quiz;
 import com.example.quizapp.entity.TimeTable;
@@ -55,8 +55,8 @@ public class QuizServiceImpl implements QuizService {
 	}
 
 	@Override
-	public KoumokuTable findKoumokuTable(int id) {
-		return quizMapper.getKoumokuTable(id);
+	public Koumoku findKoumokuTable(int id) {
+		return quizMapper.getKoumokuById(id);
 	}
 
 	@Override
@@ -122,6 +122,12 @@ public class QuizServiceImpl implements QuizService {
 			return false;
 		}
 		
+	}
+	
+//	ブログURL一覧取得
+	@Override
+	public List<Koumoku> findAllBlogUrl(){
+		return quizMapper.getKoumoku();
 	}
 
 }

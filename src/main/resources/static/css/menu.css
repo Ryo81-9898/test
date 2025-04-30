@@ -10,7 +10,7 @@ body {
 /*ログイン画面固有のエラーメッセージの設定（style.cssにも共通事項あり）*/
 #menuErrorMessage {
 	position: fixed;	/* 画面固定 */
-	top: 100px;		/*上から少し余白をとる*/
+	top: 50px;		/*上から少し余白をとる*/
 	right: 20px;	/* 右側に少し余白をとる */
 	width: 250px;
 	flex-direction: row;	/* アイコンとテキストを横に並べる */
