@@ -160,6 +160,8 @@ public class QuizController {
 		if(target != null) {
 			//対象データがある場合はFormへの変換
 			QuizForm form = Quizhelper.toForm(target);
+			System.out.println("ここ確認中!");
+		System.out.println(form);
 			model.addAttribute("quizForm", form);
 			return "/form";
 		} else {

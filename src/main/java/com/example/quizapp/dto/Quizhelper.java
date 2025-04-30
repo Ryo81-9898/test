@@ -110,7 +110,11 @@ public class Quizhelper {
 				q.setChoice5(f.getChoice5());			
 			}
 			q.setAns(f.getAns());
-			q.setExplanation(f.getExplanation());
+			if(f.getExplanation()=="" || f.getExplanation() == null) {
+				q.setExplanation(null);
+			}else {
+				q.setExplanation(f.getExplanation());			
+			}
 			q.setKoumoku(new Koumoku(f.getKoumokuId()));
 			return q;
 			
@@ -123,6 +127,11 @@ public class Quizhelper {
 			qf.setId(q.getId());
 			qf.setQuestionNumber(q.getQuestionNumber());
 			qf.setQuestion(q.getQuestion());
+			if(q.getImagePath() == null) {
+				q.setImagePath(null);
+			}else {
+				qf.setImagePath(q.getImagePath());			
+			}
 			qf.setChoice1(q.getChoice1());
 			qf.setChoice2(q.getChoice2());
 			qf.setChoice3(q.getChoice3());
@@ -133,7 +142,11 @@ public class Quizhelper {
 				qf.setChoice5(q.getChoice5());			
 			}
 			qf.setAns(q.getAns());
-			qf.setExplanation(q.getExplanation());
+			if(q.getExplanation() == null) {
+				qf.setExplanation(null);
+			}else {
+				qf.setExplanation(q.getExplanation());			
+			}
 			qf.setTestNumber(q.getTestNumber());
 			qf.setTestNumberId(q.getTestNumber().getTestNumberId());
 			qf.setTime(q.getTime());

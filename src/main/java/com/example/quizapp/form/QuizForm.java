@@ -24,7 +24,7 @@ public class QuizForm {
 	private Integer questionNumber;
 	@NotBlank(message = "※問題文は必須です")
 	private String question;
-	@Pattern(regexp = ".*\\.(png|jpg)$", flags = Pattern.Flag.CASE_INSENSITIVE, message = "画像ファイルは .png, .PNG, .jpg, .JPG のいずれかで指定してください")
+	@Pattern(regexp = "^$|.*\\.(png|jpg)$", flags = Pattern.Flag.CASE_INSENSITIVE, message = "画像ファイルは .png, .PNG, .jpg, .JPG のいずれかで指定してください")
 	private String imagePath;
 	@NotBlank(message = "※選択肢1は必須です")
 	private String choice1;
