@@ -14,6 +14,7 @@
 			<result property="choice5" column="choice5" />
 			<result property="ans" column="ans" />
 			<result property="explanation" column="explanation" />
+   			<result property="imagePath" column="image_path" />
 			<association property="testNumber"
 				javaType="com.example.quizapp.entity.TestNumber">
 				<id property="testNumberId" column="test_number_id" />
@@ -51,7 +52,6 @@
 					<result property="mokuhyo" column="mokuhyo" />
 				 </association>
    			 </association>
-<!--   			 <result property="imagePath" column="image_path" />-->
 	</resultMap>
 	<!-- 全問題表示 -->
 	<select id="selectAll"
@@ -71,6 +71,7 @@
 			choice5,
 			ans,
 			explanation,
+			image_path,
 			s_koumoku,
 			m_koumoku,
 			l_koumoku,
@@ -119,6 +120,7 @@
 			rq.choice5,
 			rq.ans,
 			rq.explanation,
+			rq.image_path,
 			s_koumoku,
 			m_koumoku,
 			l_koumoku,
@@ -161,6 +163,7 @@
 			choice5,
 			ans,
 			explanation,
+			image_path,
 			koumoku_table.koumoku_id,
 			s_koumoku,
 			m_koumoku,

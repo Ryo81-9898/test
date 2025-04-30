@@ -39,30 +39,31 @@
 				</h1>
 			</div>
 		</div>
+<!--		解答カードの繰り返し-->
 		<div th:each="result, s : ${userResults}"
 			th:class="'result-card ' + (${result.match} ? 'correct-card' : 'incorrect-card')"
 			th:style="'animation-delay: ' + (${s.count} * 0.2) + 's;'">
 
-
+<!--		正解、不正解の表示-->
 			<div class="result-icon">
 				<span th:text="${result.match} ? '○' : '×'"></span>
 			</div>
-
+<!--		解答カードの内容-->
 			<div class="result-content">
 				<p class="question">問題[[${s.count}]]</p>
 				<p th:text="|第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}　　${result.koumoku.sKoumoku}|"
 					class="question-meta"></p>
 				<p><span class="value">問題文：[[${result.question}]]</span></p>
 
-
-				<!--					if文でデータがある場合に、パスを取ってきてイメージを表示する。-->
-				<!--									<div class="image-container">-->
-				<!--										<img src="/images/example.png" alt="サンプル画像" />-->
-				<!--									</div>-->
-
-
+<!--		問題の画像あれば表示-->
+				<!--			if文でデータがある場合に、パスを取ってきてイメージを表示する。-->
+				<div class="image-container" th:if="${result.imagePath != null and result.imagePath != ''}">
+					<img th:src="@{/images/{path}(path=${result.imagePath})}" alt="サンプル画像" />
+				</div>
+<!--		選択肢・答え表示-->
 				<p><span class="label">あなたの選択肢：</span><span class="value" th:text="${result.userAnswer}"></span></p>
 				<p><span class="label">答え：</span><span class="value" th:text="${result.correctAnswer}"></span></p>
+<!--		解説のあれば表示-->
 				<div class="explanation"
 					th:if="${result != null and result.explanation != null and result.explanation != ''}">
 					<a href="javascript:void(0);" class="toggle-explanation">解説を見る</a>
@@ -70,7 +71,7 @@
 				</div>
 			</div>
 
-
+<!--		関連記事あれば表示-->
 			<!--if文を付けて関連記事があればこのボタンを表示するように設定する予定-->
 			<div th:if="${result.koumoku != null and result.koumoku.blogUrl != null and result.koumoku.blogUrl != ''}">
 				<div class="related-link">

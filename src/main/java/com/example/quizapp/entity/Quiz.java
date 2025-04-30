@@ -18,6 +18,7 @@ public class Quiz {
 	private String choice5;
 	private Integer ans;
 	private String explanation;
+	private String imagePath;
 	private TestNumber testNumber;
 	private Time time;
 	private Koumoku koumoku;

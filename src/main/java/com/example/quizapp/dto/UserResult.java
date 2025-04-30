@@ -22,6 +22,7 @@ public class UserResult {
 	private String choice5;
 	private String ans;
 	private String explanation;
+	private String imagePath;
 	private TestNumber testNumber;
 	private Time time;
 	private Koumoku koumoku;

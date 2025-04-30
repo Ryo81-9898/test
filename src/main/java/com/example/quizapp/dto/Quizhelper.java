@@ -70,6 +70,7 @@ public class Quizhelper {
 		String ans = String.valueOf(q.getAns());
 		ur.setAns(ans);
 		ur.setExplanation(q.getExplanation());
+		ur.setImagePath(q.getImagePath());
 		ur.setTestNumber(q.getTestNumber());
 		ur.setTime(q.getTime());
 		ur.setKoumoku(q.getKoumoku());
