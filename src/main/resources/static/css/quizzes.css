@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-/*画面から切れないようにpaddingやmarginの影響を無くす*/
-/** {*/
-/*  box-sizing: border-box;*/
-/*}*/
 
 .quizzes-title {
   font-size: 2.5rem;
@@ -296,6 +292,11 @@ body {
       padding: 20px;
       font-size: 1.4rem;
     }
+
+	/*一番下のスペース*/
+  .copyright{
+	padding-bottom: 80px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -327,5 +328,11 @@ body {
         font-size: 1.5rem;
 		
       }
+  /*一番下のスペース*/
+  .copyright{
+	 padding-bottom: 100px;
+  }
 }
+
+
 

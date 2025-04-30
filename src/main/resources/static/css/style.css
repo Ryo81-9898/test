@@ -19,14 +19,15 @@ html, body {
 
 /* ヘッダーのスタイル */
 
+/* ヘッダー */
   .header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     margin: 0 auto;
-	padding: 2px 0;
-	position: fixed;
+	padding: 5px 0;
+	position: absolute;
 	top: 0;
 	left: 0;
 	z-index: 1000;
@@ -244,11 +245,19 @@ margin: 0 20px;
 /* 480px以下の画面に対応 */
 @media (max-width: 480px) {
   #scrollTopBtn {
-    padding: 12px 15px; /* ボタンのサイズを小さく */
+	box-sizing: border-box;
+    padding: 10px 13px;
     font-size: 1rem; /* フォントサイズを小さく */
 	bottom: 80px;
-	right: 30px;
-  }
+	right: auto;
+	left: 50%;
+	transform: translate(-50%, 20px);
+	}
+	
+  #scrollTopBtn.show {
+	transform: translate(-50%, 0); /* 出現時も中央＆Y方向 */
+	 }
+
 }
 
 
@@ -274,6 +283,70 @@ margin: 0 20px;
 
 
 
+/* フッター全体 */
+.site-footer {
+  padding: 20px 0 10px 0;
+  color: #3E2B2B;
+  font-size: 14px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  border-top: 2px solid #ccc; /* ← これが区切り線！ */
+  margin-top: 150px; /* mainとの間に少しスペース */
+}
 
+/* 中身の最大幅 */
+.footer-container {
+  max-width: 1000px;
+  margin: 0 auto;
+
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: center;
+  gap: 50px; /* 中央線をはさんだ余白。調整可！ */
+  flex-wrap: wrap;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 120px; 
+  text-align: center;
+}
+
+
+.footer-left a,
+.footer-right a {
+  color: #3E2B2B;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer-left a:hover,
+.footer-right a:hover {
+  color: #7d5a3e;
+  text-decoration: underline;
+}
+
+.copyright{
+	margin-top:20px;
+}
+
+@media screen and (max-width: 480px) {
+  .footer-columns {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer-left,
+  .footer-right {
+    align-items: center;
+  }
+}
 
 

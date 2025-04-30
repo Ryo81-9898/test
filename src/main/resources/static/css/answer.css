@@ -431,6 +431,11 @@ main {
 		right: 5px;
 		padding: 10px 5px;
 	}
+	
+	/*一番下のスペース*/
+	.copyright{
+		padding-bottom: 80px;
+	}
 }
 
 @media (max-width: 480px) {
@@ -471,5 +476,11 @@ main {
 		border-radius: 16px;
 		box-shadow: none;
 	}
+	
+	/*一番下のスペース*/
+	.copyright{
+		padding-bottom: 100px;
+	}
 
 }
+
