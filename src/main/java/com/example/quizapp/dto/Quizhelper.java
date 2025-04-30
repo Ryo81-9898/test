@@ -88,6 +88,18 @@ public class Quizhelper {
 			q.setTime(new Time(f.getTimeId()));
 			q.setQuestionNumber(f.getQuestionNumber());
 			q.setQuestion(f.getQuestion());
+			
+			
+			
+			if(f.getImagePath()=="" || f.getImagePath() == null) {
+				q.setImagePath(null);
+			}else {
+				q.setImagePath(f.getImagePath());			
+			}
+			
+			
+			
+			
 			q.setChoice1(f.getChoice1());
 			q.setChoice2(f.getChoice2());
 			q.setChoice3(f.getChoice3());

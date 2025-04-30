@@ -2,6 +2,7 @@ package com.example.quizapp.form;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -23,6 +24,8 @@ public class QuizForm {
 	private Integer questionNumber;
 	@NotBlank(message = "※問題文は必須です")
 	private String question;
+	@Pattern(regexp = ".*\\.(png|jpg)$", flags = Pattern.Flag.CASE_INSENSITIVE, message = "画像ファイルは .png, .PNG, .jpg, .JPG のいずれかで指定してください")
+	private String imagePath;
 	@NotBlank(message = "※選択肢1は必須です")
 	private String choice1;
 	@NotBlank(message = "※選択肢2は必須です")
@@ -34,7 +37,6 @@ public class QuizForm {
 	private String choice5;
 	@NotNull(message = "※答えは必須です")
 	private Integer ans;
-	@NotBlank(message = "※解説は必須です")
 	private String explanation;
 	@NotNull(message = "※試験回数は必須です")
 	@Range(min = 105, max = 114, message = "※試験回数は第{min}回から最新のテストまでの範囲となっています")

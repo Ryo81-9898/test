@@ -39,6 +39,13 @@
 		<label for="question">問題文：</label>
 		<input type="text" id="question" th:field="*{question}" required>
 		<span th:if="${#fields.hasErrors('question')}" th:errors="*{question}" style="color:red"></span><br>
+		
+		<!--		問題関連画像-->
+		<label for="imagePath">問題関連画像（（パス(/)）ファイル名入力）：</label>
+		<input type="text" id="imagePath" th:field="*{imagePath}">
+		<span th:if="${#fields.hasErrors('imagePath')}" th:errors="*{imagePath}" style="color:red"></span><br>
+		
+
 		<!--		選択肢-->
 		<table>
 			<tr>
@@ -92,8 +99,8 @@
 		<!--		解説-->
 		<br>
 		<label for="explanation">解説</label>
-		<textarea rows="10" cols="100" id="explanation" th:field="*{explanation}" required></textarea>
-		<span th:if="${#fields.hasErrors('explanation')}" th:errors="*{explanation}" style="color:red"></span><br>
+		<textarea rows="10" cols="100" id="explanation" th:field="*{explanation}"></textarea>
+<!--		<span th:if="${#fields.hasErrors('explanation')}" th:errors="*{explanation}" style="color:red"></span><br>-->
 		<br>
 		<!--		出題基準-->
 		<label for="koumokuId">出題基準</label>
