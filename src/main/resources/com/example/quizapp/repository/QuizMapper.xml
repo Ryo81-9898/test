@@ -34,6 +34,7 @@
 				javaType="com.example.quizapp.entity.Koumoku">
 				<id property="koumokuId" column="koumoku_id" />
 				<result property="sKoumoku" column="s_koumoku" />
+				<result property="blogUrl" column="blog_url" />
 				<association property="mkoumoku"
 					javaType="com.example.quizapp.entity.Mkoumoku">
 					<id property="mKoumokuId" column="m_koumoku_id" />
@@ -50,6 +51,7 @@
 					<result property="mokuhyo" column="mokuhyo" />
 				 </association>
    			 </association>
+<!--   			 <result property="imagePath" column="image_path" />-->
 	</resultMap>
 	<!-- 全問題表示 -->
 	<select id="selectAll"
@@ -72,7 +74,8 @@
 			s_koumoku,
 			m_koumoku,
 			l_koumoku,
-			mokuhyo
+			mokuhyo,
+			blog_url
 		FROM quizzes
 		JOIN test_number_table
 		ON quizzes.test_number_id = test_number_table.test_number_id
@@ -119,7 +122,8 @@
 			s_koumoku,
 			m_koumoku,
 			l_koumoku,
-			mokuhyo
+			mokuhyo,
+			blog_url
 		FROM random_quizzes rq
 		JOIN test_number_table
 		ON rq.test_number_id = test_number_table.test_number_id
@@ -161,7 +165,8 @@
 			s_koumoku,
 			m_koumoku,
 			l_koumoku,
-			mokuhyo
+			mokuhyo,
+			blog_url
 		FROM quizzes
 		JOIN test_number_table
 		ON quizzes.test_number_id = test_number_table.test_number_id

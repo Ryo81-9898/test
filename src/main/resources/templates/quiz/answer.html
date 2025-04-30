@@ -53,38 +53,42 @@
 				<p th:text="|第${result.testNumber.testNumberId}回 ${result.time.time}問題 ${result.questionNumber}　　${result.koumoku.sKoumoku}|"
 					class="question-meta"></p>
 				<p><span class="value">問題文：[[${result.question}]]</span></p>
-				
-				
+
+
 				<!--					if文でデータがある場合に、パスを取ってきてイメージを表示する。-->
-<!--									<div class="image-container">-->
-<!--										<img src="/images/example.png" alt="サンプル画像" />-->
-<!--									</div>-->
-									
-									
+				<!--									<div class="image-container">-->
+				<!--										<img src="/images/example.png" alt="サンプル画像" />-->
+				<!--									</div>-->
+
+
 				<p><span class="label">あなたの選択肢：</span><span class="value" th:text="${result.userAnswer}"></span></p>
 				<p><span class="label">答え：</span><span class="value" th:text="${result.correctAnswer}"></span></p>
-				<div class="explanation">
+				<div class="explanation"
+					th:if="${result != null and result.explanation != null and result.explanation != ''}">
 					<a href="javascript:void(0);" class="toggle-explanation">解説を見る</a>
 					<span class="explanation-content">[[${result.explanation}]]</span>
 				</div>
 			</div>
 
+
 			<!--if文を付けて関連記事があればこのボタンを表示するように設定する予定-->
-			<div class="related-link">
-				<p class="related-link-message">\重要ポイント<br>　まとめてるよ！/</p>
-				<a href="https://example.com" target="_blank" rel="noopener noreferrer">
-					<button class="zen-maru-gothic-regular" type="button">関連問題</button>
-				</a>
+			<div th:if="${result.koumoku != null and result.koumoku.blogUrl != null and result.koumoku.blogUrl != ''}">
+				<div class="related-link">
+					<p class="related-link-message">\重要ポイント<br>　まとめてるよ！/</p>
+					<a th:href="${result.koumoku.blogUrl}" target="_blank" rel="noopener noreferrer">
+						<button class="zen-maru-gothic-regular" type="button">関連問題</button>
+					</a>
+				</div>
 			</div>
 
 		</div>
 
-			<!--	 もう一度ボタン -->
-			<form th:action="@{/challenge/{no}(no=${questionCount})}" method="get">
-				<button id="submit-button" class="zen-maru-gothic-regular" type="submit">もう一度チャレンジ</button>
-			</form>
+		<!--	 もう一度ボタン -->
+		<form th:action="@{/challenge/{no}(no=${questionCount})}" method="get">
+			<button id="submit-button" class="zen-maru-gothic-regular" type="submit">もう一度チャレンジ</button>
+		</form>
 	</main>
-<!--	トップへ戻るボタン-->
+	<!--	トップへ戻るボタン-->
 	<div th:replace="fragments/backToTop :: #back-to-top"></div>
 	<div th:replace="fragments/footer :: footer"></div>
 

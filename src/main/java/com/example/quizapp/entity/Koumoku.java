@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class Koumoku {
 		private Integer koumokuId;
 		private String sKoumoku;
+		private String blogUrl;
 		private Mkoumoku mkoumoku;
 		private Lkoumoku lkoumoku;
 		private Mokuhyo mokuhyo;
