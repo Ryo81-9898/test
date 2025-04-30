@@ -32,6 +32,7 @@
 				<th>西暦</th>
 				<th>時間・問題</th>
 				<th>問題文</th>
+				<th>問題関連画像</th>
 				<th>選択肢 1</th>
 				<th>選択肢 2</th>
 				<th>選択肢 3</th>
@@ -43,6 +44,7 @@
 				<th>中項目</th>
 				<th>大項目</th>
 				<th>目標</th>
+				<th>ブログURL</th>
 				<th>編集</th>
 				<th>削除</th>
 			</tr>
@@ -56,6 +58,7 @@
 					<td th:text="|${qa.testNumber.seireki}年|">西暦</td>
 					<td th:text="|${qa.time.time}問題 ${qa.questionNumber}|">時間・問題</td>
 					<td th:text="${qa.question}">問題文</td>
+					<td th:text="${qa.imagePath}">問題関連画像</td>
 					<td th:text="${qa.choice1}">選択肢1</td>
 					<td th:text="${qa.choice2}">選択肢2</td>
 					<td th:text="${qa.choice3}">選択肢3</td>
@@ -67,6 +70,7 @@
 					<td th:text="${qa.koumoku.mkoumoku.mKoumoku}">中項目</td>
 					<td th:text="${qa.koumoku.lkoumoku.lKoumoku}">大項目</td>
 					<td th:text="${qa.koumoku.mokuhyo.mokuhyo}">目標</td>
+					<td th:text="${qa.koumoku.blogUrl}">ブログURL</td>
 
 					<td>
 						<form th:action="@{/edit/{id}(id=${qa.id})}" method="get">

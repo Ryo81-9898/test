@@ -25,6 +25,7 @@
 				<th th:if="${pickUpQuiz.isNew}">西暦</th>
 				<th>時間・問題</th>
 				<th>問題文</th>
+				<th>問題関連画像</th>
 				<th>選択肢 1</th>
 				<th>選択肢 2</th>
 				<th>選択肢 3</th>
@@ -37,6 +38,7 @@
 				<th th:if="${pickUpQuiz.isNew}">大項目</th>
 				<th th:if="${pickUpQuiz.isNew}">目標</th>
 				<th th:if="${pickUpQuiz.isNew}">編集</th>
+				<th th:if="${pickUpQuiz.isNew}">ブログURL</th>
 			</tr>
 		</thead>
 		<!--		ID検索時のテーブルボディ-->
@@ -48,6 +50,7 @@
 				<td th:text="|${pickUpQuiz.testNumber.seireki}年|">西暦</td>
 				<td th:text="|${pickUpQuiz.time.time}問題 ${pickUpQuiz.questionNumber}|">時間・問題</td>
 				<td th:text="${pickUpQuiz.question}">問題文</td>
+				<td th:text="${pickUpQuiz.imagePath}">問題関連画像</td>
 				<td th:text="${pickUpQuiz.choice1}">選択肢1</td>
 				<td th:text="${pickUpQuiz.choice2}">選択肢2</td>
 				<td th:text="${pickUpQuiz.choice3}">選択肢3</td>
@@ -59,6 +62,7 @@
 				<td th:text="${pickUpQuiz.koumoku.mkoumoku.mKoumoku}">中項目</td>
 				<td th:text="${pickUpQuiz.koumoku.lkoumoku.lKoumoku}">大項目</td>
 				<td th:text="${pickUpQuiz.koumoku.mokuhyo.mokuhyo}">目標</td>
+				<td th:text="${pickUpQuiz.koumoku.blogUrl}">ブログURL</td>
 				<td th:if="${pickUpQuiz.isNew}">
 					<a th:href="@{/edit/{id}(id=${pickUpQuiz.id})}">編集
 					</a>
@@ -72,6 +76,7 @@
 				<td th:text="|第${before.testNumber.testNumberId}回|">回数</td>
 				<td th:text="|${before.time.time}問題 ${before.questionNumber}|">時間・問題</td>
 				<td th:text="${before.question}">問題文</td>
+				<td th:text="${before.imagePath}">問題関連画像</td>
 				<td th:text="${before.choice1}">選択肢1</td>
 				<td th:text="${before.choice2}">選択肢2</td>
 				<td th:text="${before.choice3}">選択肢3</td>
@@ -96,6 +101,7 @@
 					<th>回数</th>
 					<th>時間・問題</th>
 					<th>問題文</th>
+					<th>問題関連画像</th>
 					<th>選択肢 1</th>
 					<th>選択肢 2</th>
 					<th>選択肢 3</th>
@@ -112,6 +118,7 @@
 					<td th:text="|第${pickUpQuiz.testNumberId}回|">回数</td>
 					<td th:text="|${timeTable.time}問題 ${pickUpQuiz.questionNumber}|">時間・問題</td>
 					<td th:text="${pickUpQuiz.question}">問題文</td>
+					<td th:text="${pickUpQuiz.imagePath}">問題関連画像</td>
 					<td th:text="${pickUpQuiz.choice1}">選択肢1</td>
 					<td th:text="${pickUpQuiz.choice2}">選択肢2</td>
 					<td th:text="${pickUpQuiz.choice3}">選択肢3</td>

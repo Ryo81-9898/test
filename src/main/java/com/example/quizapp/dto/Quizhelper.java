@@ -25,11 +25,8 @@ public class Quizhelper {
 		}
 		q.setAns(f.getAns());
 		q.setExplanation(f.getExplanation());
-		
-		
-		return q;
-		
-		
+
+		return q;	
 	}
 	
 	//QuizFormへ変換（Entity->Form)
@@ -78,6 +75,7 @@ public class Quizhelper {
 		
 	}
 
+	
 //新規作成時にフォームから受け取った情報を整理してエンティティにつなげるコンバーター
 	//	QuizForm->Quiz
 	//上のこのメソッド（convertQuiz:Quizへの変換（Form->entity)）いらなくなるかも（最後に確認）
@@ -88,18 +86,11 @@ public class Quizhelper {
 			q.setTime(new Time(f.getTimeId()));
 			q.setQuestionNumber(f.getQuestionNumber());
 			q.setQuestion(f.getQuestion());
-			
-			
-			
 			if(f.getImagePath()=="" || f.getImagePath() == null) {
 				q.setImagePath(null);
 			}else {
 				q.setImagePath(f.getImagePath());			
 			}
-			
-			
-			
-			
 			q.setChoice1(f.getChoice1());
 			q.setChoice2(f.getChoice2());
 			q.setChoice3(f.getChoice3());
@@ -117,9 +108,10 @@ public class Quizhelper {
 			}
 			q.setKoumoku(new Koumoku(f.getKoumokuId()));
 			return q;
-			
-			
+
 		}
+		
+		
 //		更新時に必要なコンバーター（型変換用）
 		//QuizFormへ変換（Entity->Form)
 		public static QuizForm toForm(Quiz q) {
@@ -157,27 +149,4 @@ public class Quizhelper {
 			return qf;
 		}
 		
-//更新時にフォームから受け取った情報を整理するコンバーター
-		//	QuizForm + エンティティの情報（findById()) -> temporaryForm
-//			public static QuizForm toTemporaryForm(QuizForm f) {
-//				QuizForm q = new QuizForm();		
-//				q.setId(f.getId());
-//				q.setTestNumber(new TestNumber(f.getTestNumberId()));
-//				q.setTime(new Time(f.getTimeId()));
-//				q.setQuestionNumber(f.getQuestionNumber());
-//				q.setQuestion(f.getQuestion());
-//				q.setChoice1(f.getChoice1());
-//				q.setChoice2(f.getChoice2());
-//				q.setChoice3(f.getChoice3());
-//				q.setChoice4(f.getChoice4());
-//				if(f.getChoice5()=="" || f.getChoice5() == null) {
-//					q.setChoice5(null);
-//				}else {
-//					q.setChoice5(f.getChoice5());			
-//				}
-//				q.setAns(f.getAns());
-//				q.setExplanation(f.getExplanation());
-//				q.setKoumoku(new Koumoku(f.getKoumokuId()));
-//				return q;
-//			}
 }
