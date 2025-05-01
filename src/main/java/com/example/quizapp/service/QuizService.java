@@ -63,4 +63,7 @@ public interface QuizService {
 	
 //	新年度追加処理
 	void addYear(TestNumber t);
+	
+//	年度ごとの検索、Quizリスト
+	List<Quiz> selectEachYearQuizList(int testYear); 
 }

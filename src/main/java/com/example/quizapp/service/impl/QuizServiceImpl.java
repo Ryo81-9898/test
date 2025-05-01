@@ -138,13 +138,21 @@ public class QuizServiceImpl implements QuizService {
 	}
 	
 //	ブログURLをデータベース追加のためのメソッド
+	@Override
 	public void editUrl(Koumoku k) {
 		quizMapper.updateUrl(k);
 	}
 	
 //	新年度追加処理
+	@Override
 	public void addYear(TestNumber t) {
 		quizMapper.insertYear(t);
+	}
+	
+	//	年度ごとの検索、Quizリスト
+	@Override
+	public List<Quiz> selectEachYearQuizList(int testYear){
+		return quizMapper.selectEachYearQuiz(testYear);
 	}
 
 }

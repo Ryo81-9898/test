@@ -14,7 +14,11 @@
 			</form>
 		</header>
 	</div>
-	<h2>登録済み問題一覧</h2>
+<!--	<h2>登録済み問題一覧</h2>-->
+	<h2 th:text="${pageTitle}">登録済み問題一覧</h2>
+	
+	
+	
 	<!--	ID検索で対象のデータがない場合-->
 	<p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
 	<!--	更新時メッセージ-->

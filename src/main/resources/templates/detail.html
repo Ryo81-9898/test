@@ -37,8 +37,8 @@
 				<th th:if="${pickUpQuiz.isNew}">中項目</th>
 				<th th:if="${pickUpQuiz.isNew}">大項目</th>
 				<th th:if="${pickUpQuiz.isNew}">目標</th>
-				<th th:if="${pickUpQuiz.isNew}">編集</th>
 				<th th:if="${pickUpQuiz.isNew}">ブログURL</th>
+				<th th:if="${pickUpQuiz.isNew}">編集</th>
 			</tr>
 		</thead>
 		<!--		ID検索時のテーブルボディ-->
@@ -140,8 +140,6 @@
 		<form th:action="@{/update}" method="post">
 			<button type="submit">更新</button>
 		</form>
-		<br>
-		<a th:href="@{/list}">一覧へ戻る</a>
 	</div>
 	<!--	削除前の最終ボタン-->
 	<div th:if="${deleteButton}">
@@ -151,6 +149,7 @@
 			<button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
 		</form>
 	</div>
+	<a th:if="${returnUrl != null}" th:href="${returnUrl}">元の画面に戻る</a>
 	<br>
 	<a th:href="@{/}">メニューへ戻る</a>
 </body>

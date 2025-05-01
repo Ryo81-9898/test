@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -115,6 +116,7 @@ public class QuizController {
 	//問題一覧
 	@GetMapping("/list")
 	public String getAllQuizList(Model model) {
+		model.addAttribute("pageTitle", "全件の問題一覧");
 		model.addAttribute("quizAllList", q.selectAllQuiz());
 		return "list";
 	}
@@ -159,12 +161,13 @@ public class QuizController {
 	
 	//編集画面へ(menu.html->form(isNew=null))
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable int id, Model model, RedirectAttributes att) {
+	public String edit(@PathVariable int id, Model model,  @RequestHeader(value = "Referer", required = false) String referer, RedirectAttributes att) {
 		Quiz target = q.findQuizById(id);
 		if(target != null) {
 			//対象データがある場合はFormへの変換
 			QuizForm form = Quizhelper.toForm(target);
 			model.addAttribute("quizForm", form);
+			model.addAttribute("returnUrl", referer);
 			return "/form";
 		} else {
 			//対象データがない場合はフラッシュメッセージを表示
@@ -217,7 +220,7 @@ public class QuizController {
 // ======問題の削除=======
 	//最終確認のページ
 	@GetMapping("pickUpDeleteQuestion")
-	public String pickUpDeleteQuestion(@RequestParam int id, Model model) {
+	public String pickUpDeleteQuestion(@RequestParam int id, Model model, @RequestHeader(value = "Referer", required = false) String referer) {
 		QuizForm form = Quizhelper.convertForm(q.findQuizById(id));
 		//ID検索からの詳細画面用設定のため
 		form.setIsNew(true);
@@ -225,6 +228,7 @@ public class QuizController {
 		model.addAttribute("pickUpQuiz", form);
 		//削除ボタン追加のため
 		model.addAttribute("deleteButton", true);
+		model.addAttribute("returnUrl", referer);
 		return "detail";
 	}
 	
@@ -308,9 +312,20 @@ public class QuizController {
 			return "redirect:/addYearForm";
 		}
 		
-//			System.out.println("ここ確認中!");
-//			System.out.println(form);
-//			System.out.println(tn);		
+		
+//		年度ごとの検索
+		@GetMapping("/pickUpTestYear")
+		public String eachYearQuizList(@RequestParam int testYear, Model model) {
+			model.addAttribute("pageTitle", "検索結果（第" + testYear + "回の問題一覧）");
+			model.addAttribute("quizAllList", q.selectEachYearQuizList(testYear));
+			return "/list";
+			
+		}
+		
+		
+//		System.out.println("ここ確認中!");
+//		System.out.println(i);
+//		System.out.println(tn);	
 
 }
 

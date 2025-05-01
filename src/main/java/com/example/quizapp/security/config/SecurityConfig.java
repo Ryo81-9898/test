@@ -32,7 +32,7 @@ public class SecurityConfig {
 						//						【管理者権限設定】以下のurlは管理者しかアクセスできない
 						.requestMatchers("/list", "/pickUp/**", "/form", "/save", "/edit/**", "/reedit",
 								"/check", "/update/**", "pickUpDeleteQuestion/**", "/delete/**", "/bloglist", 
-								"/editUrl/**", "/addUrl", "addYearForm", "/addYear")
+								"/editUrl/**", "/addUrl", "addYearForm", "/addYear", "/pickUpTestYear")
 						.hasAuthority("ADMIN")
 						//	その他のリクエストは認証が必要
 						.anyRequest().authenticated())

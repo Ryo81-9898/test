@@ -51,4 +51,8 @@ public interface QuizMapper {
 	
 //	新年度追加処理
 	void insertYear(TestNumber t);
+	
+//	年度ごとの検索、Quizリスト
+	List<Quiz> selectEachYearQuiz(int testYear);
+	
 }

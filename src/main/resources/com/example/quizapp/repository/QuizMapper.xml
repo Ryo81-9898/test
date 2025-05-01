@@ -397,4 +397,56 @@
 		#{seireki}
 		);
 	</insert>
+	
+	
+	<!-- 年度ごとの問題表示 -->
+	<select id="selectEachYearQuiz" resultMap="QuizWithTestNumberResult">
+		SELECT id,
+		quizzes.test_number_id,
+		gengo_table.gengo,
+		gengo_nen,
+		seireki,
+		time_table.time,
+		question_number,
+		question,
+		choice1,
+		choice2,
+		choice3,
+		choice4,
+		choice5,
+		ans,
+		explanation,
+		image_path,
+		s_koumoku,
+		m_koumoku,
+		l_koumoku,
+		mokuhyo,
+		blog_url
+		FROM quizzes
+		JOIN test_number_table
+		ON quizzes.test_number_id =
+		test_number_table.test_number_id
+		JOIN gengo_table
+		ON
+		test_number_table.gengo_id = gengo_table.gengo_id
+		JOIN time_table
+		ON
+		quizzes.time_id = time_table.time_id
+		JOIN koumoku_table
+		ON
+		quizzes.koumoku_id = koumoku_table.koumoku_id
+		JOIN m_koumoku_table
+		ON
+		koumoku_table.m_koumoku_id = m_koumoku_table.m_koumoku_id
+		JOIN
+		l_koumoku_table
+		ON koumoku_table.l_koumoku_id =
+		l_koumoku_table.l_koumoku_id
+		JOIN mokuhyo_table
+		ON
+		koumoku_table.mokuhyo_id = mokuhyo_table.mokuhyo_id
+		WHERE quizzes.test_number_id = #{testYear}
+		ORDER BY quizzes.time_id ASC, quizzes.question_number ASC
+		;
+	</select>
 </mapper>
