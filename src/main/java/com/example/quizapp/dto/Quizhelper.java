@@ -5,6 +5,7 @@ import com.example.quizapp.entity.Quiz;
 import com.example.quizapp.entity.TestNumber;
 import com.example.quizapp.entity.Time;
 import com.example.quizapp.form.AddUrlForm;
+import com.example.quizapp.form.AddYearForm;
 import com.example.quizapp.form.QuizForm;
 
 public class Quizhelper {
@@ -177,5 +178,18 @@ public class Quizhelper {
 			kf.setMkoumoku(a.getMkoumoku());
 			return kf;
 		}
+		
+		
+//		========新年度追加処理==========
+//		新年度追加フォーム(addYearForm.html)
+		public static TestNumber toTestNumber(AddYearForm a) {
+			TestNumber tn = new TestNumber();
+			tn.setTestNumberId(a.getTestNumberId());
+			tn.setGengoNen(a.getGengoNen());
+			tn.setSeireki(a.getSeireki());
+			tn.setGengo(a.getGengo());
+			return tn;
+		}
+
 		
 }

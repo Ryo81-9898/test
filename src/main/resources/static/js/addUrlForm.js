@@ -1,7 +1,7 @@
 /**
  * 
  */
-//URL変更時のアラート機能
+//URL変更時のコンフォーム機能
 document.addEventListener('DOMContentLoaded', function () {
 	const form = document.querySelector('form');
 	const blogUrlInput = document.getElementById('blogUrl');

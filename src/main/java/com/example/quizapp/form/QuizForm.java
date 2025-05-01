@@ -39,7 +39,7 @@ public class QuizForm {
 	private Integer ans;
 	private String explanation;
 	@NotNull(message = "※試験回数は必須です")
-	@Range(min = 105, max = 114, message = "※試験回数は第{min}回から最新のテストまでの範囲となっています")
+	@Range(min = 105, max = 200, message = "※テスト回は第{min}回から最新のテストまでの範囲となっています")
 	private Integer testNumberId;
 	private TestNumber testNumber;
 	@NotNull(message = "※選択は必須です")

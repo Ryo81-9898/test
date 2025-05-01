@@ -145,10 +145,10 @@
 	</div>
 	<!--	削除前の最終ボタン-->
 	<div th:if="${deleteButton}">
-		<p th:text="本当に削除してもいいですか" style="color : red;"></p>
+		<p th:text="'本当に削除してもいいですか？'" style="color: red;"></p>
 		<form th:action="@{/delete}" method="post">
 			<input type="hidden" name="id" th:value="${pickUpQuiz.id}">
-			<button type="submit">削除</button>
+			<button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
 		</form>
 	</div>
 	<br>

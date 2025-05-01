@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>新年度登録フォーム</title>
+	<!-- アラート機能 -->
+<!--	<script th:src="@{/js/.js}" defer></script>-->
+</head>
+
+<body>
+	<h2>新年度登録フォーム</h2>
+	<!--	追加ジメッセージ-->
+	<p th:if="${insertYearMessage}" th:text="${insertYearMessage}" style="color: blue;"></p>
+
+	<!--	アクション：編集-->
+	<form th:action="@{/addYear}" th:object="${addYearForm}" method="post">
+
+
+		<!--		入力内容-->
+<!--		<label for="testNumberId">テスト回：第</label>-->
+<!--		<input type="text" id="testNumberId" th:field="*{testNumberId}" ><label>回</label>-->
+<!--		<br>-->
+		
+		<!-- ① テスト回：3桁・105〜999 -->
+		<label for="testNumberId">テスト回：第</label>
+		<input type="text" id="testNumberId" th:field="*{testNumberId}"
+		       pattern="^(1(0[5-9]|[1-9][0-9]))$"
+		       title="3桁の数値（最新のテスト回入力）"
+		       required>
+		<label>回</label>
+		<span th:if="${#fields.hasErrors('testNumberId')}" th:errors="*{testNumberId}" style="color:red"></span><br>
+		
+		
+		<br>
+		<!-- ② 元号選択 -->
+		<label for="gengoId">元号</label>
+		<select id="gengoId" th:field="*{gengo.gengoId}" required>
+			<option value="1">平成</option>
+			<option value="2">令和</option>
+		</select>
+		<span th:if="${#fields.hasErrors('gengo')}" th:errors="*{gengo}" style="color:red"></span><br>
+		
+		
+<!--		<input type="text" id="gengoNen" th:field="*{gengoNen}" ><label>年</label>-->
+		<!-- ③ 元号年：1〜2桁 -->
+		<input type="text" id="gengoNen" th:field="*{gengoNen}"
+      		 pattern="^[0-9]{1,2}$"
+      		 title="1-2桁の数値（元号年を入力）"
+      		 required>
+		<label>年度</label>
+		<span th:if="${#fields.hasErrors('gengoNen')}" th:errors="*{gengoNen}" style="color:red"></span><br>
+		<br>
+		
+		
+<!--		<label for="seireki">西暦</label>-->
+<!--		<input type="text" id="seireki" th:field="*{seireki}" ><label>年</label>-->
+		<!-- ③ 西暦：4桁、2010〜2999の想定 -->
+		<label for="seireki">西暦</label>
+		<input type="text" id="seireki" th:field="*{seireki}"
+     		  pattern="^20[1-9][0-9]$"
+     		  title="4桁の数値（西暦年を入力）"
+     		  required>
+		<label>年度</label>
+		<span th:if="${#fields.hasErrors('seireki')}" th:errors="*{seireki}" style="color:red"></span><br>
+		
+		<!--		追加ボタン-->
+		<br>
+		<br>
+		<button type="submit">新年度追加</button>
+	</form>
+	<br>
+	<a th:href="@{/}">メニューへ戻る</a>
+
+</body>
+
+</html>

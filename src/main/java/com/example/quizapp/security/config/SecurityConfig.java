@@ -31,7 +31,8 @@ public class SecurityConfig {
 						.requestMatchers("/", "/login", "/challenge/**", "/result", "/css/**", "/js/**", "/images/**").permitAll()
 						//						【管理者権限設定】以下のurlは管理者しかアクセスできない
 						.requestMatchers("/list", "/pickUp/**", "/form", "/save", "/edit/**", "/reedit",
-								"/check", "/update/**", "pickUpDeleteQuestion/**", "/delete/**", "/bloglist", "/editUrl/**", "/addUrl")
+								"/check", "/update/**", "pickUpDeleteQuestion/**", "/delete/**", "/bloglist", 
+								"/editUrl/**", "/addUrl", "addYearForm", "/addYear")
 						.hasAuthority("ADMIN")
 						//	その他のリクエストは認証が必要
 						.anyRequest().authenticated())

@@ -18,8 +18,11 @@
 
 		<!--		入力内容-->
 		<!--		試験回数-->
-		<label for="testNumberId">試験回数：第</label>
-		<input type="text" id="testNumberId" th:field="*{testNumberId}" required><label>回</label>
+		<label for="testNumberId">テスト回：第</label>
+		<input type="text" id="testNumberId" th:field="*{testNumberId}" 
+				       pattern="^(1(0[5-9]|[1-9][0-9]))$" 
+				       title="3桁の数値を入力（105回から最新のテストまで）"
+					   required><label>回</label>
 		<span th:if="${#fields.hasErrors('testNumberId')}" th:errors="*{testNumberId}" style="color:red"></span><br>
 		<!--		時間帯-->
 		<label for="timeId">時間帯</label>
@@ -114,7 +117,10 @@
 		<!--		ボタン：登録 or 更新-->
 		<br>
 		<br>
-		<button th:if="${quizForm.isNew}" type="submit">登録</button>
+<!--		<button th:if="${quizForm.isNew}" type="submit">登録</button>-->
+		<button th:if="${quizForm.isNew}" type="submit"
+		        onclick="return confirm('この内容で登録しますか？')">登録</button>
+
 		<button th:unless="${quizForm.isNew}" type="submit">編集確認</button>
 	</form>
 	<br>

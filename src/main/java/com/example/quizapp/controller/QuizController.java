@@ -20,7 +20,9 @@ import com.example.quizapp.dto.Quizhelper;
 import com.example.quizapp.dto.UserResult;
 import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.Quiz;
+import com.example.quizapp.entity.TestNumber;
 import com.example.quizapp.form.AddUrlForm;
+import com.example.quizapp.form.AddYearForm;
 import com.example.quizapp.form.QuizForm;
 import com.example.quizapp.service.QuizService;
 
@@ -281,8 +283,34 @@ public class QuizController {
 			return "redirect:/bloglist";
 		}
 
+		
+//		========新年度追加処理==========
+		// 新年度追加フォームへの遷移
+		@GetMapping("/addYearForm")
+		public String showAddYearForm(@ModelAttribute AddYearForm form) {
+			return "/addYearForm";
+		}
+		
+
+		@PostMapping("/addYear")
+		public String addYear(@Validated @ModelAttribute AddYearForm form,  BindingResult bindingResult, RedirectAttributes redirect) {
+			//データベースへの更新処理
+			TestNumber tn = new TestNumber();
+			tn = Quizhelper.toTestNumber(form);
+			
+//			バリデーション（空文字もしくはhttp(s)のみ許可
+			if (bindingResult.hasErrors()) {
+				return "addYearForm"; // 入力画面に戻す
+			}
+			q.addYear(tn);
+			//フラッシュメッセージ
+			redirect.addFlashAttribute("insertYearMessage", "新年度が追加されました。");
+			return "redirect:/addYearForm";
+		}
+		
 //			System.out.println("ここ確認中!");
 //			System.out.println(form);
-//			System.out.println(k);
+//			System.out.println(tn);		
+
 }
 

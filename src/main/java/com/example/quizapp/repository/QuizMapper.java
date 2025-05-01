@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.MaxId;
 import com.example.quizapp.entity.Quiz;
+import com.example.quizapp.entity.TestNumber;
 import com.example.quizapp.entity.TimeTable;
 
 @Mapper
@@ -48,5 +49,6 @@ public interface QuizMapper {
 //	ブログURLをデータベース追加のためのメソッド
 	void updateUrl(Koumoku k);
 	
-
+//	新年度追加処理
+	void insertYear(TestNumber t);
 }

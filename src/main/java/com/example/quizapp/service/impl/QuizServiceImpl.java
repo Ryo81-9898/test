@@ -9,6 +9,7 @@ import com.example.quizapp.dto.UserResult;
 import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.MaxId;
 import com.example.quizapp.entity.Quiz;
+import com.example.quizapp.entity.TestNumber;
 import com.example.quizapp.entity.TimeTable;
 import com.example.quizapp.repository.QuizMapper;
 import com.example.quizapp.service.QuizService;
@@ -139,6 +140,11 @@ public class QuizServiceImpl implements QuizService {
 //	ブログURLをデータベース追加のためのメソッド
 	public void editUrl(Koumoku k) {
 		quizMapper.updateUrl(k);
-}
+	}
+	
+//	新年度追加処理
+	public void addYear(TestNumber t) {
+		quizMapper.insertYear(t);
+	}
 
 }

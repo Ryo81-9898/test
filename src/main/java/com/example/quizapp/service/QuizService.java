@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.quizapp.dto.UserResult;
 import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.Quiz;
+import com.example.quizapp.entity.TestNumber;
 import com.example.quizapp.entity.TimeTable;
 
 public interface QuizService {
@@ -58,4 +59,8 @@ public interface QuizService {
 	
 //	ブログURLをデータベース追加のためのメソッド
 	void editUrl(Koumoku k);
+	
+	
+//	新年度追加処理
+	void addYear(TestNumber t);
 }

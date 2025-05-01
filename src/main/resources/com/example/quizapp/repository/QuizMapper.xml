@@ -382,5 +382,19 @@
 		;
 	</update>
 
-
+<!-- 新年度を追加 -->
+	<insert id="insertYear">
+		INSERT INTO test_number_table (
+		test_number_id,
+		gengo_id,
+		gengo_nen,
+		seireki
+		)
+		VALUES (
+		#{testNumberId},
+		#{gengo.gengoId},
+		#{gengoNen},
+		#{seireki}
+		);
+	</insert>
 </mapper>
