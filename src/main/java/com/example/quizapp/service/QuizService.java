@@ -52,4 +52,10 @@ public interface QuizService {
 	
 //	ブログURL一覧取得
 	List<Koumoku> findAllBlogUrl();
+	
+//	ブログURL追加、更新のためIdで検索
+	Koumoku findUrlById(int id);
+	
+//	ブログURLをデータベース追加のためのメソッド
+	void editUrl(Koumoku k);
 }

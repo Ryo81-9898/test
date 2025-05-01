@@ -20,6 +20,7 @@ import com.example.quizapp.dto.Quizhelper;
 import com.example.quizapp.dto.UserResult;
 import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.Quiz;
+import com.example.quizapp.form.AddUrlForm;
 import com.example.quizapp.form.QuizForm;
 import com.example.quizapp.service.QuizService;
 
@@ -161,8 +162,6 @@ public class QuizController {
 		if(target != null) {
 			//対象データがある場合はFormへの変換
 			QuizForm form = Quizhelper.toForm(target);
-			System.out.println("ここ確認中!");
-		System.out.println(form);
 			model.addAttribute("quizForm", form);
 			return "/form";
 		} else {
@@ -246,8 +245,44 @@ public class QuizController {
 			System.out.println(l);
 		}
 		model.addAttribute("blogUrlList", q.findAllBlogUrl());
-		return "quiz/blogList";
+		return "blogList";
 	}
+	
+//	blogListからブログURL編集画面へ
+	@GetMapping("/editUrl/{id}")
+	public String editUrl(@PathVariable int id, Model model, RedirectAttributes att) {
+			Koumoku target = q.findUrlById(id);
+			if(target != null) {
+				//対象データがある場合はFormへの変換
+				AddUrlForm form = Quizhelper.toAddUrlForm(target);
+				model.addAttribute("blogUrlIdForm", form);
+				return "/addUrlForm";
+			} else {
+				//対象データがない場合はフラッシュメッセージを表示
+				att.addFlashAttribute("errorMessage", "対象のデータがありません");
+				return "redirect:/bloglist";
+			}
+	}
+	
+	//ブログURL更新処理
+		@PostMapping("/addUrl")
+		public String addUrl(@Validated @ModelAttribute AddUrlForm form,  BindingResult bindingResult, RedirectAttributes redirect) {
+			//データベースへの更新処理
+			Koumoku k = new Koumoku();
+			k = Quizhelper.toKoumoku(form);
+			
+//			バリデーション（空文字もしくはhttp(s)のみ許可
+			 if (bindingResult.hasErrors()) {
+			        return "addUrlForm"; // 入力画面に戻す
+			    }
+			q.editUrl(k);
+			//フラッシュメッセージ
+			redirect.addFlashAttribute("updateMessage", "URLが更新されました");
+			return "redirect:/bloglist";
+		}
 
+//			System.out.println("ここ確認中!");
+//			System.out.println(form);
+//			System.out.println(k);
 }
 

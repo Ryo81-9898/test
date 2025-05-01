@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>問題登録・編集フォーム</title>
+	<!-- アラート機能 -->
+	<script th:src="@{/js/addUrlForm.js}" defer></script>
+</head>
+
+<body>
+	<h2>URL追加・編集</h2>
+	<!--	アクション：編集-->
+	<form th:action="@{/addUrl}"  th:object="${blogUrlIdForm}" method="post">
+		<!--		更新時に必要なため、hiddenで持つ-->
+		<input type="hidden" th:field="*{koumokuId}">
+
+		<!--		小項目表示-->
+		<p th:text="*{koumokuId}">項目のID</p>
+		<p th:text="*{sKoumoku}">小項目</p>
+		<p th:text="*{Mkoumoku.mKoumoku}">中項目</p>
+		
+		<!--		入力内容-->
+		<label for="blogUrl">ブログURL:</label>
+<!--		<input type="text" id="blogUrl" th:field="*{blogUrl}">-->
+		<input type="text" id="blogUrl" th:field="*{blogUrl}" 
+		       pattern="^$|https?://.+" 
+		       title="空欄または http(s):// から始まるURLを入力してください">
+		<span th:if="${#fields.hasErrors('blogUrl')}" th:errors="*{blogUrl}" style="color:red"></span><br>
+		
+		
+		<!--		ボタン：登録 or 更新-->
+		<br>
+		<br>
+		<button type="submit">URL編集完了</button>
+	</form>
+	<br>
+	<a th:href="@{/bloglist}">ブログURL一覧へ</a>
+	<br>
+	<a th:href="@{/}">メニューへ戻る</a>
+
+</body>
+
+</html>

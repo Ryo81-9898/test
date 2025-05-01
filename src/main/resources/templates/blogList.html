@@ -17,9 +17,9 @@
 	<h2>出題基準項目とブログURL一覧</h2>
 	<a th:href="@{/}">メニューへ戻る</a>
 <!--		ID検索で対象のデータがない場合-->
-<!--	<p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>-->
+	<p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
 <!--		更新時メッセージ-->
-<!--	<p th:if="${updateMessage}" th:text="${updateMessage}" style="color: blue;"></p>-->
+	<p th:if="${updateMessage}" th:text="${updateMessage}" style="color: blue;"></p>
 <!--		削除時メッセージ-->
 <!--	<p th:if="${deleteMessage}" th:text="${deleteMessage}" style="color: red;"></p>-->
 <!--	<a th:href="@{/}">メニューへ戻る</a>-->
@@ -43,11 +43,11 @@
 					<td th:text="${bl.mkoumoku.mKoumoku}">中項目</td>
 					<td th:text="${bl.blogUrl}">ブログURL</td>
 
-<!--					<td>-->
-<!--						<form th:action="@{/edit/{id}(id=${qa.id})}" method="get">-->
-<!--							<button type="submit">編集</button>-->
-<!--						</form>-->
-<!--					</td>-->
+					<td>
+						<form th:action="@{/editUrl/{id}(id=${bl.koumokuId})}" method="get">
+							<button type="submit">編集</button>
+						</form>
+					</td>
 <!--					<td>-->
 <!--						<form th:action="@{/pickUpDeleteQuestion}" method="get">-->
 <!--							<input type="hidden" name="id" th:value="${qa.id}">-->

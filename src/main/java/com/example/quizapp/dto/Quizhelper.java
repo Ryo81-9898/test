@@ -4,6 +4,7 @@ import com.example.quizapp.entity.Koumoku;
 import com.example.quizapp.entity.Quiz;
 import com.example.quizapp.entity.TestNumber;
 import com.example.quizapp.entity.Time;
+import com.example.quizapp.form.AddUrlForm;
 import com.example.quizapp.form.QuizForm;
 
 public class Quizhelper {
@@ -147,6 +148,34 @@ public class Quizhelper {
 			qf.setKoumokuId(q.getKoumoku().getKoumokuId());
 			System.out.println(q);
 			return qf;
+		}
+		
+//		ID検索して取得したブログURLリストからフォームへ変換
+//		koumoku -> AddUrlForm
+		public static AddUrlForm toAddUrlForm(Koumoku k) {
+			AddUrlForm auf = new AddUrlForm();
+			auf.setKoumokuId(k.getKoumokuId());
+			auf.setSKoumoku(k.getSKoumoku());
+			auf.setBlogUrl(k.getBlogUrl());
+			auf.setMkoumoku(k.getMkoumoku());
+			auf.setLkoumoku(k.getLkoumoku());
+			auf.setMokuhyo(k.getMokuhyo());
+			return auf;
+		}
+//		ブログURL入力フォーム（addUrlForm.html）からデータベースupdateのためkomokuエンティティへ変換
+//		koumoku <- AddUrlForm
+		public static Koumoku toKoumoku(AddUrlForm a) {
+			Koumoku kf = new Koumoku();
+			kf.setKoumokuId(a.getKoumokuId());
+			kf.setSKoumoku(a.getSKoumoku());
+//			kf.setBlogUrl(a.getBlogUrl());
+			if(a.getBlogUrl()=="" || a.getBlogUrl() == null) {
+				kf.setBlogUrl(null);
+			}else {
+				kf.setBlogUrl(a.getBlogUrl());			
+			}
+			kf.setMkoumoku(a.getMkoumoku());
+			return kf;
 		}
 		
 }

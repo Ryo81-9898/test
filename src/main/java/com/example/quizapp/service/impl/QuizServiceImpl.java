@@ -130,4 +130,15 @@ public class QuizServiceImpl implements QuizService {
 		return quizMapper.getKoumoku();
 	}
 
+//	ブログURL追加、更新のためIdで検索
+	@Override
+	public Koumoku findUrlById(int id){
+		return quizMapper.selectUrlById(id);
+	}
+	
+//	ブログURLをデータベース追加のためのメソッド
+	public void editUrl(Koumoku k) {
+		quizMapper.updateUrl(k);
+}
+
 }

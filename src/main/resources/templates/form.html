@@ -42,7 +42,9 @@
 		
 		<!--		問題関連画像-->
 		<label for="imagePath">問題関連画像（（パス(/)）ファイル名入力）：</label>
-		<input type="text" id="imagePath" th:field="*{imagePath}">
+		<input type="text" id="imagePath" th:field="*{imagePath}"
+			pattern="^$|.*\\.(png|jpg)$" 
+			title="画像ファイルは .png, .PNG, .jpg, .JPG のいずれかで指定してください">
 		<span th:if="${#fields.hasErrors('imagePath')}" th:errors="*{imagePath}" style="color:red"></span><br>
 		
 

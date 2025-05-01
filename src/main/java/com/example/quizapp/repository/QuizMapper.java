@@ -41,5 +41,12 @@ public interface QuizMapper {
 	
 //	ブログURL一覧のためのテーブル取得
 	List<Koumoku> getKoumoku();
+	
+//	ブログURL追加、更新のためIdで検索
+	Koumoku selectUrlById(int id);
+	
+//	ブログURLをデータベース追加のためのメソッド
+	void updateUrl(Koumoku k);
+	
 
 }
